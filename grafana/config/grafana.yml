@@ -1,0 +1,32 @@
+# Grafana configuration file
+
+[ server ]
+  # Set the protocol to use (http or https)
+  protocol = http
+
+  # Set the hostname or IP address to bind to
+  domain = localhost
+
+  # Set the HTTP port to listen on
+  http_port = ${GF_SERVER_HTTP_PORT:-3000}
+
+  # Set the root URL for Grafana
+  root_url = %(protocol)s://%(domain)s:%(http_port)s/
+
+  [ security ]
+  # Set the admin password for Grafana
+  admin_password = ${GF_SECURITY_ADMIN_PASSWORD:-admin123}
+
+  # Enable user authentication
+  auth_enabled = true
+
+  [ database ]
+  # Set the database type to use (sqlite3, mysql, postgres)
+  type = sqlite3
+
+  # Set the path to the SQLite database file
+  path = ${GF_PATH_TO_SQL_DB:-/var/lib/grafana/grafana.db}
+
+  [ analytics ]
+  # Enable or disable analytics reporting
+  reporting_enabled = ${GF_ANALYTICS_REPORTING_ENABLED:-false}

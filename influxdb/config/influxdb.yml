@@ -1,0 +1,63 @@
+# Configuration for the InfluxDB server to listen on a specific IP and port.
+[http]
+  # Determines whether HTTP endpoint is enabled.
+  enabled = true
+
+  # The bind address used by the HTTP service.
+  bind-address = "0.0.0.0:8086"
+
+  # Configuration for the InfluxDB data store.
+  [data]
+  # The directory where the TSM storage engine stores TSM files.
+  dir = "/var/lib/influxdb/data"
+
+  # The maximum size a single WAL file can reach before InfluxDB switches to a new one.
+  wal-dir = "/var/lib/influxdb/wal"
+
+  # Configuration for the cluster communication.
+  [cluster]
+  # The hostname or IP address the other nodes will use to connect to this node.
+  hostname = "localhost"
+
+  # The port the cluster communication will happen on.
+  port = 8099
+
+  # Authentication and authorization configuration.
+  [authentication]
+  # Determines whether authentication is enabled.
+  enabled = true
+
+  # The default admin user name.
+  username = "admin"
+
+  # The default admin password.
+  password = "admin"
+
+  # Configuration for InfluxDB's backup and restore.
+  [backup]
+  # The directory where backups are stored.
+  dir = "/var/lib/influxdb/backups"
+
+  # Configuration for query execution and results.
+  [query]
+  # The maximum number of concurrent queries that will be executed.
+  max-concurrent-queries = 0
+
+  # The maximum number of series a single query can scan.
+  max-select-series = 0
+
+  # The maximum number of measurements a single query can return.
+  max-select-points = 0
+
+  # Configuration for the monitoring system.
+  [monitor]
+  # The directory where the InfluxDB TICKscripts are stored.
+  store-enabled = false
+  store-database = "_internal"
+  store-interval = "10s"
+
+  # Configuration for the query logging system.
+  [logging]
+  # The file to which the logging output is sent.
+  level = "info"
+  format = "auto"

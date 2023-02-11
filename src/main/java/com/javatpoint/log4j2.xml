@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="metric-boet-api" packages="">
+    <Appenders>
+        <LogstashTcpSocket name="Logstash"
+                           protocol="tcp"
+                           host="logstash.example.com"
+                           port="9600"
+                           userName="elastic"
+                           password="elastic-password"
+                           applicationName="metric-boet-api"
+                           includeMdc="true"
+                           includeContext="true"
+                           mdcProfiles="default"
+                           indexName="log-metrics">
+            <PatternLayout pattern="%d{ISO8601} [%t] %-5level %logger{36} - %msg%n"/>
+        </LogstashTcpSocket>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Logstash"/>
+        </Root>
+    </Loggers>
+</Configuration>
