@@ -11,7 +11,7 @@ public class MetricEmptyNameFieldValidator extends AbstractMetricValidator {
      * @param metric Metric to check
      * @return True if the name field is null or empty, False otherwise
      */
-    private boolean basicChecks(Metric metric) {
+    public boolean basicChecks(Metric metric) {
         // basic empty checks
         return metric.getName() == null || metric.getName().length() == 0;
     }

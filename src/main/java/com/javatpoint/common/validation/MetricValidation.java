@@ -9,7 +9,7 @@ import com.javatpoint.common.validation.validators.*;
 import com.javatpoint.common.validation.validators.generic.AbstractMetricValidator;
 import com.javatpoint.models.Metric;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * MetricValidation is a final class that provides validation checks for a Metric object.
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * passing in the current validator and the Metric object. If any of the validators return false,
  * the BasicMetricChecker will throw a MetricsException with the corresponding error message.
  */
-@Service
+@Component
 public final class MetricValidation {
 
     private LogManager logger;
@@ -38,11 +38,8 @@ public final class MetricValidation {
     //array of different validator implementations
     private static final AbstractMetricValidator[] validators = new AbstractMetricValidator[]{
             new MetricEmptyNameFieldValidator(),
-            new MetricEmptyTimeStampFieldValidator(),
             new MetricEmptyValueFieldValidator(),
-            new MetricNameMetricValidator(),
-            new MetricTimeStampValidator(),
-            new MetricValueRangeMetricValidator()
+            new MetricEmptyDeviceFieldValidator()
     };
 
     //checker object that implements the IMetricChecker interface
@@ -61,7 +58,7 @@ public final class MetricValidation {
                 throw e;
             }
         }
-
         influxDBService.pushMetricToInflux(metric);
+        logger.logInfo(CREATED_PREFIX.concat(DIVIDER).concat(metric.toString()));
     }
 }

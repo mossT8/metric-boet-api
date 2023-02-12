@@ -10,7 +10,7 @@ public class MetricEmptyValueFieldValidator extends AbstractMetricValidator {
      * @param metric Metric to check
      * @return true if the metric's value is NaN, false otherwise
      */
-    private boolean basicChecks(Metric metric) {
+    public boolean basicChecks(Metric metric) {
         return Double.isNaN(metric.getValue());
     }
 
