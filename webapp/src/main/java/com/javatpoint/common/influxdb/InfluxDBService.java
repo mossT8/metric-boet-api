@@ -2,6 +2,7 @@ package com.javatpoint.common.influxdb;
 
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.WriteApiBlocking;
+import com.influxdb.client.domain.BucketRetentionRules;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
 import com.javatpoint.models.Metric;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+
+import javax.validation.constraints.Null;
 
 @Service
 public class InfluxDBService {
@@ -23,7 +26,17 @@ public class InfluxDBService {
     public InfluxDBService(InfluxDBClient influxDBClient) {
         this.influxDBClient = influxDBClient;
         this.writeApi = influxDBClient.getWriteApiBlocking();
+        
+        try {
+            BucketRetentionRules retention = new BucketRetentionRules();
+            retention.setEverySeconds(3600);
+            influxDBClient.getBucketsApi().createBucket(bucket, retention, org);
+        } catch (Exception e) {
+            // proberbly there already or org doesnt exist
+        }
     }
+    
+
 
     public void pushMetricToInflux(Metric metric) {
         Point point =

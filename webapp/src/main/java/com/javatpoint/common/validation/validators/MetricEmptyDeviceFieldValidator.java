@@ -33,6 +33,6 @@ public class MetricEmptyDeviceFieldValidator extends AbstractMetricValidator {
      */
     @Override
     public String getInvalidMessage() {
-        return "Metric name cannot be null or empty";
+        return "Metric device cannot be null or empty";
     }
 }

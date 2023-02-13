@@ -7,7 +7,7 @@ services:
       - influxdb-storage:/var/lib/influxdb2:rw
     env_file:
       - .env
-    entrypoint: ["./entrypoint.sh"]
+    entrypoint: [ "./entrypoint.sh" ]
     restart: on-failure:10
     ports:
       - ${DOCKER_INFLUXDB_INIT_PORT}:8086
@@ -30,6 +30,16 @@ services:
     ports:
       - ${GRAFANA_PORT}:3000
 
+  metric-app:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+    volumes:
+      - /webapp/target:/app
+    ports:
+      - 8080:8080
+
 volumes:
   grafana-storage:
   influxdb-storage:
+  app-data:

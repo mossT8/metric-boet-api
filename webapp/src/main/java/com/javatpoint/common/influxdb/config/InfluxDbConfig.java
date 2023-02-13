@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class InfluxDbConfig {
     // You can generate an API token from the "API Tokens Tab" in the UI
 
-    @Value("${influxdb.token:aldppLTVdL-edqywyrLz2HPNp5njEBy7H-ZXTTD4qItblxElfd6gGDN8cH8iqnf0iQEY8hkPEI-CitEx1EYHBw==}")
+    @Value("${influxdb.token:ED05D186A111103FD4896238F1C4F7622}")
     private String token;
 
     @Value("${influxdb.host:localhost}")
@@ -25,7 +25,7 @@ public class InfluxDbConfig {
     @Value("${influxdb.username:admin}")
     private String userName;
 
-    @Value("${influxdb.password:admin123}")
+    @Value("${influxdb.password:password123}")
     private String password;
 
     @Bean
