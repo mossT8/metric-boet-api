@@ -2,6 +2,7 @@ version: "3"
 
 services:
   influxdb:
+    container_name: influxdb
     image: influxdb:2.1.1
     volumes:
       - influxdb-storage:/var/lib/influxdb2:rw
@@ -13,6 +14,7 @@ services:
       - ${DOCKER_INFLUXDB_INIT_PORT}:8086
 
   telegraf:
+    container_name: telegraf
     image: telegraf:1.19
     volumes:
       - ${TELEGRAF_CFG_PATH}:/etc/telegraf/telegraf.conf:rw
@@ -22,6 +24,7 @@ services:
       - influxdb
 
   grafana:
+    container_name: grafana
     image: grafana/grafana-oss:8.4.3
     volumes:
       - grafana-storage:/var/lib/grafana:rw
@@ -30,16 +33,25 @@ services:
     ports:
       - ${GRAFANA_PORT}:3000
 
-  metric-app:
-    build:
-      context: ./webapp
-      dockerfile: Dockerfile
-    volumes:
-      - /webapp/target:/app
+  db:
+    container_name: postgress-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: metricboetdb
     ports:
-      - 8080:8080
+      - "5432:5432"
+
+  dbadmin:
+    image: adminer
+    restart: always
+    ports:
+      - 8083:8083
+    depends_on:
+      - db
 
 volumes:
   grafana-storage:
   influxdb-storage:
-  app-data:
