@@ -33,7 +33,7 @@ services:
     ports:
       - ${GRAFANA_PORT}:3000
 
-  db:
+  postgress-db:
     container_name: postgress-db
     image: postgres
     restart: always
@@ -43,6 +43,8 @@ services:
       POSTGRES_DB: metricboetdb
     ports:
       - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   dbadmin:
     image: adminer
@@ -50,7 +52,7 @@ services:
     ports:
       - 8083:8083
     depends_on:
-      - db
+      - postgress-db
 
 volumes:
   grafana-storage:

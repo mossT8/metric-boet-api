@@ -1,7 +1,11 @@
-import AuthService from '../services/auth.service';
+import { AuthActionContext, AuthState } from '@/types/auth';
+import { User } from '@/types/user';
+import AuthService from '@/services/auth.service';
 
-const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
+const userStr = localStorage.getItem('user');
+const user: User | null = userStr ? JSON.parse(userStr) : null;
+
+const initialState: AuthState = user
   ? { status: { loggedIn: true }, user }
   : { status: { loggedIn: false }, user: null };
 
@@ -9,10 +13,10 @@ export const auth = {
   namespaced: true,
   state: initialState,
   actions: {
-    login({ commit }, user) {
-      return AuthService.login(user).then(
-        user => {
-          commit('loginSuccess', user);
+    async login({ commit }: AuthActionContext, user: User): Promise<User> {
+    await AuthService.login(user).then(
+        response  => {
+          commit('loginSuccess', response);
           return Promise.resolve(user);
         },
         error => {
@@ -20,12 +24,14 @@ export const auth = {
           return Promise.reject(error);
         }
       );
+
+    return user;
     },
-    logout({ commit }) {
+    logout({ commit }: AuthActionContext): void {
       AuthService.logout();
       commit('logout');
     },
-    register({ commit }, user) {
+    register({ commit }: AuthActionContext, user: User): Promise<any> {
       return AuthService.register(user).then(
         response => {
           commit('registerSuccess');
@@ -39,22 +45,22 @@ export const auth = {
     }
   },
   mutations: {
-    loginSuccess(state, user) {
+    loginSuccess(state: AuthState, user: User): void {
       state.status.loggedIn = true;
       state.user = user;
     },
-    loginFailure(state) {
+    loginFailure(state: AuthState): void {
       state.status.loggedIn = false;
       state.user = null;
     },
-    logout(state) {
+    logout(state: AuthState): void {
       state.status.loggedIn = false;
       state.user = null;
     },
-    registerSuccess(state) {
+    registerSuccess(state: AuthState): void {
       state.status.loggedIn = false;
     },
-    registerFailure(state) {
+    registerFailure(state: AuthState): void {
       state.status.loggedIn = false;
     }
   }

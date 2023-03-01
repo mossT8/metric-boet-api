@@ -1,12 +1,12 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "./components/Home.vue";
-import Login from "./components/Login.vue";
-import Register from "./components/Register.vue";
+import Home from "@/components/pages/Home.vue";
+import Login from "@/components/user/Login.vue";
+import Register from "@/components/user/Register.vue";
 // lazy-loaded
-const Profile = () => import("./components/Profile.vue")
-const BoardAdmin = () => import("./components/BoardAdmin.vue")
-const BoardModerator = () => import("./components/BoardModerator.vue")
-const BoardUser = () => import("./components/BoardUser.vue")
+const Profile = () => import("@/components/user/Profile.vue");
+const BoardAdmin = () => import("@/components/pages/BoardAdmin.vue");
+const BoardModerator = () => import("@/components/pages/BoardModerator.vue");
+const BoardUser = () => import("@/components/pages/BoardUser.vue");
 
 const routes = [
   {
