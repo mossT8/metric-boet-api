@@ -20,6 +20,18 @@ public class User {
 	private Long id;
 
 	@NotBlank
+	@Size(max = 50)
+	private String firstName;
+
+	@NotBlank
+	@Size(max = 50)
+	private String lastName;
+
+	@NotBlank
+	@Size(max = 50)
+	private String phone;
+
+	@NotBlank
 	@Size(max = 20)
 	private String username;
 
@@ -41,7 +53,10 @@ public class User {
 	public User() {
 	}
 
-	public User(String username, String email, String password) {
+	public User(String firstName, String lastName, String phone, String username, String email, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -85,5 +100,29 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

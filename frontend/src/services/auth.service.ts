@@ -29,6 +29,9 @@ class AuthService {
       username: user.username,
       email: user.email,
       password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phone: user.phone
     });
 
     // Make sure the response data contains the expected properties

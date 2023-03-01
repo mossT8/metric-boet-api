@@ -1,3 +1,4 @@
+
 CREATE TABLE "roles" (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(20)
@@ -6,17 +7,22 @@ CREATE TABLE "roles" (
 INSERT INTO roles(name) VALUES('ROLE_USER');
 INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+COMMIT;
 
 CREATE TABLE "users" (
 	"id" SERIAL PRIMARY KEY,
+	"firstname" VARCHAR(50),
+	"lastname" VARCHAR(50),
+	"phone" VARCHAR(15),
 	"username" VARCHAR(50),
 	"email" VARCHAR(50),
 	"password" VARCHAR(120)
 );
 
-INSERT INTO "users" ("id", "email", "password", "username") VALUES (1, 'user@tester.com', '$2a$10$b6fKyfskaSHM9I29sjLAGubjLnQjLOS5jriJPcsWpkIHYCHkrnUFG', 'user');
-INSERT INTO "users" ("id", "email", "password", "username") VALUES (2, 'moderator@tester.com', '$2a$10$VdudRCzwK37eHf2zfC/V3ebC5GPG0WUELTrxAW46A5ggWAX0YKNzO', 'moderator');
-INSERT INTO "users" ("id", "email", "password", "username") VALUES (3, 'admin@tester.com', '$2a$10$lt6Lt19ZfI0lPYHPOt0PEeh0ClEsRTcwyotP4Rp9ckBo29pm.SNQO', 'admin');
+INSERT INTO "users" ("id", "email", "first_name", "last_name", "password", "phone", "username") VALUES (1, 'blikkies@test.com', 'Blikkies', 'Blignaut', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281161', 'Blikkies');
+INSERT INTO "users" ("id", "email", "first_name", "last_name", "password", "phone", "username") VALUES (2, 'moderator@test.com', 'Michael', 'Rogers', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281162', 'Moderator');
+INSERT INTO "users" ("id", "email", "first_name", "last_name", "password", "phone", "username") VALUES (3, 'admin@test.com', 'Jane', 'Doe', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281163', 'Admin');
+COMMIT;
 
 CREATE TABLE "user_roles" (
 	"id" SERIAL PRIMARY KEY,
@@ -27,3 +33,5 @@ CREATE TABLE "user_roles" (
 INSERT INTO user_roles(user_id, role_id) VALUES(1,1);
 INSERT INTO user_roles(user_id, role_id) VALUES(2,2);
 INSERT INTO user_roles(user_id, role_id) VALUES(3,3);
+
+COMMIT;
