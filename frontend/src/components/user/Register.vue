@@ -4,7 +4,7 @@
       <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
       <Form @submit="handleRegister" :validation-schema="schema">
         <div v-if="!successful">
-          <div >
+          <div v-if="currentStep === 1">
             <h2>Step 1: Personal Info</h2>
             <div class="form-group">
               <label for="firstName">First Name</label>
@@ -24,7 +24,7 @@
             <div class="btn btn-primary float-right"  @click="currentStep++">Next</div>
           </div>
 
-          <div>
+          <div v-if="currentStep === 2">
             <h2>Step 2: Account Info</h2>
             <div class="form-group">
               <label for="username">Username</label>

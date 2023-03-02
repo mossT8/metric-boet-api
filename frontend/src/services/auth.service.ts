@@ -2,12 +2,12 @@ import { LoginRequest, LoginResponse, RegisterResponse } from '@/types/auth';
 import { User } from '@/types/user';
 import axios, { AxiosResponse } from 'axios';
 
-const API_URL = 'http://localhost:8080/api/auth/';
+const AUTH_API_URL = 'http://localhost:8080/api/v1/auth/';
 
 class AuthService {
   login(user: LoginRequest): Promise<LoginResponse> {
     return axios
-      .post<LoginResponse>(API_URL + 'signin', {
+      .post<LoginResponse>(AUTH_API_URL + 'signin', {
         username: user.username,
         password: user.password
       })
@@ -25,7 +25,7 @@ class AuthService {
   }
 
   async register(user: User): Promise<RegisterResponse> {
-    const response = await axios.post(API_URL + 'signup', {
+    const response = await axios.post(AUTH_API_URL + 'signup', {
       username: user.username,
       email: user.email,
       password: user.password,

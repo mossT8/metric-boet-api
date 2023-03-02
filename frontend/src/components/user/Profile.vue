@@ -24,7 +24,7 @@
     </ul>
     <div>
       <strong>Devices ({{ totalDevices }}) </strong>
-      <Button class="float-right" type="success">Add Device </Button>
+      <Button class="float-right" type="success" @click.stop="addDeviceForm" >Add Device </Button>
     </div>
   </div>
 </template>
@@ -44,6 +44,11 @@ export default {
     },
     totalDevices() {
       return 0;
+    }
+  },
+  methods: {
+    addDeviceForm() {
+      this.$router.push('/device-add');
     }
   },
   mounted() {

@@ -33,6 +33,6 @@ export const userSchema = yup.object().shape({
     .max(40, "Must be maximum 40 characters!"),
 });
 
-export interface User  extends yup.InferType<typeof userSchema> {
+export interface User extends yup.InferType<typeof userSchema> {
  
 }

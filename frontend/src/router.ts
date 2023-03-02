@@ -7,6 +7,7 @@ const Profile = () => import("@/components/user/Profile.vue");
 const BoardAdmin = () => import("@/components/pages/BoardAdmin.vue");
 const BoardModerator = () => import("@/components/pages/BoardModerator.vue");
 const BoardUser = () => import("@/components/pages/BoardUser.vue");
+const AddDeviceForUser = () => import("@/components/device/RegisterDevice.vue");
 
 const routes = [
   {
@@ -49,6 +50,12 @@ const routes = [
     name: "user",
     // lazy-loaded
     component: BoardUser,
+  },
+  {
+    path: "/device-add",
+    name: "device-add",
+    // lazy-loaded
+    component: AddDeviceForUser,
   },
 ];
 
