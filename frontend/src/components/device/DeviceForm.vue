@@ -5,7 +5,7 @@
             <Form @submit="handleRegister" :validation-schema="schema" :initial-values="intialValues">
                 <div v-if="!successful">
                     <FormTextInput name="name" label="Name" />
-                    <FormSelectListInput name="type" label="Typr" :options="typeOptions" />
+                    <FormSelectListInput name="type" label="Type" :options="typeOptions" />
                     <FormTextInput name="location" label="Location" />
                     <FormRadioButtonInput name="status" label="Status" :options="statusOptions" />
                     <FormTextInput name="token" label="Token" />

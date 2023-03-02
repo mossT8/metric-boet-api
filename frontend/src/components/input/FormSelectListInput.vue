@@ -1,7 +1,9 @@
 <template>
     <div class="form-group">
         <label :for="name">{{ label }}</label>
-        <select :name="name" class="form-control" v-model="selectedOption">
+        <Field type="hidden" :name="name" v-model="selectedOption"/>
+        <select  :name="name" class="form-control" v-model="selectedOption">
+            <option value="" disabled selected>Please Select</option>
             <option v-for="(option, index) in options" :key="index" :value="option.value">{{ option.label }}</option>
         </select>
         <ErrorMessage :name="name" class="error-feedback" />
@@ -10,7 +12,7 @@
   
 <script>
 import { defineComponent } from 'vue'
-import { ErrorMessage } from 'vee-validate'
+import { ErrorMessage , Field} from 'vee-validate'
 
 export default defineComponent({
     name: 'FormSelectInput',
@@ -33,7 +35,7 @@ export default defineComponent({
         }
     },
     components: {
-        ErrorMessage
+        ErrorMessage, Field
     },
     data() {
         return {
