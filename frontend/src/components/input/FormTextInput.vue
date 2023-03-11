@@ -11,7 +11,7 @@ import { defineComponent } from 'vue'
 import { Field, ErrorMessage } from 'vee-validate'
 
 export default defineComponent({
-    name: 'FormTextInput',
+    name: 'form-text-imput',
     props: {
         name: {
             type: String,

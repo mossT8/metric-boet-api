@@ -4,13 +4,13 @@
             <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
             <Form @submit="handleRegister" :validation-schema="schema" :initial-values="intialValues">
                 <div v-if="!successful">
-                    <FormTextInput name="name" label="Name" />
-                    <FormSelectListInput name="type" label="Type" :options="typeOptions" />
-                    <FormTextInput name="location" label="Location" />
-                    <FormRadioButtonInput name="status" label="Status" :options="statusOptions" />
-                    <FormTextInput name="token" label="Token" />
+                    <form-text-input name="name" label="Name" />
+                    <form-select-list-input name="type" label="Type" :options="typeOptions" />
+                    <form-text-input name="location" label="Location" />
+                    <form-radio-button-input name="status" label="Status" :options="statusOptions" />
+                    <form-text-input name="token" label="Token" />
                     <button class="btn btn-primary float-right" :disabled="loading">
-                        <span v-show="loading" @click.stop="console.log(schema)"
+                        <span v-show="loading" 
                             class="spinner-border spinner-border-sm"></span>
                         {{ btnTxt }}
                     </button>
@@ -78,7 +78,6 @@ export default {
         return {
             successful: false,
             loading: false,
-            currentStep: 1,
             message: "",
             schema,
         };
@@ -103,7 +102,7 @@ export default {
             return [{ value: "standard", label: "Standard" }, { value: "live_save", label: "Live Saver" }];
         },
         statusOptions() {
-            return [{ value: "standard", label: "Standard" }, { value: "live_save", label: "Live Saver" }];
+            return [{ value: "0", label: "Disabled" }, { value: "1", label: "Active" }];
         }
     },
     mounted() {

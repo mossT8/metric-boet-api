@@ -15,7 +15,7 @@ import { defineComponent } from 'vue'
 import { ErrorMessage , Field} from 'vee-validate'
 
 export default defineComponent({
-    name: 'FormSelectInput',
+    name: 'form-select-list-input',
     props: {
         name: {
             type: String,

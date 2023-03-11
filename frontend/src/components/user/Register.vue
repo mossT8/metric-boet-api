@@ -1,80 +1,22 @@
 <template>
-  <div class="col-md-12">
-    <div class="card card-container">
-      <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-      <Form @submit="handleRegister" :validation-schema="schema">
-        <div v-if="!successful">
-          <div>
-            <h2>Step 1: Personal Info</h2>
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <Field name="firstName" type="text" class="form-control" />
-              <ErrorMessage name="firstName" class="error-feedback" />
-            </div>
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <Field name="lastName" type="text" class="form-control" />
-              <ErrorMessage name="lastName" class="error-feedback" />
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <Field name="phone" type="text" class="form-control" />
-              <ErrorMessage name="phone" class="error-feedback" />
-            </div>
-          </div>
-
-          <div>
-            <h2>Step 2: Account Info</h2>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <Field name="username" type="text" class="form-control" />
-              <ErrorMessage name="username" class="error-feedback" />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <Field name="email" type="email" class="form-control" />
-              <ErrorMessage name="email" class="error-feedback" />
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <Field name="password" type="password" class="form-control" />
-              <ErrorMessage name="password" class="error-feedback" />
-            </div>
-          </div>
-          <button class="btn btn-primary float-right" :disabled="loading">
-            <span v-show="loading" @click.stop="console.log(schema)" class="spinner-border spinner-border-sm"></span>
-            Sign Up
-          </button>
-        </div>
-      </Form>
-
-      <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'">
-        {{ message }}
-      </div>
-    </div>
-  </div>
+  <user-form />
 </template>
 
 <script>
-import { Form, Field, ErrorMessage } from "vee-validate";
-import { userSchema } from "@/types/user/user"
+import UserForm from "@/components/user/UserForm.vue";
 
 export default {
   name: "Register",
   components: {
-    Form,
-    Field,
-    ErrorMessage,
+    UserForm,
   },
   data() {
-    const schema = userSchema;
 
     return {
       successful: false,
       loading: false,
       currentStep: 1,
       message: "",
-      schema,
     };
   },
   computed: {
@@ -115,42 +57,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-label {
-  display: block;
-  margin-top: 10px;
-}
-
-.card-container.card {
-  max-width: 350px !important;
-  padding: 40px 40px;
-}
-
-.card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.profile-img-card {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
-
-.error-feedback {
-  color: red;
-}
-</style>

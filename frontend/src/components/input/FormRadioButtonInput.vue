@@ -14,7 +14,7 @@ import { defineComponent } from 'vue'
 import { ErrorMessage } from 'vee-validate'
 
 export default defineComponent({
-    name: 'FormRadioButtonInput',
+    name: 'form-radio-button-input',
     props: {
         name: {
             type: String,

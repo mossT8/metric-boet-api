@@ -2,6 +2,7 @@
   <div class="container">
     <header class="jumbotron">
       <h3>
+        <font-awesome-icon icon="fa-solid fa-user" />
         <strong>{{ currentUser.username }}</strong> Profile
       </h3>
       <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'">
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Button from "@/components/button/Button.vue"
 import DeviceList from "@/components/device/DeviceList.vue";
 import DeviceService from "@/services/device.service";
@@ -45,7 +46,8 @@ export default {
   name: 'Profile',
   components: {
     Button,
-    DeviceList
+    DeviceList,
+    FontAwesomeIcon
   },
   data() {
     return {
