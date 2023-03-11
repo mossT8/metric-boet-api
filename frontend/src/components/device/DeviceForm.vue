@@ -26,7 +26,7 @@
   
 <script>
 import { Form } from "vee-validate";
-import { deviceShema } from "@/types/device"
+import { deviceShema } from "@/types/device/device"
 import FormTextInput from "@/components/input/FormTextInput.vue";
 import FormSelectListInput from "@/components/input/FormSelectListInput.vue";
 import FormRadioButtonInput from "@/components/input/FormRadioButtonInput.vue";

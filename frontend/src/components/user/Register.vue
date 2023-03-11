@@ -4,7 +4,7 @@
       <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
       <Form @submit="handleRegister" :validation-schema="schema">
         <div v-if="!successful">
-          <div v-if="currentStep === 1">
+          <div>
             <h2>Step 1: Personal Info</h2>
             <div class="form-group">
               <label for="firstName">First Name</label>
@@ -21,10 +21,9 @@
               <Field name="phone" type="text" class="form-control" />
               <ErrorMessage name="phone" class="error-feedback" />
             </div>
-            <div class="btn btn-primary float-right"  @click="currentStep++">Next</div>
           </div>
 
-          <div v-if="currentStep === 2">
+          <div>
             <h2>Step 2: Account Info</h2>
             <div class="form-group">
               <label for="username">Username</label>
@@ -41,12 +40,11 @@
               <Field name="password" type="password" class="form-control" />
               <ErrorMessage name="password" class="error-feedback" />
             </div>
-            <div class="btn btn-outline-primary"  @click="currentStep--">Previous</div>
-            <button class="btn btn-primary float-right" :disabled="loading">
-              <span v-show="loading" @click.stop="console.log(schema)" class="spinner-border spinner-border-sm"></span>
-              Sign Up
-            </button>
           </div>
+          <button class="btn btn-primary float-right" :disabled="loading">
+            <span v-show="loading" @click.stop="console.log(schema)" class="spinner-border spinner-border-sm"></span>
+            Sign Up
+          </button>
         </div>
       </Form>
 
@@ -59,7 +57,7 @@
 
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
-import {userSchema} from "@/types/user"
+import { userSchema } from "@/types/user/user"
 
 export default {
   name: "Register",

@@ -7,7 +7,8 @@ const Profile = () => import("@/components/user/Profile.vue");
 const BoardAdmin = () => import("@/components/pages/BoardAdmin.vue");
 const BoardModerator = () => import("@/components/pages/BoardModerator.vue");
 const BoardUser = () => import("@/components/pages/BoardUser.vue");
-const AddDeviceForUser = () => import("@/components/device/RegisterDevice.vue");
+const DeviceRegister = () => import("@/components/device/DeviceRegister.vue");
+const DeviceUpdate = () => import("@/components/device/DeviceUpdate.vue");
 
 const routes = [
   {
@@ -55,7 +56,13 @@ const routes = [
     path: "/device-add",
     name: "device-add",
     // lazy-loaded
-    component: AddDeviceForUser,
+    component: DeviceRegister,
+  },
+  {
+    path: "/device-update/:uid",
+    name: "device-update",
+    // lazy-loaded
+    component: DeviceUpdate,
   },
 ];
 

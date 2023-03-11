@@ -1,5 +1,5 @@
-import { AuthHeader } from "@/types/auth";
-import { User } from "@/types/user";
+import { AuthHeader } from "@/types/auth/auth";
+import { User } from "@/types/user/user";
 
 export default function authHeader(): AuthHeader {
   const userStr = localStorage.getItem('user');

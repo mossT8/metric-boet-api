@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <label :for="name">{{ label }}</label>
-        <Field :name="name" :type="type" class="form-control" />
+        <Field :name="name" :type="type" :disabled="disabled" class="form-control" />
         <ErrorMessage :name="name" class="error-feedback" />
     </div>
 </template>
@@ -25,6 +25,11 @@ export default defineComponent({
             type: String,
             required: false,
             default: 'text'
+        },
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false,
         }
     },
     components: {

@@ -1,5 +1,5 @@
-import { LoginRequest, LoginResponse, RegisterResponse } from '@/types/auth';
-import { User } from '@/types/user';
+import { LoginRequest, LoginResponse, RegisterResponse } from '@/types/auth/auth';
+import { User } from '@/types/user/user';
 import axios, { AxiosResponse } from 'axios';
 
 const AUTH_API_URL = 'http://localhost:8080/api/v1/auth/';

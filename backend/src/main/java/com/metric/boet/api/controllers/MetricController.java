@@ -1,8 +1,8 @@
 package com.metric.boet.api.controllers;
 
-import com.metric.boet.api.common.log.LogManager;
-import com.metric.boet.api.models.Metric;
-import com.metric.boet.api.service.imp.MetricService;
+import com.metric.boet.api.core.log.imp.LogManager;
+import com.metric.boet.api.entity.Metric;
+import com.metric.boet.api.service.metric.imp.SimpleMetricService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import java.io.StringWriter;
 public class MetricController {
 
     @Autowired
-    MetricService metricServiceImplemented;
+    SimpleMetricService metricServiceImplemented;
     @Autowired
     LogManager logger;
 

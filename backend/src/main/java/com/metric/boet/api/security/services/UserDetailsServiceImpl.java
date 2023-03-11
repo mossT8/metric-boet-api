@@ -1,6 +1,6 @@
 package com.metric.boet.api.security.services;
 
-import com.metric.boet.api.models.User;
+import com.metric.boet.api.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

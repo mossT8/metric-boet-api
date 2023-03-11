@@ -1,5 +1,5 @@
-import { AuthActionContext, AuthState } from '@/types/auth';
-import { User } from '@/types/user';
+import { AuthActionContext, AuthState } from '@/types/auth/auth';
+import { User } from '@/types/user/user';
 import AuthService from '@/services/auth.service';
 
 const userStr = localStorage.getItem('user');

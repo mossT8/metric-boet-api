@@ -1,0 +1,42 @@
+// Define primary colors
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$info-color: #17a2b8;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+$primary-bg-color: #FFFF;
+$primary-dark-text: #0000;
+
+// Define breakpoints for responsive design
+$breakpoint-small: 576px; // Mobile devices
+$breakpoint-small-minus-one: 575px; // Mobile devices
+$breakpoint-medium: 768px; // Tablets
+$breakpoint-medium-minus-one: 767px; // Tablets
+$breakpoint-large: 992px; // Desktops
+$breakpoint-large-minus-one: 991px; // Desktops
+
+// Define media query mixins for each breakpoint
+@mixin media-small {
+  @media (max-width: $breakpoint-small-minus-one) {
+    @content;
+  }
+}
+
+@mixin media-medium {
+  @media (min-width: $breakpoint-small) and (max-width: $breakpoint-medium-minus-one) {
+    @content;
+  }
+}
+
+@mixin media-large {
+  @media (min-width: $breakpoint-medium) and (max-width: $breakpoint-large-minus-one) {
+    @content;
+  }
+}
+
+@mixin media-xlarge {
+  @media (min-width: $breakpoint-large) {
+    @content;
+  }
+}
