@@ -35,4 +35,6 @@ export interface DeviceMapped {
     location: string,
     status: boolean,
     token: string,
+    createdAt: Date,
+    updatedAt: Date,
 }

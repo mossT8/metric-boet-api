@@ -9,6 +9,9 @@ const BoardModerator = () => import("@/components/pages/BoardModerator.vue");
 const BoardUser = () => import("@/components/pages/BoardUser.vue");
 const DeviceRegister = () => import("@/components/device/DeviceRegister.vue");
 const DeviceUpdate = () => import("@/components/device/DeviceUpdate.vue");
+const AdminPageEditorList = () =>
+  import("@/components/pages/AdminPageEditorList.vue");
+  const UpdateHtmlPage = () => import("@/components/pages/UpdateHtmlPage.vue");
 
 const routes = [
   {
@@ -64,6 +67,18 @@ const routes = [
     // lazy-loaded
     component: DeviceUpdate,
   },
+  {
+    path: "/html-list",
+    name: "html-list",
+    // lazy-loaded
+    component: AdminPageEditorList,
+  },
+  {
+    path: "/html-edit/:url",
+    name: "html-edit",
+    // lazy-loaded
+    component: UpdateHtmlPage,
+  },
 ];
 
 const router = createRouter({
@@ -71,7 +86,7 @@ const router = createRouter({
   routes,
 });
 
-router
+router;
 
 // router.beforeEach((to, from, next) => {
 //   const publicPages = ['/login', '/register', '/home'];

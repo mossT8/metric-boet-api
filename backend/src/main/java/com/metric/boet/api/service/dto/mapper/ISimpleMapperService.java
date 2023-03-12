@@ -1,8 +1,10 @@
 package com.metric.boet.api.service.dto.mapper;
 
 import com.metric.boet.api.dto.DeviceDto;
+import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.dto.UserDto;
 import com.metric.boet.api.entity.Device;
+import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.entity.User;
 import jdk.jshell.spi.ExecutionControl;
 
@@ -16,4 +18,9 @@ public interface ISimpleMapperService {
     UserDto getUserDto(User user) throws ExecutionControl.NotImplementedException;
 
     List<UserDto> getUsersDto(List<User> users) throws ExecutionControl.NotImplementedException;
+
+    HtmlPageDto getHtmlPageDto(HtmlPage htmlPage) throws ExecutionControl.NotImplementedException;
+
+    List<HtmlPageDto> getHtmlPagesDto(List<HtmlPage> devices) throws ExecutionControl.NotImplementedException;
+
 }

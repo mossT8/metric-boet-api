@@ -95,6 +95,9 @@
         {{ btnTxt }}
       </button>
     </div>
+    <div>
+      {{ html }}
+    </div>
   </div>
 </template>
 

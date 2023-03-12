@@ -13,7 +13,7 @@
     </table>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 th,
 td {
     border: 1px solid black;

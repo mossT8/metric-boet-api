@@ -1,10 +1,13 @@
 package com.metric.boet.api.service.dto.mapper.imp;
 
 import com.metric.boet.api.core.mapper.imp.DeviceDtoMapper;
+import com.metric.boet.api.core.mapper.imp.HtmlPageMapper;
 import com.metric.boet.api.core.mapper.imp.UserDtoMapper;
 import com.metric.boet.api.dto.DeviceDto;
+import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.dto.UserDto;
 import com.metric.boet.api.entity.Device;
+import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.service.dto.mapper.ISimpleMapperService;
 import jdk.jshell.spi.ExecutionControl;
@@ -21,6 +24,9 @@ public class SimpleMapperService implements ISimpleMapperService {
 
     @Autowired
     UserDtoMapper userDtoMapper;
+
+    @Autowired
+    HtmlPageMapper htmlPageMapper;
 
     @Override
     public DeviceDto getDeviceDto(Device device) throws ExecutionControl.NotImplementedException {
@@ -44,11 +50,26 @@ public class SimpleMapperService implements ISimpleMapperService {
 
     @Override
     public List<UserDto> getUsersDto(List<User> users) throws ExecutionControl.NotImplementedException {
-        List<UserDto> mappedDevices = new ArrayList<>();
+        List<UserDto> mappedUsers = new ArrayList<>();
         for (User user : users) {
-            mappedDevices.add(getUserDto(user));
+            mappedUsers.add(getUserDto(user));
         }
 
-        return mappedDevices;
+        return mappedUsers;
+    }
+
+    @Override
+    public HtmlPageDto getHtmlPageDto(HtmlPage htmlPage) throws ExecutionControl.NotImplementedException {
+        return htmlPageMapper.removeSensitiveInformation(htmlPage);
+    }
+
+    @Override
+    public List<HtmlPageDto> getHtmlPagesDto(List<HtmlPage> pages) throws ExecutionControl.NotImplementedException {
+        List<HtmlPageDto> mappedUsers = new ArrayList<>();
+        for (HtmlPage page : pages) {
+            mappedUsers.add(getHtmlPageDto(page));
+        }
+
+        return mappedUsers;
     }
 }
