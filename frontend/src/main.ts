@@ -14,6 +14,10 @@ import { faB } from "@fortawesome/free-solid-svg-icons";
 library.add(fas);
 library.add(faB);
 
+import Editor from "@/core/editor/Editor.vue";
+
+export default Editor;
+
 createApp(App)
   .directive("roles", rolesDirective)
   .component("font-awesome-icon", FontAwesomeIcon)

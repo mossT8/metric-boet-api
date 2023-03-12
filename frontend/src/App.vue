@@ -119,6 +119,13 @@ export default {
 
 <style lang="scss" >
 
+@import'@/sass/variables.scss';
+@import'@/sass/icon.scss';
+@import '@/sass/editor.scss';
+@import '@/sass/menubar.scss';
+@import '@/sass/menububble.scss';
+@import '@/sass/main.scss';
+
 .logo-img {
   width: 32px;
   height: 32px;

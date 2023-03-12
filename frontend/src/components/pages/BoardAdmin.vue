@@ -1,23 +1,26 @@
 <template>
   <div class="container">
     <header class="jumbotron">
-      <h3>{{ content }}</h3>
+      <Editor :initialContent="content" />
     </header>
   </div>
 </template>
 
 <script>
-import UserService from "../../services/user.service";
-
+import UserService from "@/services/user.service";
+import Editor from "@/main";
 export default {
   name: "Admin",
+  components: {
+    Editor,
+  },
   data() {
     return {
       content: "",
     };
   },
   mounted() {
-    UserService.getAdminBoard().then(
+    UserService.getAdminEditableUserContent().then(
       (response) => {
         this.content = response.data;
       },
