@@ -3,10 +3,6 @@
         <slot></slot>
     </button>
 </template>
-
-<style lang="scss">
-@import "@/assets/styles/button.scss";
-</style>
   
 <script>
 export default {

@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <label :for="name">{{ label }}</label>
-        <Field :name="name" :type="type" :disabled="disabled" class="form-control" />
+        <Field v-model="innerValue" :name="name" :type="type" :disabled="disabled" class="form-control" />
         <ErrorMessage :name="name" class="error-feedback" />
     </div>
 </template>
@@ -12,6 +12,10 @@ import { Field, ErrorMessage } from 'vee-validate'
 
 export default defineComponent({
     name: 'form-text-imput',
+    components: {
+        Field,
+        ErrorMessage
+    },
     props: {
         name: {
             type: String,
@@ -20,6 +24,11 @@ export default defineComponent({
         label: {
             type: String,
             required: true
+        },
+        value: {
+            type: String,
+            required: false,
+            default: '',
         },
         type: {
             type: String,
@@ -32,9 +41,20 @@ export default defineComponent({
             default: false,
         }
     },
-    components: {
-        Field,
-        ErrorMessage
+    data() {
+
+        return {
+            innerValue: '',
+        }
+    },
+    watch: {
+        innerValue(newValue) {
+            this.$emit('input', newValue);
+            this.$emit('change');
+        },
+        value(newValue) {
+            this.innerValue = newValue;
+        }
     }
 })
 </script>

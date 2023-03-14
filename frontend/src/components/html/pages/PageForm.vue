@@ -1,8 +1,8 @@
 <template>
-    <div class="card card-container">
-        <Form @submit.prevent="submitForm">
-            <form-text-input name="url" label="Url" />
-            <Editor :initialContent="htmlInnverValue" />
+    <div class="card card-container-xl">
+        <Form @submit.prevent="submitForm" :validation-schema="schema" :initialValues="initialValues">
+            <form-text-input v-model="urlInnverValue" name="url" label="Url" :disabled="true" />
+            <Editor :initialContent="htmlInnverValue" heading="Page Editor" :showButtons="false" />
 
             <button class="btn btn-primary float-right" :disabled="loading">
                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
@@ -18,7 +18,8 @@
 <script>
 import { Form } from "vee-validate";
 import FormTextInput from "@/components/input/FormTextInput.vue";
-import { Editor } from "@tiptap/vue-3";
+import { htmpPageSchema } from "@/types/pages/html-pages";
+import Editor from "@/core/editor/Editor.vue";
 export default {
     components: {
         Form,
@@ -40,7 +41,8 @@ export default {
             urlInput: this.url,
             htmlInput: this.html,
             loading: false,
-            message: ''
+            message: '',
+            schema: htmpPageSchema,
         }
     },
     computed: {
@@ -60,6 +62,12 @@ export default {
                 this.htmlInput = newValue
             }
         },
+        initialValues() {
+            return {
+                url: this.urlInnverValue,
+                html: this.htmlInnverValue
+            }
+        },
         btnTxt() {
             return this.html.length > 0 || this.url.length > 0 ? 'Update' : 'Create';
         }
@@ -73,9 +81,18 @@ export default {
             this.$emit('onSubmit', pageData);
         }
     }
-    , mounted() {
+    ,
+    mounted() {
         this.urlInnverValue = this.url || '';
         this.htmlInnverValue = this.html || '';
+    },
+    watch: {
+        html(newValue) {
+            this.htmlInnverValue = newValue;
+        },
+        url(newValue) {
+            this.urlInnverValue = newValue;
+        }
     }
 }
 </script>

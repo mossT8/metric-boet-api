@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <page-form :url="url" :content="content" />
+        <page-form v-if="!loading" :url="htmlUrl" :html="content" /> 
     </div>
 </template>
   
@@ -11,12 +11,12 @@ import PageForm from "@/components/html/pages/PageForm.vue";
 export default {
     name: "update-html-page",
     components: {
-        PageForm
+      PageForm
     },
     data() {
         return {
             content: "",
-            url: "",
+            loading: false,
         };
     },
     computed: {
@@ -25,9 +25,10 @@ export default {
         },
     },
     mounted() {
+        this.loading = true;
         htmlPagesService.getPageByUrl(this.htmlUrl).then(
             (response) => {
-                this.content = response.data;
+                this.content = response.html;
             },
             (error) => {
                 this.content =
@@ -37,7 +38,9 @@ export default {
                     error.message ||
                     error.toString();
             }
-        );
+        ).finally(() => {
+            this.loading = false;
+        });
     },
 };
 </script>

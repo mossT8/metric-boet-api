@@ -13,6 +13,9 @@
             <li v-if="showAdminBoard" class="nav-item">
                 <router-link to="/admin" class="nav-link">Admin Board</router-link>
             </li>
+            <li v-if="showAdminBoard" class="nav-item">
+                <router-link to="/html-list" class="nav-link">Page Manager</router-link>
+            </li>
             <li v-if="showModeratorBoard" class="nav-item">
                 <router-link to="/mod" class="nav-link">Moderator Board</router-link>
             </li>

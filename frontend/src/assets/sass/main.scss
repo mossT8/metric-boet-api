@@ -22,7 +22,7 @@
 }
 
 html {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 18px;
   color: $color-black;
   line-height: 1.5;
@@ -87,7 +87,18 @@ h3 {
   font-style: italic;
 }
 
+.logo-img {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 10px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
 @import "./icon";
 @import "./editor";
 @import "./menubar";
 @import "./menububble";
+@import "./form";
+@import "./button";

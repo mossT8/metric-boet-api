@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 export const htmpPageSchema = yup.object().shape({
-  name: yup.string().required("Html is required!"),
+  html: yup.string().required("Html is required!"),
   url: yup
     .string()
     .required("Type is required!")

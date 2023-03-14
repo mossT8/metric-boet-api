@@ -53,9 +53,9 @@ public class HtmlPageController {
         return ResponseEntity.ok(mappedDevices);
     }
 
-    @GetMapping("/{uid}")
+    @GetMapping("/{url}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<HtmlPageDto> getHtmlPageByUrl(@RequestParam String url) throws ExecutionControl.NotImplementedException {
+    public ResponseEntity<HtmlPageDto> getHtmlPageByUrl(@PathVariable String url) throws ExecutionControl.NotImplementedException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 

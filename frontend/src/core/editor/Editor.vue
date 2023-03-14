@@ -86,7 +86,7 @@
     </div>
     <hr />
     <editor-content class="editor__content" :initialContent="initialContent" :editor="editor" />
-    <div class="editor-footer">
+    <div v-if="shouldShowFooterButton" class="editor-footer">
       <button class="btn btn-danger mr-1" :disabled="loading" @click="onClear">
         Clear
       </button>
@@ -94,9 +94,6 @@
         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
         {{ btnTxt }}
       </button>
-    </div>
-    <div>
-      {{ html }}
     </div>
   </div>
 </template>
@@ -123,6 +120,11 @@ export default {
       type: String,
       required: false,
       default: 'Text Editor',
+    },
+    showButtons: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
     activeButtons: {
       type: Array,
@@ -174,7 +176,10 @@ export default {
   emits: ['update'],
   computed: {
     btnTxt() {
-      return this.loading ? 'Updating...' : 'Update';
+      return this.loading ? 'Saving...' : 'Save';
+    },
+    shouldShowFooterButton() {
+      return this.showButtons || false;
     }
   },
   data() {

@@ -22,20 +22,5 @@ export default {
 </script>
 
 <style lang="scss" >
-
-@import'@/sass/variables.scss';
-@import'@/sass/icon.scss';
-@import '@/sass/editor.scss';
-@import '@/sass/menubar.scss';
-@import '@/sass/menububble.scss';
-@import '@/sass/main.scss';
-
-.logo-img {
-  width: 32px;
-  height: 32px;
-  margin: 0 auto 10px;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
+@import '@/assets/sass/main.scss';
 </style>
