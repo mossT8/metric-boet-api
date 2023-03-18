@@ -3,14 +3,13 @@ package com.metric.boet.api.core.mapper.imp;
 import com.metric.boet.api.core.mapper.IDtoMapper;
 import com.metric.boet.api.dto.UserDto;
 import com.metric.boet.api.entity.User;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserDtoMapper implements IDtoMapper<User, UserDto> {
 
     @Override
-    public UserDto removeSensitiveInformation(User inputObject) throws ExecutionControl.NotImplementedException {
+    public UserDto removeSensitiveInformation(User inputObject) {
         UserDto networkSafeObject = new UserDto();
 
         networkSafeObject.setUsername(inputObject.getUsername());

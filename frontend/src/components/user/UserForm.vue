@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card card-container">
             <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-            <Form @submit="handleRegister" :validation-schema="schema" :initial-values="intialValues">
+            <Form class="portal-form" @submit="handleRegister" :validation-schema="schema" :initial-values="intialValues">
                 <div v-if="!successful">
                     <form-text-input name="firstName" label="First Name" />
                     <form-text-input name="lastName" label="Last Name" />

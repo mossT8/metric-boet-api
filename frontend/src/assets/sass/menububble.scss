@@ -1,15 +1,35 @@
+// Spacing
+$menububble-padding: 0.3rem;
+$menububble-margin-bottom: 0.5rem;
+$menububble-button-padding: 0.2rem 0.5rem;
+$menububble-button-margin-right: 0.2rem;
+$menububble-button-radius: 3px;
+
+// Font
+$menububble-font: inherit;
+
+// Transitions
+$menububble-transition: opacity 0.2s, visibility 0.2s;
+
+// Border
+$menububble-border-radius: 5px;
+$menububble-border: none;
+
+// Other
+$menububble-cursor: pointer;
+
 .menububble {
   position: absolute;
   display: flex;
   z-index: 20;
   background: $color-black;
-  border-radius: 5px;
-  padding: 0.3rem;
-  margin-bottom: 0.5rem;
+  border-radius: $menububble-border-radius;
+  padding: $menububble-padding;
+  margin-bottom: $menububble-margin-bottom;
   transform: translateX(-50%);
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition: $menububble-transition;
 
   &.is-active {
     opacity: 1;
@@ -19,12 +39,12 @@
   &__button {
     display: inline-flex;
     background: transparent;
-    border: 0;
+    border: $menububble-border;
     color: $color-white;
-    padding: 0.2rem 0.5rem;
-    margin-right: 0.2rem;
-    border-radius: 3px;
-    cursor: pointer;
+    padding: $menububble-button-padding;
+    margin-right: $menububble-button-margin-right;
+    border-radius: $menububble-button-radius;
+    cursor: $menububble-cursor;
 
     &:last-child {
       margin-right: 0;
@@ -45,8 +65,8 @@
   }
 
   &__input {
-    font: inherit;
-    border: none;
+    font: $menububble-font;
+    border: $menububble-border;
     background: transparent;
     color: $color-white;
   }

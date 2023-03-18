@@ -1,14 +1,12 @@
 package com.metric.boet.api.dto;
 
-import com.metric.boet.api.core.annotations.NoIdField;
 import com.metric.boet.api.entity.Role;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@NoIdField
-public class UserDto {
+public class UserDto extends BasicObjectDto {
     String username;
     String accountCode;
     String firstName;

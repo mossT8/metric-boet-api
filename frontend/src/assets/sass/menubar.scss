@@ -1,6 +1,23 @@
-.menubar {
+// Size
+$menubar-button-width: 1.8rem;
+$menubar-button-height: 1.2rem;
 
-  margin-bottom: 1rem;
+// Font
+$menubar-button-font-weight: bold;
+$font-size-small: 12px;
+
+// Padding
+$menubar-button-padding: 0.2rem 0.5rem;
+
+// Margin
+$menubar-margin-bottom: 1rem;
+$menubar-button-margin-right: 0.2rem;
+
+// Radius
+$menubar-button-border-radius: 3px;
+
+.menubar {
+  margin-bottom: $menubar-margin-bottom;
   transition: visibility 0.2s 0.4s, opacity 0.2s 0.4s;
 
   &.is-hidden {
@@ -16,16 +33,16 @@
 
   &__button {
     vertical-align: middle;
-    width: 1.8rem;
-    height: 1.2rem;
-    font-weight: bold;
+    width: $menubar-button-width;
+    height: $menubar-button-height;
+    font-weight: $menubar-button-font-weight;
     display: inline-flex;
     background: transparent;
     border: 0;
     color: $color-black;
-    padding: 0.2rem 0.5rem;
-    margin-right: 0.2rem;
-    border-radius: 3px;
+    padding: $menubar-button-padding;
+    margin-right: $menubar-button-margin-right;
+    border-radius: $menubar-button-border-radius;
     cursor: pointer;
 
     &:hover {
@@ -38,6 +55,6 @@
   }
 
   span#{&}__button {
-    font-size: 13.3333px;
+    font-size: $font-size-small;
   }
 }

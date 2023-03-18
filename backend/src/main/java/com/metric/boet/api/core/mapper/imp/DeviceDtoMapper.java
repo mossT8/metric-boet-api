@@ -3,7 +3,6 @@ package com.metric.boet.api.core.mapper.imp;
 import com.metric.boet.api.core.mapper.IDtoMapper;
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ public class DeviceDtoMapper implements IDtoMapper<Device, DeviceDto> {
     UserDtoMapper userDtoMapper;
 
     @Override
-    public DeviceDto removeSensitiveInformation(Device inputObject) throws ExecutionControl.NotImplementedException {
+    public DeviceDto removeSensitiveInformation(Device inputObject) {
         DeviceDto networkSafeObject = new DeviceDto();
 
         networkSafeObject.setUuid(inputObject.getUuid());

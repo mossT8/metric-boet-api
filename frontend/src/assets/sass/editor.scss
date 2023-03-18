@@ -1,19 +1,50 @@
+$editor-padding: 4px;
+$editor-margin: 0 auto 5rem auto;
+
+$editor-footer-padding: 10px;
+$editor-footer-margin-top: 36px;
+
+$editor-content-padding: 1em;
+$editor-content-border-radius: 15px;
+
+$editor-header-font-size: 24px;
+$editor-header-font-weight: 300;
+
+$code-font-size: 0.8rem;
+$code-font-weight: bold;
+
+$code-background-color: rgba($color-black, 0.1);
+$code-color: rgba($color-black, 0.8);
+
+$editor-pre-margin: 0.7rem 1rem;
+$editor-pre-radius: 5px;
+
+$editor-code-margin: 0.2rem 0.4rem;
+$editor-code-radius: 5px;
+
+$editor-block-quote-color: rgba($color-black, 0.8);
+$editor-block-quote-padding-left: rgba($color-black, 0.8);
+
+$editor-cell-border: 2px solid $color-grey;
+$editor-cell-padding: 3px 5px;
+$editor-cell-selected: rgba(200, 200, 255, 0.4);
+
 .editor {
   position: relative;
-  max-width: 30rem;
-  margin: 0 auto 5rem auto;
+  margin: $editor-margin;
   background-color: $color-white;
-  padding: 4px;
+  padding: $editor-padding;
 
   .editor-header {
-    font-size: 24px;
-    font-weight: 300;
+    font-size: $editor-header-font-size;
+    font-weight: $editor-header-font-weight;
   }
 
   .editor-footer {
     display: flex;
     justify-content: end;
-    margin-top: 36px;
+    margin-top: $editor-footer-margin-top;
+    padding: $editor-footer-padding;
   }
 
   &__content {
@@ -22,19 +53,19 @@
     word-break: break-word;
 
     background: $color-form-grey;
-    padding: 1em;
-    border-radius: 15px;
+    padding: $editor-content-padding;
+    border-radius: $editor-content-border-radius;
 
     * {
       caret-color: currentColor;
     }
 
     pre {
-      padding: 0.7rem 1rem;
-      border-radius: 5px;
+      padding: $editor-pre-margin;
+      border-radius: $editor-pre-radius;
       background: $color-black;
       color: $color-white;
-      font-size: 0.8rem;
+      font-size: $code-font-size;
       overflow-x: auto;
 
       code {
@@ -43,12 +74,12 @@
     }
 
     p code {
-      padding: 0.2rem 0.4rem;
-      border-radius: 5px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      background: rgba($color-black, 0.1);
-      color: rgba($color-black, 0.8);
+      padding: $editor-code-margin;
+      border-radius: $editor-code-radius;
+      font-size: $code-font-size;
+      font-weight: $code-font-weight;
+      background: $code-background-color;
+      color: $code-color;
     }
 
     ul,
@@ -68,8 +99,8 @@
 
     blockquote {
       border-left: 3px solid rgba($color-black, 0.1);
-      color: rgba($color-black, 0.8);
-      padding-left: 0.8rem;
+      color: $editor-block-quote-color;
+      padding-left: $editor-block-quote-padding-left;
       font-style: italic;
 
       p {
@@ -92,8 +123,8 @@
       td,
       th {
         min-width: 1em;
-        border: 2px solid $color-grey;
-        padding: 3px 5px;
+        border: $editor-cell-border;
+        padding: $editor-cell-padding;
         vertical-align: top;
         box-sizing: border-box;
         position: relative;
@@ -115,7 +146,7 @@
         right: 0;
         top: 0;
         bottom: 0;
-        background: rgba(200, 200, 255, 0.4);
+        background: $editor-cell-selected;
         pointer-events: none;
       }
 

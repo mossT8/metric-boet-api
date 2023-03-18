@@ -4,6 +4,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -33,7 +34,18 @@ public class HtmlPage {
     @LastModifiedDate
     private Date updatedAt;
 
+    @NotBlank
+    private Boolean visibleOnNav;
+
+    @NotBlank
+    private Boolean visibleForUsers;
+
+    @NotBlank
+    private Boolean visibleForModerators;
+
     public HtmlPage() {
+        this.visibleForUsers = true;
+        this.visibleForModerators = true;
     }
 
     public Long getId() {
@@ -74,5 +86,29 @@ public class HtmlPage {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Boolean getVisibleForUsers() {
+        return visibleForUsers;
+    }
+
+    public void setVisibleForUsers(Boolean visibleForUsers) {
+        this.visibleForUsers = visibleForUsers;
+    }
+
+    public Boolean getVisibleForModerators() {
+        return visibleForModerators;
+    }
+
+    public void setVisibleForModerators(Boolean visibleForFarmers) {
+        this.visibleForModerators = visibleForFarmers;
+    }
+
+    public Boolean getVisibleOnNav() {
+        return visibleOnNav;
+    }
+
+    public void setVisibleOnNav(Boolean visibleOnNav) {
+        this.visibleOnNav = visibleOnNav;
     }
 }

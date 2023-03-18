@@ -1,11 +1,8 @@
 package com.metric.boet.api.dto;
 
-import com.metric.boet.api.core.annotations.NoIdField;
-
 import java.util.Date;
 
-@NoIdField
-public class DeviceDto {
+public class DeviceDto extends BasicObjectDto {
     String uuid;
     String name;
     String type;

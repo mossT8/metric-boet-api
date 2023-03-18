@@ -2,12 +2,15 @@ package com.metric.boet.api.dto;
 
 import java.util.Date;
 
-public class HtmlPageDto {
+public class HtmlPageDto extends BasicObjectDto {
 
     private String url;
     private String html;
     private Date createdAt;
     private Date updatedAt;
+    private Boolean isVisibleForUsers;
+    private Boolean isVisibleForModerators;
+    private Boolean isVisibleOnNav;
 
     public HtmlPageDto() {
     }
@@ -42,5 +45,29 @@ public class HtmlPageDto {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Boolean getVisibleForUsers() {
+        return isVisibleForUsers;
+    }
+
+    public void setVisibleForUsers(Boolean visibleForUsers) {
+        isVisibleForUsers = visibleForUsers;
+    }
+
+    public Boolean getVisibleForModerators() {
+        return isVisibleForModerators;
+    }
+
+    public void setVisibleForModerators(Boolean visibleForFarmers) {
+        isVisibleForModerators = visibleForFarmers;
+    }
+
+    public Boolean getVisibleOnNav() {
+        return isVisibleOnNav;
+    }
+
+    public void setVisibleOnNav(Boolean visibleOnNav) {
+        isVisibleOnNav = visibleOnNav;
     }
 }

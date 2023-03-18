@@ -1,7 +1,15 @@
 <template>
     <div class="card card-container-xl">
-        <Form @submit.prevent="submitForm" :validation-schema="schema" :initialValues="initialValues">
+        <Form class="portal-form" @submit.prevent="submitForm" :validation-schema="schema" :initialValues="initialValues">
             <form-text-input v-model="urlInnverValue" name="url" label="Url" :disabled="true" />
+            <div class="d-flex justify-content-between">
+                <form-switch-input v-model="visibleForUsersInnverValue" :color="successColor" :isEnabled="true"
+                    name="visibleForUsers" label="Visible for Users" />
+                <form-switch-input v-model="visibleForModeratorsInnverValue" :color="successColor" :isEnabled="true"
+                    name="visibleForModerators" label="Visible for Moderators" />
+                <form-switch-input v-model="visibleOnNavInnverValue" :color="successColor" :isEnabled="true"
+                    name="visibleOnNav" label="Visible on Navbar" />
+            </div>
             <Editor :initialContent="htmlInnverValue" heading="Page Editor" :showButtons="false" />
 
             <button class="btn btn-primary float-right" :disabled="loading">
@@ -18,12 +26,14 @@
 <script>
 import { Form } from "vee-validate";
 import FormTextInput from "@/components/input/FormTextInput.vue";
+import FormSwitchInput from "@/components/input/FormSwitchInput.vue";
 import { htmpPageSchema } from "@/types/pages/html-pages";
 import Editor from "@/core/editor/Editor.vue";
 export default {
     components: {
         Form,
         FormTextInput,
+        FormSwitchInput,
         Editor
     },
     props: {
@@ -34,12 +44,27 @@ export default {
         html: {
             type: String,
             default: ''
-        }
+        },
+        visibleForUsers: {
+            type: Boolean,
+            default: true
+        },
+        visibleForModerators: {
+            type: Boolean,
+            default: true
+        },
+        visibleOnNav: {
+            type: Boolean,
+            default: true
+        },
     },
     data() {
         return {
             urlInput: this.url,
             htmlInput: this.html,
+            visibleForUsersInput: this.visibleForUsers,
+            visibleForModeratorsInput: this.visibleForModerators,
+            visibleOnNavInput: this.visibleOnNav,
             loading: false,
             message: '',
             schema: htmpPageSchema,
@@ -54,6 +79,9 @@ export default {
                 this.urlInput = newValue
             }
         },
+        successColor() {
+            return "#F53731";
+        },
         htmlInnverValue: {
             get() {
                 return this.htmlInput
@@ -62,10 +90,37 @@ export default {
                 this.htmlInput = newValue
             }
         },
+        visibleForUsersInnverValue: {
+            get() {
+                return this.visibleForUsersInput
+            },
+            set(newValue) {
+                this.visibleForUsersInput = newValue
+            }
+        },
+        visibleForModeratorsInnverValue: {
+            get() {
+                return this.visibleForModeratorsInput
+            },
+            set(newValue) {
+                this.visibleForModeratorsInput = newValue
+            }
+        },
+        visibleOnNavInnverValue: {
+            get() {
+                return this.visibleOnNavInput
+            },
+            set(newValue) {
+                this.visibleOnNavInput = newValue
+            }
+        },
         initialValues() {
             return {
                 url: this.urlInnverValue,
-                html: this.htmlInnverValue
+                html: this.htmlInnverValue,
+                visibleForUsers: this.visibleForUsersInnverValue,
+                visibleForModerators: this.visibleForModeratorsInnverValue,
+                visibleOnNav: this.visibleOnNavInnverValue,
             }
         },
         btnTxt() {
@@ -75,9 +130,12 @@ export default {
     methods: {
         submitForm() {
             const pageData = {
-                url: this.url,
-                html: this.html
-            }
+                url: this.urlInnverValue,
+                html: this.htmlInnverValue,
+                visibleForUsers: this.visibleForUsersInnverValue,
+                visibleForModerators: this.visibleForModeratorsInnverValue,
+                visibleOnNav: this.visibleOnNavInnverValue,
+            };
             this.$emit('onSubmit', pageData);
         }
     }

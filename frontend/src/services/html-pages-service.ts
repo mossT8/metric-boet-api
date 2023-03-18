@@ -1,6 +1,7 @@
 import { HtmlPage, HtmlPageMapped } from "@/types/pages/html-pages";
 import axios from "axios";
 import authHeader from "@/services/auth-header";
+import { formatDate } from "@/core/dates/date-util";
 
 const API_URL = "http://localhost:8080/api/v1/html/pages";
 
@@ -22,7 +23,16 @@ class HtmlPageServices {
   getAllPages(): Promise<HtmlPageMapped[]> {
     const mappedDeviced = axios
       .get<HtmlPageMapped[]>(API_URL + "/list", { headers: authHeader() })
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .then((data) => {
+        for (const record of data) {
+          if (record.createdAt) {
+            record.createdAt = formatDate(record.createdAt);
+            record.updatedAt = formatDate(record.updatedAt);
+          }
+        }
+        return data;
+      });
 
     return mappedDeviced;
   }
