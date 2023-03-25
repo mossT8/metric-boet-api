@@ -37,7 +37,8 @@ public class HtmlPageController {
 
     @GetMapping("/list")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<List<HtmlPageDto>> getHtmlPages() throws ExecutionControl.NotImplementedException {
+    public ResponseEntity<List<HtmlPageDto>> listPages() throws ExecutionControl.NotImplementedException {
+        // authenticate user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -45,7 +46,7 @@ public class HtmlPageController {
         if (!user.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
+        // get list
         List<HtmlPage> htmlPages = htmlPageRepository.findAll();
         List<HtmlPageDto> mappedDevices = simpleMapperService.getHtmlPagesDto(htmlPages);
 
@@ -55,7 +56,8 @@ public class HtmlPageController {
 
     @GetMapping("/{url}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<HtmlPageDto> getHtmlPageByUrl(@PathVariable String url) throws ExecutionControl.NotImplementedException {
+    public ResponseEntity<HtmlPageDto> getPage(@PathVariable String url) throws ExecutionControl.NotImplementedException {
+        // authenticate user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -63,7 +65,7 @@ public class HtmlPageController {
         if (!user.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-
+        // get page
         Optional<HtmlPage> htmlPage = htmlPageRepository.getByUrl(url);
         if (htmlPage.isPresent()) {
             HtmlPageDto htmlPageDto = simpleMapperService.getHtmlPageDto(htmlPage.get());
@@ -75,7 +77,8 @@ public class HtmlPageController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> registerDeviceForUser(@Valid @RequestBody HtmlPageRequest htmlPageRequest) {
+    public ResponseEntity<?> createPage(@Valid @RequestBody HtmlPageRequest htmlPageRequest) {
+        // authenticate user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -83,12 +86,53 @@ public class HtmlPageController {
         if (!user.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        Date createDate = new Date();
+
+        // check page url not in already
+        Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
+
+        if (possiblePage.isPresent()) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Url is already in use!", false));
+        }
+
+        // add page
         HtmlPage htmlPage = new HtmlPage();
         htmlPage.setHtml(htmlPageRequest.getHtml());
         htmlPage.setUrl(htmlPage.getUrl());
         htmlPageRepository.save(htmlPage);
-        return ResponseEntity.ok(new MessageResponse("Html Page registered successfully!"));
+
+        return ResponseEntity.ok(new MessageResponse("Html Page created successfully!", true));
+    }
+
+    @PostMapping("/update")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public ResponseEntity<?> updatePage(@Valid @RequestBody HtmlPageRequest htmlPageRequest) {
+        // authenticate user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        Optional<User> user = userRepository.findByUsername(username);
+        if (!user.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // check page url is in use
+        Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
+
+        if (!possiblePage.isPresent()) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Url is not in use!", false));
+        }
+
+        // update page
+        HtmlPage htmlPage = possiblePage.get();
+        htmlPage.setHtml(htmlPageRequest.getHtml());
+        htmlPage.setUrl(htmlPageRequest.getUrl());
+        htmlPage.setVisibleForModerators(htmlPageRequest.getVisibleForModerators());
+        htmlPage.setVisibleForUsers(htmlPageRequest.getVisibleForUsers());
+        htmlPage.setVisibleOnNav(htmlPageRequest.getVisibleOnNav());
+
+        htmlPageRepository.save(htmlPage);
+
+        return ResponseEntity.ok(new MessageResponse("Html Page updated successfully!", true));
     }
 }
 

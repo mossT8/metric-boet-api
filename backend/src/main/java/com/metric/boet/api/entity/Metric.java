@@ -9,6 +9,8 @@ import java.time.Instant;
  * This class represents a metric that contains a name, timestamp and a value. It has three properties, name, timestamp,
  * and value, and has getters and setters for each property. The constructor accepts these three properties as
  * parameters and assigns them to the corresponding properties.
+ *
+ * Note: wouldn't need to extend AbstractDataBean as we are using influxDB not postgres!
  */
 @Measurement(name = "metric")
 public class Metric {

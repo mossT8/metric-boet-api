@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.metric.boet.api.entity.ERole;
+import com.metric.boet.api.core.authorization.BasicUsers;
+import com.metric.boet.api.entity.enums.ERole;
 import com.metric.boet.api.entity.Role;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payload.request.LoginRequest;
@@ -19,6 +20,7 @@ import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.security.jwt.JwtUtils;
 import com.metric.boet.api.security.services.UserDetailsImpl;
 import com.metric.boet.api.service.generator.imp.SimpleGeneratorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -81,13 +83,13 @@ public class AuthController {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse("Error: Username is already taken!", false));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+                    .body(new MessageResponse("Error: Email is already in use!", false));
         }
 
         // Create new user's account
@@ -97,7 +99,8 @@ public class AuthController {
                 signUpRequest.getPhone(),
                 signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()),
+                BasicUsers.ADMIN_USER);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -132,6 +135,6 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!", true));
     }
 }

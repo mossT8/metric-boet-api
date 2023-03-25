@@ -1,8 +1,10 @@
 package com.metric.boet.api.entity;
 
+import com.metric.boet.api.core.authorization.BasicUsers;
+import com.metric.boet.api.core.authorization.IUserAudit;
+import com.metric.boet.api.core.bean.BasicDataBean;
+import com.metric.boet.api.entity.enums.ERole;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -21,10 +23,10 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "email"),
                 @UniqueConstraint(columnNames = "accountCode"),
         })
-public class User {
+public class User extends BasicDataBean implements IUserAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public long id;
 
     @NotBlank
     @Size(max = 50)
@@ -55,16 +57,6 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -72,9 +64,11 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+        super(BasicUsers.ADMIN_USER);
     }
 
-    public User(String accountCode, String firstName, String lastName, String phone, String username, String email, String password) {
+    public User(String accountCode, String firstName, String lastName, String phone, String username, String email, String password, IUserAudit userAudit) {
+        super(userAudit);
         this.accountCode = accountCode;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -82,16 +76,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -158,19 +142,24 @@ public class User {
         this.accountCode = accountCode;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    @Override
+    public long getUserId() {
+        return id;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+    @Override
+    public ERole getUserRole() {
+        ERole currentMaxPrivilege = ERole.ROLE_USER;
+        ERole currentPrivilege;
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+        for (Role role : roles) {
+            currentPrivilege = role.getName();
+            if (currentPrivilege.ordinal() < currentMaxPrivilege.ordinal()) {
+                // as admin is 0
+                currentMaxPrivilege = currentPrivilege;
+            }
+        }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+        return currentMaxPrivilege;
     }
 }

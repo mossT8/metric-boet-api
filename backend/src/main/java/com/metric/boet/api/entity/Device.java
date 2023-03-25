@@ -1,21 +1,22 @@
 package com.metric.boet.api.entity;
 
+import com.metric.boet.api.core.authorization.BasicUsers;
+import com.metric.boet.api.core.bean.BasicDataBean;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Entity
 @Configurable
-@Table(name = "device")
-public class Device {
+@Table(name = "device", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "uuid")
+})
+public class Device extends BasicDataBean {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public long id;
 
     @NotBlank
     @Size(max = 255)
@@ -41,23 +42,15 @@ public class Device {
     private String token;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_created_id", nullable = false)
     private User user;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date updatedAt;
-
     public Device() {
+        super(BasicUsers.ADMIN_USER);
     }
 
-    public Device(String name, String uuid, String type, String location, Boolean status, String token, User user, Date createdAt, Date updatedAt) {
+    public Device(String name, String uuid, String type, String location, Boolean status, String token, User user) {
+        super(user);
         this.name = name;
         this.uuid = uuid;
         this.type = type;
@@ -65,16 +58,6 @@ public class Device {
         this.status = status;
         this.token = token;
         this.user = user;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -123,22 +106,6 @@ public class Device {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public String getUuid() {
