@@ -1,8 +1,9 @@
 <template>
-    <div class="form-group">
+    <div class="form-group" :class="inline ? 'd-flex d-inline' : ''">
         <label>{{ label }}</label>
         <div class="switch-button-control" @click="toggle">
-            <div class="switch-button" :class="{ enabled: innerValue }" :style="{ '--color': color }">
+            <div class="switch-button" :class="{ 'enabled': innerValue, 'inline-switch': inline }"
+                :style="{ '--color': color }">
                 <div class="button"></div>
                 <div class="label">{{ currentLabel }}</div>
             </div>
@@ -37,9 +38,13 @@ export default defineComponent({
             type: String,
             default: ''
         },
-        color: {
+        positiveColorValue: {
             type: String,
-            default: ''
+            default: '#28a745'
+        },
+        negativeColorValue: {
+            type: String,
+            default: '#F53731'
         },
         positiveValue: {
             type: String,
@@ -52,29 +57,48 @@ export default defineComponent({
         value: {
             type: Boolean,
             default: false
+        },
+        inline: {
+            type: Boolean,
+            default: false
         }
     },
-    emits: ['update:modelValue'],
     computed: {
-        positiveDefault() {
+        positiveLabelDefault() {
             return { value: true, label: this.positiveValue || "Yes" };
         },
-        negativeDefault() {
+        negativeLabelDefault() {
             return { value: false, label: this.negativeValue || "No" };
         },
+        positiveColorDefault() {
+            return this.positiveColorValue || "#28a745";
+        },
+        negativeColorDefault() {
+            return this.negativeColorValue || "#F53731";
+        },
         options() {
-            return [this.positiveDefault, this.negativeDefault];
+            return [this.positiveLabelDefault, this.negativeLabelDefault];
         },
         currentLabel() {
-            return this.innerValue ? this.positiveDefault.label : this.negativeDefault.label;
-        }
+            return this.innerValue ? this.positiveLabelDefault.label : this.negativeLabelDefault.label;
+        },
+        color() {
+            return this.innerValue ? this.positiveColorDefault : this.negativeColorDefault;
+        },
     },
     watch: {
+        innerValue(newValue) {
+            this.$emit('input', newValue);
+            this.$emit('change');
+        },
         value(newValue) {
             this.innerValue = newValue;
-        },
-        innerValue(newValue) {
-            this.$emit('update:modelValue', newValue);
+        }
+    },
+    created() {
+        console.log(this.value);
+        if (this.value) {
+            this.innerValue = this.value;
         }
     },
     methods: {

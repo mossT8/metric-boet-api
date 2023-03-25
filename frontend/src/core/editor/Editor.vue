@@ -85,7 +85,7 @@
       </span>
     </div>
     <hr />
-    <editor-content class="editor__content" :initialContent="initialContent" :editor="editor" />
+    <editor-content class="editor__content" :editor="editor" />
     <div v-if="shouldShowFooterButton" class="editor-footer">
       <button class="btn btn-danger mr-1" :disabled="loading" @click="onClear">
         Clear
@@ -111,9 +111,9 @@ export default {
     Icon
   },
   props: {
-    initialContent: {
+    value: {
       type: String,
-      required: true,
+      required: false,
       default: '<em>editable text</em>',
     },
     heading: {
@@ -173,7 +173,7 @@ export default {
       ],
     },
   },
-  emits: ['update'],
+  emits: ['update', 'update', 'onSubmit', 'input', 'change'],
   computed: {
     btnTxt() {
       return this.loading ? 'Saving...' : 'Save';
@@ -184,32 +184,51 @@ export default {
   },
   data() {
     return {
+      innerValue: '',
       html: '',
       json: '',
       editor: null,
       loading: false,
     };
   },
+  watch: {
+    innerValue(newValue) {
+      this.$emit('input', newValue);
+      this.$emit('change');
+      this.editor.commands.clearContent(true);
+      this.editor.commands.insertContent(newValue);
+
+    },
+    value(newValue) {
+      this.innerValue = newValue;
+    }
+  },
   created() {
     this.onClear();
-
-    this.editor = new Editor({
-      content: this.initialContent,
-      extensions: [StarterKit, Underline],
-    });
-    this.html = this.editor.getHTML();
-    this.json = this.editor.getJSON();
-
-
-    this.editor.on('update', () => {
-      this.html = this.editor.getHTML();
-      this.json = this.editor.getJSON();
-      this.$emit('update', this.html);
-    });
+    this.setupEditor();
   },
   methods: {
     onSubmit() {
       this.$emit('onSubmit', this.html);
+    },
+    setupEditor() {
+      if (this.value) {
+        this.innerValue = this.value;
+      }
+
+      this.editor = new Editor({
+        content: this.innerValue,
+        extensions: [StarterKit, Underline],
+      });
+      this.html = this.editor.getHTML();
+      this.json = this.editor.getJSON();
+
+
+      this.editor.on('update', () => {
+        this.html = this.editor.getHTML();
+        this.json = this.editor.getJSON();
+        this.$emit('update', this.html);
+      });
     },
     onClear() {
       if (this.editor) {

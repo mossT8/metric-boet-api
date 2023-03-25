@@ -11,6 +11,11 @@ class HtmlPageServices {
       headers: authHeader(),
     });
   }
+  update(page: HtmlPage) {
+    return axios.post(API_URL + "/update", page, {
+      headers: authHeader(),
+    });
+  }
   getPageByUrl(url: string): Promise<HtmlPageMapped> {
     const mappedDeviced = axios
       .get<HtmlPageMapped>(API_URL + "/" + url, {

@@ -4,18 +4,18 @@
     <table>
       <thead class="w-100">
         <tr>
-          <th v-for="column in columns" :key="column">{{ column }}</th>
+          <th v-for="column in columns" :key="column.value">{{ column.heading }}</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <page-item :html-page="htmlPage" v-for="htmlPage in htmlPages" :key="htmlPage.url" :columns="columns" />
+        <page-item :html-page="htmlPage" v-for="htmlPage in htmlPages" :key="htmlPage.url" :columns="columnFields" />
       </tbody>
     </table>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 th,
 td {
   border: 1px solid black;
@@ -33,11 +33,28 @@ import PageItem from '@/components/html/pages/PageItem.vue';
 export default {
   name: "page-list",
   components: {
-    PageItem,
+    PageItem
   },
   data() {
     return {
-      columns: ['url', 'createdAt', 'updatedAt']
+      columns: 
+      [{ value: 'url', heading: 'Url' }, 
+      { value: 'visibleForUsers', heading: 'Users' }, 
+      { value: 'visibleForModerators', heading: 'Moderators' },
+      { value: 'visibleOnNav', heading: 'Nav' },
+      { value: 'createdAt', heading: 'Created At' },
+      { value: 'updatedAt', heading: 'Updated At' },
+      ]
+    }
+  },
+  methods: {
+    goToCreatePage() {
+      this.$router.push('html-create');
+    },
+  },
+  computed: {
+    columnFields() {
+      return this.columns.map(column => column.value);
     }
   },
   props: {

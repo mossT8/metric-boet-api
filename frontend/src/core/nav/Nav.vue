@@ -13,15 +13,26 @@
             <li v-if="showAdminBoard" class="nav-item">
                 <router-link to="/admin" class="nav-link">Admin Board</router-link>
             </li>
-            <li v-if="showAdminBoard" class="nav-item">
-                <router-link to="/html-list" class="nav-link">Page Manager</router-link>
-            </li>
             <li v-if="showModeratorBoard" class="nav-item">
                 <router-link to="/mod" class="nav-link">Moderator Board</router-link>
             </li>
             <li class="nav-item">
-                <router-link v-if="currentUser" to="/user" class="nav-link">User</router-link>
+                <router-link v-if="currentUser" to="/user" class="nav-link">User Board</router-link>
             </li>
+            <li class="nav-item dropdown" v-if="showAdminBoard">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Admin Management
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <router-link to="/html-list" class="dropdown-item">
+                        <font-awesome-icon icon="cogs" class="pr-2" />
+                        Page Manager
+                    </router-link>
+                    <!-- Add additional dropdown items as needed -->
+                </div>
+            </li>
+
         </div>
 
         <div v-if="!currentUser" class="navbar-nav ml-auto">

@@ -1,0 +1,15 @@
+.switch-value-display-container {
+    padding: 4px;
+    $display-switch-button-height: 1.6em;
+    $display-button-side-length: 15px;
+    $display-switch-button-color: var(--color);
+    $display-switch-button-border-thickness: 2px;
+    $display-switch-is-rounded: true;
+    .value-dot {
+        height: $display-button-side-length;
+        width: $display-button-side-length;
+        border: $display-switch-button-border-thickness solid $primary-bg-color;
+        border-radius: if($display-switch-is-rounded, $display-button-side-length, 0);
+        background: $display-switch-button-color;
+    }
+}

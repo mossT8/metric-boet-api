@@ -1,6 +1,11 @@
 <template>
   <tr>
-    <td v-for="column in columns" :key="column">{{ htmlPage[column] }}</td>
+    <td v-for="column in columns" :key="column">
+      <div v-if="column == 'visibleForUsers' || column == 'visibleForModerators' || column == 'visibleOnNav'">
+        <SwitchValueDisplay :value="htmlPage[column]" />
+      </div>
+      <div v-else>{{ htmlPage[column] }}</div>
+    </td>
     <td class="d-flex d-inline">
       <Button type="primary-outline" class="mr-2" @click="onUpdate(htmlPage)">Update</Button>
       <Button type="primary" @click="onView(htmlPage)">View</Button>
@@ -10,11 +15,13 @@
   
 <script>
 import Button from "@/components/button/Button.vue"
+import SwitchValueDisplay from "@/components/display/SwitchValueDisplay.vue";
 
 export default {
   name: "page-item",
   components: {
     Button,
+    SwitchValueDisplay
   },
   props: {
     htmlPage: {

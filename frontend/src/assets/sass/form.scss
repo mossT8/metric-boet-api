@@ -15,7 +15,7 @@ $form-profile-img-card-size: 96px;
 
 $form-switch-margin: 0 10px;
 $form-switch-label-size: 16px;
-$form-switch-label-padding:  0.1em 0;
+$form-switch-label-padding: 0.1em 0;
 
 .portal-form {
     .label {
@@ -92,12 +92,8 @@ $form-switch-label-padding:  0.1em 0;
             transition: $switch-transition;
 
             $button-side-length: calc(#{$switch-button-height} - (2 * #{$switch-button-border-thickness}));
-            $label-top-refactor: calc(
-                (-#{$switch-button-height} - 1.3em + (2 * #{$switch-button-border-thickness}))
-            );
-            $label-right-refactor: calc(
-                (-#{$switch-button-height} - 0.4em + (2 * #{$switch-button-border-thickness}))
-            );
+            $label-top-refactor: calc((-#{$switch-button-height} - 1.3em + (2 * #{$switch-button-border-thickness})));
+            $label-right-refactor: calc((-#{$switch-button-height} - 0.4em + (2 * #{$switch-button-border-thickness})));
 
             cursor: pointer;
 
@@ -109,6 +105,11 @@ $form-switch-label-padding:  0.1em 0;
                 background: $switch-button-color;
 
                 transition: $switch-transition;
+            }
+
+            &.inline-switch {
+                position: relative;
+                top: -16px;
             }
 
             &.enabled {
