@@ -1,7 +1,7 @@
-package com.metric.boet.api.core.validation.checker;
+package com.metric.boet.api.device.validation.checker;
 
 import com.metric.boet.api.exception.MetricsException;
-import com.metric.boet.api.core.validation.validators.IMetricValidator;
+import com.metric.boet.api.device.validation.validators.IMetricValidator;
 import com.metric.boet.api.entity.Metric;
 
 public interface IMetricChecker {

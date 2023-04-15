@@ -1,9 +1,9 @@
-package com.metric.boet.api.core.validation.checker.imp;
+package com.metric.boet.api.device.validation.checker.imp;
 
 
-import com.metric.boet.api.core.validation.checker.IMetricChecker;
+import com.metric.boet.api.device.validation.checker.IMetricChecker;
 import com.metric.boet.api.exception.MetricsException;
-import com.metric.boet.api.core.validation.validators.IMetricValidator;
+import com.metric.boet.api.device.validation.validators.IMetricValidator;
 import com.metric.boet.api.entity.Metric;
 
 public class BasicMetricChecker implements IMetricChecker {

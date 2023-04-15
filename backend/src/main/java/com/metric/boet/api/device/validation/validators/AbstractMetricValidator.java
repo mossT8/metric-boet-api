@@ -1,4 +1,4 @@
-package com.metric.boet.api.core.validation.validators;
+package com.metric.boet.api.device.validation.validators;
 
 
 import com.metric.boet.api.entity.Metric;

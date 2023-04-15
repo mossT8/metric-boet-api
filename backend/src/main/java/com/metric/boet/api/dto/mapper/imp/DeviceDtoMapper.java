@@ -1,6 +1,6 @@
-package com.metric.boet.api.core.mapper.imp;
+package com.metric.boet.api.dto.mapper.imp;
 
-import com.metric.boet.api.core.mapper.IDtoMapper;
+import com.metric.boet.api.dto.mapper.IDtoMapper;
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
 import org.springframework.beans.factory.annotation.Autowired;

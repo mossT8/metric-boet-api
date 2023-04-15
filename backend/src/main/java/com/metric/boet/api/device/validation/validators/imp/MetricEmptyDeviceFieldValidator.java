@@ -1,6 +1,6 @@
-package com.metric.boet.api.core.validation.validators.imp;
+package com.metric.boet.api.device.validation.validators.imp;
 
-import com.metric.boet.api.core.validation.validators.AbstractMetricValidator;
+import com.metric.boet.api.device.validation.validators.AbstractMetricValidator;
 import com.metric.boet.api.entity.Metric;
 
 public class MetricEmptyDeviceFieldValidator extends AbstractMetricValidator {

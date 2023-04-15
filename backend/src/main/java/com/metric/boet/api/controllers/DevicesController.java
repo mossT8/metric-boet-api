@@ -100,7 +100,3 @@ public class DevicesController {
         return ResponseEntity.ok(new MessageResponse("Device added successfully for user!", true));
     }
 }
-
-
-
-

@@ -1,14 +1,14 @@
-package com.metric.boet.api.core.validation;
+package com.metric.boet.api.device.validation;
 
 
-import com.metric.boet.api.core.validation.validators.imp.MetricEmptyDeviceFieldValidator;
-import com.metric.boet.api.core.validation.validators.imp.MetricEmptyNameFieldValidator;
-import com.metric.boet.api.core.validation.validators.imp.MetricEmptyValueFieldValidator;
+import com.metric.boet.api.device.validation.validators.imp.MetricEmptyDeviceFieldValidator;
+import com.metric.boet.api.device.validation.validators.imp.MetricEmptyNameFieldValidator;
+import com.metric.boet.api.device.validation.validators.imp.MetricEmptyValueFieldValidator;
 import com.metric.boet.api.exception.MetricsException;
 import com.metric.boet.api.core.influxdb.imp.InfluxDBService;
 import com.metric.boet.api.core.log.imp.LogManager;
-import com.metric.boet.api.core.validation.checker.imp.BasicMetricChecker;
-import com.metric.boet.api.core.validation.validators.AbstractMetricValidator;
+import com.metric.boet.api.device.validation.checker.imp.BasicMetricChecker;
+import com.metric.boet.api.device.validation.validators.AbstractMetricValidator;
 import com.metric.boet.api.entity.Metric;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.metric.boet.api.service.metric.imp;
 
 import com.metric.boet.api.exception.MetricsException;
-import com.metric.boet.api.core.validation.MetricValidation;
+import com.metric.boet.api.device.validation.MetricValidation;
 import com.metric.boet.api.entity.Metric;
 import com.metric.boet.api.service.metric.ISimpleMetricService;
 import org.springframework.beans.factory.annotation.Autowired;

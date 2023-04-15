@@ -1,4 +1,4 @@
-package com.metric.boet.api.core.validator;
+package com.metric.boet.api.core.annotations.validator;
 
 import com.metric.boet.api.core.annotations.NoIdField;
 

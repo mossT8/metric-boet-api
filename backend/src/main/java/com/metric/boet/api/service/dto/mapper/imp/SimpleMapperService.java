@@ -1,9 +1,9 @@
 package com.metric.boet.api.service.dto.mapper.imp;
 
-import com.metric.boet.api.core.mapper.imp.DeviceDtoMapper;
-import com.metric.boet.api.core.mapper.imp.HtmlPageDtoMapper;
-import com.metric.boet.api.core.mapper.imp.RoleDtoMapper;
-import com.metric.boet.api.core.mapper.imp.UserDtoMapper;
+import com.metric.boet.api.dto.mapper.imp.DeviceDtoMapper;
+import com.metric.boet.api.dto.mapper.imp.HtmlPageDtoMapper;
+import com.metric.boet.api.dto.mapper.imp.RoleDtoMapper;
+import com.metric.boet.api.dto.mapper.imp.UserDtoMapper;
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.dto.RoleDto;

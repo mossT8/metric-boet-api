@@ -1,6 +1,6 @@
-package com.metric.boet.api.core.mapper.imp;
+package com.metric.boet.api.dto.mapper.imp;
 
-import com.metric.boet.api.core.mapper.IDtoMapper;
+import com.metric.boet.api.dto.mapper.IDtoMapper;
 import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.entity.HtmlPage;
 import org.springframework.stereotype.Component;

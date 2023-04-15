@@ -1,4 +1,4 @@
-package com.metric.boet.api.core.mapper;
+package com.metric.boet.api.dto.mapper;
 
 import com.metric.boet.api.dto.BasicObjectDto;
 import jdk.jshell.spi.ExecutionControl;

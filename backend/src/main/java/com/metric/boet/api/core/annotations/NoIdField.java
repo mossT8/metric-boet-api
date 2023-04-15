@@ -1,6 +1,6 @@
 package com.metric.boet.api.core.annotations;
 
-import com.metric.boet.api.core.validator.NoIdFieldValidator;
+import com.metric.boet.api.core.annotations.validator.NoIdFieldValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
