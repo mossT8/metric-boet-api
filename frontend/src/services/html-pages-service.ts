@@ -1,7 +1,7 @@
 import { HtmlPage, HtmlPageMapped } from "@/types/pages/html-pages";
 import axios from "axios";
 import authHeader from "@/services/auth-header";
-import { formatDate } from "@/core/dates/date-util";
+import { formatDate } from "@/types/dates/date-util";
 
 const API_URL = "http://localhost:8080/api/v1/html/pages";
 

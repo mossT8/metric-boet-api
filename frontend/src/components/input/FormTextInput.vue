@@ -10,7 +10,7 @@
 import { defineComponent } from 'vue'
 import { Field, ErrorMessage } from 'vee-validate'
 
-export default defineComponent({
+const FormTextInput  =  defineComponent({
     name: 'form-text-imput',
     components: {
         Field,
@@ -57,5 +57,6 @@ export default defineComponent({
         }
     }
 })
+
+export default FormTextInput;
 </script>
-  

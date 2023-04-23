@@ -8,12 +8,13 @@
 
 <script>
 import UserService from "@/services/user.service";
-import Editor from "@/main";
+import Editor from "@/components/editor/Editor.vue";
+
 export default {
   name: "Admin",
   components: {
-    Editor,
-  },
+    Editor
+},
   data() {
     return {
       content: "",

@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import Icon from '@/core/editor/Icon.vue';
+import Icon from '@/components/editor/Icon.vue';
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';

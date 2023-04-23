@@ -2,11 +2,17 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 /* add some free styles */
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faUserSecret);
 library.add(faTwitter);
+
+/* add some free icons */
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { faB } from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
+library.add(faB);
 
 /* import specific icons */
 import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
@@ -20,3 +26,4 @@ library.add(faUser);
 library.add(faUserPlus);
 library.add(faSignInAlt);
 library.add(faSignOutAlt);
+

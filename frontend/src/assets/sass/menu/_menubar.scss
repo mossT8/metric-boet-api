@@ -39,18 +39,18 @@ $menubar-button-border-radius: 3px;
     display: inline-flex;
     background: transparent;
     border: 0;
-    color: $color-black;
+    color: $black-color;
     padding: $menubar-button-padding;
     margin-right: $menubar-button-margin-right;
     border-radius: $menubar-button-border-radius;
     cursor: pointer;
 
     &:hover {
-      background-color: rgba($color-black, 0.05);
+      background-color: rgba($black-color, 0.05);
     }
 
     &.is-active {
-      background-color: rgba($color-black, 0.1);
+      background-color: rgba($black-color, 0.1);
     }
   }
 

@@ -1,19 +1,13 @@
 <template>
-  <div id="app">
-    <Nav />
-
-    <div class="container">
-      <router-view />
-    </div>
-  </div>
+  <simple-layout />
 </template>
 
 <script>
-import Nav from '@/core/nav/Nav.vue';
+import SimpleLayout from "@/components/layout/Layout.vue";
 
 export default {
   components: {
-    Nav
+    SimpleLayout
   },
   mounted() {
     document.title = "Metric Boet Portal";

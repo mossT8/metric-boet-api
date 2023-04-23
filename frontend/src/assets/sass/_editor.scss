@@ -13,8 +13,8 @@ $editor-header-font-weight: 300;
 $code-font-size: 0.8rem;
 $code-font-weight: bold;
 
-$code-background-color: rgba($color-black, 0.1);
-$code-color: rgba($color-black, 0.8);
+$code-background-color: rgba($black-color, 0.1);
+$code-color: rgba($black-color, 0.8);
 
 $editor-pre-margin: 0.7rem 1rem;
 $editor-pre-radius: 5px;
@@ -22,17 +22,17 @@ $editor-pre-radius: 5px;
 $editor-code-margin: 0.2rem 0.4rem;
 $editor-code-radius: 5px;
 
-$editor-block-quote-color: rgba($color-black, 0.8);
-$editor-block-quote-padding-left: rgba($color-black, 0.8);
+$editor-block-quote-color: rgba($black-color, 0.8);
+$editor-block-quote-padding-left: rgba($black-color, 0.8);
 
-$editor-cell-border: 2px solid $color-grey;
+$editor-cell-border: 2px solid $grey-color;
 $editor-cell-padding: 3px 5px;
 $editor-cell-selected: rgba(200, 200, 255, 0.4);
 
 .editor {
   position: relative;
   margin: $editor-margin;
-  background-color: $color-white;
+  background-color: $white-color;
   padding: $editor-padding;
 
   .editor-header {
@@ -52,7 +52,7 @@ $editor-cell-selected: rgba(200, 200, 255, 0.4);
     word-wrap: break-word;
     word-break: break-word;
 
-    background: $color-form-grey;
+    background: $color-grey-form-color;
     padding: $editor-content-padding;
     border-radius: $editor-content-border-radius;
 
@@ -63,8 +63,8 @@ $editor-cell-selected: rgba(200, 200, 255, 0.4);
     pre {
       padding: $editor-pre-margin;
       border-radius: $editor-pre-radius;
-      background: $color-black;
-      color: $color-white;
+      background: $black-color;
+      color: $white-color;
       font-size: $code-font-size;
       overflow-x: auto;
 
@@ -98,7 +98,7 @@ $editor-cell-selected: rgba(200, 200, 255, 0.4);
     }
 
     blockquote {
-      border-left: 3px solid rgba($color-black, 0.1);
+      border-left: 3px solid rgba($black-color, 0.1);
       color: $editor-block-quote-color;
       padding-left: $editor-block-quote-padding-left;
       font-style: italic;

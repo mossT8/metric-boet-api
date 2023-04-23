@@ -22,7 +22,7 @@ $menububble-cursor: pointer;
   position: absolute;
   display: flex;
   z-index: 20;
-  background: $color-black;
+  background: $black-color;
   border-radius: $menububble-border-radius;
   padding: $menububble-padding;
   margin-bottom: $menububble-margin-bottom;
@@ -40,7 +40,7 @@ $menububble-cursor: pointer;
     display: inline-flex;
     background: transparent;
     border: $menububble-border;
-    color: $color-white;
+    color: $white-color;
     padding: $menububble-button-padding;
     margin-right: $menububble-button-margin-right;
     border-radius: $menububble-button-radius;
@@ -51,11 +51,11 @@ $menububble-cursor: pointer;
     }
 
     &:hover {
-      background-color: rgba($color-white, 0.1);
+      background-color: rgba($white-color, 0.1);
     }
 
     &.is-active {
-      background-color: rgba($color-white, 0.2);
+      background-color: rgba($white-color, 0.2);
     }
   }
 
@@ -68,6 +68,6 @@ $menububble-cursor: pointer;
     font: $menububble-font;
     border: $menububble-border;
     background: transparent;
-    color: $color-white;
+    color: $white-color;
   }
 }

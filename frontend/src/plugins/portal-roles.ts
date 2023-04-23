@@ -1,5 +1,5 @@
 import { Directive } from "vue";
-import { Roles } from "@/core/roles";
+import { Roles } from "@/types/roles";
 import { User } from "@/types/user/user";
 
 const rolesDirective: Directive<HTMLButtonElement> = {
@@ -15,15 +15,12 @@ const rolesDirective: Directive<HTMLButtonElement> = {
     const userRoles: string[] = user ? user["roles"] || [] : [];
 
     for (const userRole in userRoles) {
-      if (userRole in Roles) {
-        const portalRole = Roles[userRole];
-        if (!elementRoles[portalRole]) {
-          const hide = elementRoles.hide === true;
-          if (hide) {
-            el.style.display = "none";
-          } else {
-            el.disabled = true;
-          }
+      if (userRole in Roles && !elementRoles[userRole]) {
+        const hide = elementRoles.hide === true;
+        if (hide) {
+          el.style.display = "none";
+        } else {
+          el.disabled = true;
         }
       }
     }

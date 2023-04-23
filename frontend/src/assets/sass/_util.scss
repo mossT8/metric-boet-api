@@ -23,7 +23,7 @@
 html {
   font-family: "Inter";
   font-size: 18px;
-  color: $color-black;
+  color: $black-color;
   line-height: 1.5;
 }
 
@@ -65,21 +65,21 @@ h3 {
   display: inline-flex;
   background: transparent;
   border: 0;
-  color: $color-black;
+  color: $black-color;
   padding: 0.2rem 0.5rem;
   margin-right: 0.2rem;
   border-radius: 3px;
   cursor: pointer;
-  background-color: rgba($color-black, 0.1);
+  background-color: rgba($black-color, 0.1);
 
   &:hover {
-    background-color: rgba($color-black, 0.15);
+    background-color: rgba($black-color, 0.15);
   }
 }
 
 .message {
-  background-color: rgba($color-black, 0.05);
-  color: rgba($color-black, 0.7);
+  background-color: rgba($black-color, 0.05);
+  color: rgba($black-color, 0.7);
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1.5rem;
@@ -93,4 +93,30 @@ h3 {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+.switch-value-display-container {
+  padding: 4px;
+  $display-switch-button-height: 1.6em;
+  $display-button-side-length: 15px;
+  $display-switch-button-color: var(--color);
+  $display-switch-button-border-thickness: 2px;
+  $display-switch-is-rounded: true;
+  .value-dot {
+    height: $display-button-side-length;
+    width: $display-button-side-length;
+    border: $display-switch-button-border-thickness solid $primary-bg-color;
+    border-radius: if($display-switch-is-rounded, $display-button-side-length, 0);
+    background: $display-switch-button-color;
+  }
+}
+
+.icon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &.has-align-fix {
+    top: -0.1rem;
+  }
 }

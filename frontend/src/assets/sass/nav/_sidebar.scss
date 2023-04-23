@@ -1,0 +1,99 @@
+$side-bar-color: #f2f2f2;
+$side-bar-width: 15em;
+$side-bar-transition: 15em;
+$side-bar-transition-neagtive: -15em;
+
+// Define colors
+$primary-color: #337ab7;
+$secondary-color: #666;
+
+// Define styles for sidebar
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: $side-bar-width;
+    z-index: 10;
+    transition: transform 0.3s ease-in-out;
+    background-color: $primary-color;
+    color: #fff;
+    transition: transform 0.3s ease-in-out;
+
+    .sidebar-wrapper {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .logo {
+        display: block;
+        padding: 15px;
+        margin-bottom: 15px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        text-transform: uppercase;
+
+        .logo-mini {
+            display: none;
+        }
+    }
+
+    .sidebar-nav {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            a {
+                display: block;
+                padding: 10px 15px;
+                color: #fff;
+                font-size: 16px;
+                font-weight: bold;
+                text-decoration: none;
+                transition: background-color 0.3s ease-in-out;
+
+                &:hover,
+                &:focus {
+                    background-color: $secondary-color;
+                }
+            }
+
+            &.active {
+                a {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    &.hide-sidebar {
+        transform: translateX($side-bar-transition-neagtive);
+    }
+
+    .sidebar-link {
+        display: block;
+        padding: 10px;
+        color: #333;
+
+        &:hover {
+            background-color: #e6e6e6;
+        }
+
+        &.active {
+            color: #fff;
+            background-color: #007bff;
+        }
+    }
+}
+
+.content {
+    transition: margin-left 0.3s ease-in-out;
+
+    &.hide-sidebar {
+        margin-left: 0;
+    }
+}

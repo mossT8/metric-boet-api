@@ -1,11 +1,9 @@
 // first varaibles
 @import "./variables";
 // then styles
-@import "./util";
-@import "./icon";
+@import "./button/index";
+@import "./menu/index";
+@import "./nav/index";
 @import "./editor";
-@import "./menubar";
-@import "./menububble";
 @import "./form";
-@import "./button";
-@import "./display";
+@import "./util";
