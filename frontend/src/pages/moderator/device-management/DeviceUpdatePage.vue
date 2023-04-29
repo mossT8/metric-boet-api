@@ -7,7 +7,7 @@ import DeviceForm from "@/components/device/DeviceForm.vue";
 import DeviceService from "@/services/device.service";
 
 export default {
-    name: "DeviceUpdate",
+    name: "device-update-page",
     components: {
         DeviceForm
     },

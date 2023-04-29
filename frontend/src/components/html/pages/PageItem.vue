@@ -15,7 +15,7 @@
   
 <script>
 import Button from "@/components/button/Button.vue"
-import SwitchValueDisplay from "@/components/display/SwitchValueDisplay.vue";
+import SwitchValueDisplay from "@/components/form/display/SwitchValueDisplay.vue";
 
 export default {
   name: "page-item",

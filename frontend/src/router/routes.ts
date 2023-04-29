@@ -1,69 +1,95 @@
 import { RouteRecordRaw } from "vue-router";
 
 const routes: RouteRecordRaw[] = [
-  {
-    path: "/",
-    name: "home",
-    component: () => import("@/components/pages/Home.vue"),
-  },
+  /** public routes */
   {
     path: "/home",
+    name: "home",
+    component: () => import("@/pages/public/HomePage.vue"),
+  },
+  {
+    path: "/",
     redirect: { name: "home" },
   },
+
+  /** user routes */
   {
-    path: "/login",
-    name: "login",
-    component: () => import("@/components/user/Login.vue"),
+    path: "/settings",
+    name: "settings",
+    component: () =>
+      import("@/pages/user/user-management/UserSettingsPage.vue"),
   },
   {
-    path: "/register",
-    name: "register",
-    component: () => import("@/components/user/Register.vue"),
+    path: "/user-login",
+    name: "user-login",
+    component: () => import("@/pages/user/user-management/UserLoginPage.vue"),
   },
   {
-    path: "/profile",
-    name: "profile",
-    component: () => import("@/components/user/Profile.vue"),
+    path: "/user-logout",
+    name: "user-logout",
+    component: () => import("@/pages/user/user-management/UserLogoutPage.vue"),
   },
   {
-    path: "/admin",
-    name: "admin",
-    component: () => import("@/components/pages/BoardAdmin.vue"),
+    path: "/user-board",
+    name: "user-board",
+    component: () => import("@/pages/user/UserBoardPage.vue"),
   },
   {
-    path: "/mod",
-    name: "moderator",
-    component: () => import("@/components/pages/BoardModerator.vue"),
+    path: "/user-register",
+    name: "user-register",
+    component: () =>
+      import("@/pages/user/user-management/UserRegisterPage.vue"),
   },
   {
-    path: "/user",
-    name: "user",
-    component: () => import("@/components/pages/BoardUser.vue"),
+    path: "/user-profile",
+    name: "user-profile",
+    component: () => import("@/pages/user/user-management/UserProfilePage.vue"),
+  },
+
+  /** admin routes */
+  {
+    path: "/admin-board",
+    name: "admin-board",
+    component: () => import("@/pages/admin/AdminBoardPage.vue"),
   },
   {
-    path: "/device-add",
-    name: "device-add",
-    component: () => import("@/components/device/DeviceRegister.vue"),
-  },
-  {
-    path: "/device-update/:uid",
-    name: "device-update",
-    component: () => import("@/components/device/DeviceUpdate.vue"),
-  },
-  {
-    path: "/html-list",
-    name: "html-list",
-    component: () => import("@/components/pages/AdminPageEditorList.vue"),
+    path: "/page-management",
+    name: "page-management",
+    component: () => import("@/pages/admin/page-management/HtmlListPage.vue"),
   },
   {
     path: "/html-edit/:url",
     name: "html-edit",
-    component: () => import("@/components/pages/UpdateHtmlPage.vue"),
+    component: () => import("@/pages/admin/page-management/HtmlUpdatePage.vue"),
   },
   {
+    path: "/user-management",
+    name: "user-management",
+    component: () => import("@/pages/admin/page-management/HtmlListPage.vue"),
+  },
+
+  /** moderator routes */
+  {
+    path: "/moderator-board",
+    name: "moderator",
+    component: () => import("@/pages/moderator/ModeratorBoardPage.vue"),
+  },
+  {
+    path: "/device-register",
+    name: "device-register",
+    component: () =>
+      import("@/pages/moderator/device-management/DeviceRegisterPage.vue"),
+  },
+  {
+    path: "/device-update/:uid",
+    name: "device-update",
+    component: () =>
+      import("@/pages/moderator/device-management/DeviceUpdatePage.vue"),
+  },
+ /*  {
     path: "/:catchAll(.*)",
     redirect: { name: "home" },
-  },
+  }, */
 ];
 
 export default routes;

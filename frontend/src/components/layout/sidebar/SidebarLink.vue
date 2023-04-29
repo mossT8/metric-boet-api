@@ -1,17 +1,21 @@
 <template>
-  <component :is="tag"
-             @click.stop="hideSidebar"
-             class="nav-item"
-             v-bind="$attrs"
-             tag="li">
+  <component :is="tag" @click.stop="hideSidebar" class="nav-item" v-bind="$attrs" tag="li">
     <a class="nav-link">
-      <slot>
-        <i v-if="icon" :class="icon"></i>
-        <p>{{name}}</p>
-      </slot>
+      <div class="w-100 d-flex justify-content-between">
+        <font-awesome-icon v-if="icon" :icon="icon" />
+        <p>{{ name }}</p>
+      </div>
     </a>
   </component>
 </template>
+
+<style lang="scss" scoped>
+p,
+svg {
+  margin: auto 0px;
+}
+</style>
+
 <script>
 export default {
   name: "sidebar-link",
@@ -21,15 +25,18 @@ export default {
       default: true
     },
     addLink: {
-      default: ()=>{}
+      default: () => { }
     },
     removeLink: {
-      default: ()=>{}
+      default: () => { }
     }
   },
   props: {
     name: String,
-    icon: String,
+    icon: {
+      type: String,
+      default: "fa-solid fa-bars"
+    },
     tag: {
       type: String,
       default: "router-link"
@@ -38,7 +45,7 @@ export default {
   methods: {
     hideSidebar() {
       if (this.autoClose) {
-        this.$sidebar.displaySidebar(false);
+        this.$emit('hideSideBar');
       }
     },
     isActive() {
@@ -60,5 +67,3 @@ export default {
   }
 };
 </script>
-<style>
-</style>

@@ -29,7 +29,7 @@
     </ul>
     <div v-roles="['Admin', 'Moderator']" class="mb-2 d-flex justify-content-between">
       <strong>Devices ({{ totalDevices }}) </strong>
-      <Button  v-roles="['Admin']" type="success" @click.stop="addDeviceForm">Add Device </Button>
+      <Button v-roles="['Admin']" type="success" @click.stop="addDeviceForm">Add Device </Button>
     </div>
     <DeviceList v-roles="['Admin', 'Moderator']" :devices="allDevices" />
   </div>
@@ -43,7 +43,7 @@ import DeviceService from "@/services/device.service";
 
 
 export default {
-  name: 'Profile',
+  name: 'user-profile-page',
   components: {
     Button,
     DeviceList,

@@ -27,9 +27,9 @@
 <script>
 import { Form } from "vee-validate";
 import { deviceShema } from "@/types/device/device"
-import FormTextInput from "@/components/input/FormTextInput.vue";
-import FormSelectListInput from "@/components/input/FormSelectListInput.vue";
-import FormRadioButtonInput from "@/components/input/FormRadioButtonInput.vue";
+import FormTextInput from "@/components/form/input/FormTextInput.vue";
+import FormSelectListInput from "@/components/form/input/FormSelectListInput.vue";
+import FormRadioButtonInput from "@/components/form/input/FormRadioButtonInput.vue";
 
 
 export default {
@@ -106,8 +106,8 @@ export default {
         }
     },
     mounted() {
-        if (this.loggedIn) {
-            this.$router.push("/profile");
+        if (!this.loggedIn) {
+            this.$router.push("/home");
         }
     },
     methods: {

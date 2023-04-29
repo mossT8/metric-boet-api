@@ -3,10 +3,6 @@ $side-bar-width: 15em;
 $side-bar-transition: 15em;
 $side-bar-transition-neagtive: -15em;
 
-// Define colors
-$primary-color: #337ab7;
-$secondary-color: #666;
-
 // Define styles for sidebar
 .sidebar {
     position: fixed;
@@ -18,12 +14,53 @@ $secondary-color: #666;
     transition: transform 0.3s ease-in-out;
     background-color: $primary-color;
     color: #fff;
-    transition: transform 0.3s ease-in-out;
+
+    .logo-section {
+        padding-top: 1em;
+        padding-left: 1em;
+        .logo-img {
+            max-width: 2em;
+        }
+
+        &:hover {
+            cursor: pointer;
+            color: $primary-dark-text;
+        }
+    }
+
+    a {
+        &:hover {
+            cursor: pointer;
+            color: $primary-dark-text;
+        }
+    }
 
     .sidebar-wrapper {
-        height: 100%;
+        height: 100vh;
         overflow-y: auto;
         overflow-x: hidden;
+    }
+
+    .sidebar-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .sidebar-links-bottum {
+        align-self: flex-end;
+        display: block;
+        justify-content: unset;
+        width: 100%;
+    }
+
+    .sidebar-links-top {
+        margin-bottom: 10px;
+        display: block;
+        justify-content: unset;
+        width: 100%;
     }
 
     .logo {
@@ -39,6 +76,10 @@ $secondary-color: #666;
         .logo-mini {
             display: none;
         }
+    }
+
+    .nav {
+        margin: 0;
     }
 
     .sidebar-nav {
@@ -92,6 +133,8 @@ $secondary-color: #666;
 
 .content {
     transition: margin-left 0.3s ease-in-out;
+    filter: none;
+    transition: filter 0.3s ease-in-out;
 
     &.hide-sidebar {
         margin-left: 0;

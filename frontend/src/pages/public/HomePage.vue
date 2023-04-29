@@ -21,7 +21,7 @@
 import UserService from "../../services/user.service";
 
 export default {
-  name: "Home",
+  name: "home-page",
   data() {
     return {
       content: "",

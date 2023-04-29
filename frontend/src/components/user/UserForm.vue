@@ -29,7 +29,7 @@
 import { defineComponent } from "vue";
 import { userSchema } from "@/types/form/form";
 import { Form } from "vee-validate";
-import FormTextInput from "@/components/input/FormTextInput.vue";
+import FormTextInput from "@/components/form/input/FormTextInput.vue";
 export default defineComponent({
     name: "user-form",
     components: {
@@ -108,8 +108,8 @@ export default defineComponent({
         }
     },
     mounted() {
-        if (this.loggedIn) {
-            this.$router.push("/profile");
+        if (!this.loggedIn) {
+            this.$router.push("/home");
         }
     },
     methods: {
@@ -123,40 +123,40 @@ export default defineComponent({
 
 <style scoped>
 label {
-  display: block;
-  margin-top: 10px;
+    display: block;
+    margin-top: 10px;
 }
 
 .card-container.card {
-  max-width: 350px !important;
-  padding: 40px 40px;
+    max-width: 350px !important;
+    padding: 40px 40px;
 }
 
 .card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  margin: 0 auto 25px;
-  margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    background-color: #f7f7f7;
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 .profile-img-card {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
 }
 
 .error-feedback {
-  color: red;
+    color: red;
 }
 </style>
 

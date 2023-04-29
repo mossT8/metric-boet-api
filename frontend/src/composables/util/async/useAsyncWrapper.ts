@@ -1,6 +1,6 @@
 import { reactive } from "vue";
 
-export function useAsyncWrapper() {
+export default function useAsyncWrapper() {
   const state = reactive({
     isLoading: false,
     message: "",

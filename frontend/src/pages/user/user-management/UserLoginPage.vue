@@ -1,11 +1,7 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
+      <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
       <Form @submit="handleLogin" :validation-schema="schema">
         <div class="form-group">
           <label for="username">Username</label>
@@ -20,10 +16,7 @@
 
         <div class="form-group">
           <button class="btn btn-primary btn-block" :disabled="loading">
-            <span
-              v-show="loading"
-              class="spinner-border spinner-border-sm"
-            ></span>
+            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
             <span>Login</span>
           </button>
         </div>
@@ -43,7 +36,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
-  name: "Login",
+  name: "user-login-page",
   components: {
     Form,
     Field,
@@ -66,18 +59,13 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     },
   },
-  created() {
-    if (this.loggedIn) {
-      this.$router.push("/profile");
-    }
-  },
   methods: {
     handleLogin(user) {
       this.loading = true;
 
       this.$store.dispatch("auth/login", user).then(
         () => {
-          this.$router.push("/profile");
+          this.$router.push("/user-profile");
         },
         (error) => {
           this.loading = false;

@@ -26,8 +26,8 @@
 
 <script>
 import { Form } from "vee-validate";
-import FormTextInput from "@/components/input/FormTextInput.vue";
-import FormSwitchInput from "@/components/input/FormSwitchInput.vue";
+import FormTextInput from "@/components/form/input/FormTextInput.vue";
+import FormSwitchInput from "@/components/form/input/FormSwitchInput.vue";
 import { htmpPageSchema } from "@/types/pages/html-pages";
 import Editor from "@/components/editor/Editor.vue";
 export default {

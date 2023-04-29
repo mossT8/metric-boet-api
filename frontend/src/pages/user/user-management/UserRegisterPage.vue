@@ -6,7 +6,7 @@
 import UserForm from "@/components/user/UserForm.vue";
 
 export default {
-  name: "Register",
+  name: "user-register-page",
   components: {
     UserForm,
   },
@@ -25,8 +25,8 @@ export default {
     },
   },
   mounted() {
-    if (this.loggedIn) {
-      this.$router.push("/profile");
+    if (!this.loggedIn) {
+      this.$router.push("/home");
     }
   },
   methods: {

@@ -10,11 +10,11 @@
 import UserService from "@/services/user.service";
 import Editor from "@/components/editor/Editor.vue";
 
-export default {
+export default defineComponent({
   name: "Admin",
   components: {
     Editor
-},
+  },
   data() {
     return {
       content: "",
@@ -35,5 +35,5 @@ export default {
       }
     );
   },
-};
+});
 </script>

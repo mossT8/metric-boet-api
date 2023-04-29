@@ -8,7 +8,7 @@ import DeviceForm from "@/components/device/DeviceForm.vue";
 import DeviceService from "@/services/device.service";
 
 export default {
-    name: "DeviceRegister",
+    name: "device-register-page",
     components: {
         DeviceForm
     },
