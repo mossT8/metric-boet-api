@@ -131,6 +131,18 @@ $side-bar-transition-neagtive: -15em;
     }
 }
 
+.logout-item {
+    .nav-link {
+        &:hover {
+            color: $black-color;
+            p {
+                text-decoration: underline;
+                margin: 0;
+            }
+        }
+    }
+}
+
 .content {
     transition: margin-left 0.3s ease-in-out;
     filter: none;

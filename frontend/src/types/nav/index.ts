@@ -38,25 +38,10 @@ export const mainNavOptions: NavItem[] = [
     label: "Site Dashboard",
     roles: [Roles.ROLE_ADMIN],
   },
-];
-
-export const subNavOptions: NavItem[] = [
   {
-    route: "/user-profile",
-    icon: "fa-solid fa-user-circle",
-    label: "Profile",
-    roles: [Roles.ROLE_ADMIN, Roles.ROLE_USER, Roles.ROLE_MODERATOR],
-  },
-  {
-    route: "/settings",
-    icon: "fa-solid fa-cog",
-    label: "Settings",
-    roles: [Roles.ROLE_ADMIN, Roles.ROLE_USER, Roles.ROLE_MODERATOR],
-  },
-  {
-    route: "/user-logout",
-    icon: "fa-solid fa-sign-out-alt",
-    label: "Log out",
-    roles: [Roles.ROLE_ADMIN, Roles.ROLE_USER, Roles.ROLE_MODERATOR],
+    route: "/about",
+    icon: "fa-solid fa-info",
+    label: "About",
+    roles: [Roles.ROLE_PUBLIC],
   },
 ];

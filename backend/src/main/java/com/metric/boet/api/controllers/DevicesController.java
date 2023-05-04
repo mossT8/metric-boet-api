@@ -5,7 +5,7 @@ import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payload.request.DeviceRequest;
-import com.metric.boet.api.payload.response.MessageResponse;
+import com.metric.boet.api.payload.response.BasicMessageResponse;
 import com.metric.boet.api.repository.DeviceRepository;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.service.dto.mapper.imp.SimpleMapperService;
@@ -97,6 +97,6 @@ public class DevicesController {
         // add device
         Device newDevice = new Device(deviceRequest.getName(), deviceUidGenerator.getNextUid(), deviceRequest.getType(), deviceRequest.getLocation(), deviceRequest.getStatus(), deviceRequest.getToken(), user.get());
         deviceRepository.save(newDevice);
-        return ResponseEntity.ok(new MessageResponse("Device added successfully for user!", true));
+        return ResponseEntity.ok(new BasicMessageResponse("Device added successfully for user!", true));
     }
 }

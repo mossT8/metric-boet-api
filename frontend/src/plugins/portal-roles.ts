@@ -14,13 +14,20 @@ const rolesDirective: Directive<HTMLButtonElement> = {
 
     const userRoles: string[] = user ? user["roles"] || [] : [];
 
-    for (const userRole in userRoles) {
-      if (userRole in Roles && !elementRoles[userRole]) {
-        const hide = elementRoles.hide === true;
-        if (hide) {
-          el.style.display = "none";
-        } else {
-          el.disabled = true;
+    if (userRoles.length === 0) {
+      if (elementRoles[0] === Roles.ROLE_PUBLIC) {
+
+      }
+      el.disabled = true;
+    } else {
+      for (const userRole in userRoles) {
+        if (userRole in Roles && !elementRoles[userRole]) {
+          const hide = elementRoles.hide === true;
+          if (hide) {
+            el.style.display = "none";
+          } else {
+            el.disabled = true;
+          }
         }
       }
     }

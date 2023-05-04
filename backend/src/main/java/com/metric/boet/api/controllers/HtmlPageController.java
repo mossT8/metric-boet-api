@@ -4,7 +4,7 @@ import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payload.request.HtmlPageRequest;
-import com.metric.boet.api.payload.response.MessageResponse;
+import com.metric.boet.api.payload.response.BasicMessageResponse;
 import com.metric.boet.api.repository.HtmlPageRepository;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.service.dto.mapper.imp.SimpleMapperService;
@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,7 +90,7 @@ public class HtmlPageController {
         Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
 
         if (possiblePage.isPresent()) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Url is already in use!", false));
+            return ResponseEntity.badRequest().body(new BasicMessageResponse("Error: Url is already in use!", false));
         }
 
         // add page
@@ -100,7 +99,7 @@ public class HtmlPageController {
         htmlPage.setUrl(htmlPage.getUrl());
         htmlPageRepository.save(htmlPage);
 
-        return ResponseEntity.ok(new MessageResponse("Html Page created successfully!", true));
+        return ResponseEntity.ok(new BasicMessageResponse("Html Page created successfully!", true));
     }
 
     @PostMapping("/update")
@@ -119,7 +118,7 @@ public class HtmlPageController {
         Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
 
         if (!possiblePage.isPresent()) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Url is not in use!", false));
+            return ResponseEntity.badRequest().body(new BasicMessageResponse("Error: Url is not in use!", false));
         }
 
         // update page
@@ -132,7 +131,7 @@ public class HtmlPageController {
 
         htmlPageRepository.save(htmlPage);
 
-        return ResponseEntity.ok(new MessageResponse("Html Page updated successfully!", true));
+        return ResponseEntity.ok(new BasicMessageResponse("Html Page updated successfully!", true));
     }
 }
 

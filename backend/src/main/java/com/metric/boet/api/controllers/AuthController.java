@@ -14,7 +14,7 @@ import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payload.request.LoginRequest;
 import com.metric.boet.api.payload.request.SignupRequest;
 import com.metric.boet.api.payload.response.JwtResponse;
-import com.metric.boet.api.payload.response.MessageResponse;
+import com.metric.boet.api.payload.response.BasicMessageResponse;
 import com.metric.boet.api.repository.RoleRepository;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.security.jwt.JwtUtils;
@@ -83,13 +83,13 @@ public class AuthController {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!", false));
+                    .body(new BasicMessageResponse("Error: Username is already taken!", false));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!", false));
+                    .body(new BasicMessageResponse("Error: Email is already in use!", false));
         }
 
         // Create new user's account
@@ -135,6 +135,6 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!", true));
+        return ResponseEntity.ok(new BasicMessageResponse("User registered successfully!", true));
     }
 }
