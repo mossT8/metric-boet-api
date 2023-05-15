@@ -6,6 +6,7 @@ public class BasicMessageResponse {
 
     public BasicMessageResponse(String message, Boolean successful) {
         this.message = message;
+        this.successful = successful;
     }
 
     public Boolean getSuccessful() {
