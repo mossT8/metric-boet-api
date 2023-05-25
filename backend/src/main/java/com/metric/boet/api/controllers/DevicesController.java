@@ -95,7 +95,7 @@ public class DevicesController {
         }
 
         // add device
-        Device newDevice = new Device(deviceRequest.getName(), deviceUidGenerator.getNextUid(), deviceRequest.getType(), deviceRequest.getLocation(), deviceRequest.getStatus(), deviceRequest.getToken(), user.get());
+        Device newDevice = new Device(deviceRequest.getName(), deviceUidGenerator.getNextUnique(), deviceRequest.getType(), deviceRequest.getLocation(), deviceRequest.getStatus(), deviceRequest.getToken(), user.get());
         deviceRepository.save(newDevice);
         return ResponseEntity.ok(new BasicMessageResponse("Device added successfully for user!", true));
     }

@@ -17,16 +17,16 @@ public class SimpleGeneratorService implements ISimpleGeneratorService {
 
     @Override
     public String getNextUserAccountCode() {
-        return accountCodeGenerator.getNextAccountCode();
+        return accountCodeGenerator.getNextUnique();
     }
 
     @Override
     public String getCurrentMaxUserAccountCode() {
-        return accountCodeGenerator.getCurrentMaxAccountCode();
+        return accountCodeGenerator.getNextUnique();
     }
 
     @Override
     public String getNextDeviceUid() {
-        return deviceUidGenerator.getNextUid();
+        return deviceUidGenerator.getNextUnique();
     }
 }

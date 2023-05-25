@@ -17,20 +17,20 @@ public abstract class BasicDataBean {
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    protected Date createdAt;
+    public Date createdAt;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    protected Date updatedAt;
+    public Date updatedAt;
 
     @NotNull
     @PositiveOrZero
-    protected long userCreatedId = 0;
+    public long userCreatedId = 0;
 
     @NotNull
     @PositiveOrZero
-    protected int userCreatedTypeId = 0;
+    public int userCreatedTypeId = 0;
 
     public BasicDataBean(IUserAudit userAudit) {
         this.userCreatedId = userAudit.getUserId();

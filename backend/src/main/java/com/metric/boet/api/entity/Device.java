@@ -3,10 +3,12 @@ package com.metric.boet.api.entity;
 import com.metric.boet.api.core.authorization.BasicUsers;
 import com.metric.boet.api.core.bean.BasicDataBean;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Configurable
@@ -44,6 +46,12 @@ public class Device extends BasicDataBean {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_created_id", nullable = false)
     private User user;
+
+    // overriting abstract database so that jpa can pick up createdAt for last created query
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    protected Date createdAt;
 
     public Device() {
         super(BasicUsers.ADMIN_USER);
