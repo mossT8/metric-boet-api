@@ -1,19 +1,18 @@
-package com.metric.boet.api.service.metric.imp;
+package com.metric.boet.api.service.metric;
 
-import com.metric.boet.api.util.exception.MetricsException;
 import com.metric.boet.api.device.MetricValidation;
 import com.metric.boet.api.entity.Metric;
-import com.metric.boet.api.service.metric.ISimpleMetricService;
+import com.metric.boet.api.util.exception.MetricsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SimpleMetricService implements ISimpleMetricService {
+public class SimpleMetricServiceTests implements ISimpleMetricService {
 
     private MetricValidation metricValidation;
 
     @Autowired
-    public SimpleMetricService(MetricValidation metricValidation) {
+    public SimpleMetricServiceTests(MetricValidation metricValidation) {
         this.metricValidation = metricValidation;
     }
 

@@ -1,6 +1,5 @@
 package com.metric.boet.api.util;
 
-import com.metric.boet.api.core.util.NullUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

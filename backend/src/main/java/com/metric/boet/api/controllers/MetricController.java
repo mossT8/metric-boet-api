@@ -1,6 +1,6 @@
 package com.metric.boet.api.controllers;
 
-import com.metric.boet.api.core.log.imp.LogManager;
+import com.metric.boet.api.util.log.imp.LogManager;
 import com.metric.boet.api.entity.Metric;
 import com.metric.boet.api.service.metric.imp.SimpleMetricService;
 

@@ -1,7 +1,6 @@
 package com.metric.boet.api.entity;
 
-import com.metric.boet.api.core.authorization.BasicUsers;
-import com.metric.boet.api.core.bean.BasicDataBean;
+import com.metric.boet.api.authorization.BasicUsers;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.data.annotation.CreatedDate;
 

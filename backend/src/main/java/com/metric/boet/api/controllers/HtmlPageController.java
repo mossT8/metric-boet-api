@@ -7,7 +7,7 @@ import com.metric.boet.api.payload.request.HtmlPageRequest;
 import com.metric.boet.api.payload.response.BasicMessageResponse;
 import com.metric.boet.api.repository.HtmlPageRepository;
 import com.metric.boet.api.repository.UserRepository;
-import com.metric.boet.api.service.dto.mapper.imp.SimpleMapperService;
+import com.metric.boet.api.service.mapper.imp.SimpleMapperService;
 import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

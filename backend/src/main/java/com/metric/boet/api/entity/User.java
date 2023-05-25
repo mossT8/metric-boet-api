@@ -1,12 +1,10 @@
 package com.metric.boet.api.entity;
 
-import com.metric.boet.api.core.authorization.BasicUsers;
-import com.metric.boet.api.core.authorization.IUserAudit;
-import com.metric.boet.api.core.bean.BasicDataBean;
+import com.metric.boet.api.authorization.BasicUsers;
+import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.entity.enums.ERole;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 

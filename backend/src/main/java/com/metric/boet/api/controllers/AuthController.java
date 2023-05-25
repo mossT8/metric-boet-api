@@ -5,7 +5,7 @@ import javax.validation.Valid;
 import com.metric.boet.api.payload.request.LoginRequest;
 import com.metric.boet.api.payload.request.SignupRequest;
 
-import com.metric.boet.api.service.auth.AuthService;
+import com.metric.boet.api.service.auth.imp.SimpleAuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,16 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @Autowired
-    AuthService authService;
+    SimpleAuthService simpleAuthService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        return authService.authenticateUser(loginRequest);
+        return simpleAuthService.authenticateUser(loginRequest);
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        return ResponseEntity.ok(authService.registerUser(signUpRequest));
+        return ResponseEntity.ok(simpleAuthService.registerUser(signUpRequest));
     }
 }

@@ -1,6 +1,6 @@
 package com.metric.boet.api.controllers;
 
-import com.metric.boet.api.core.generator.imp.DeviceUidGenerator;
+import com.metric.boet.api.util.uuid.imp.DeviceUidGenerator;
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
 import com.metric.boet.api.entity.User;
@@ -8,7 +8,7 @@ import com.metric.boet.api.payload.request.DeviceRequest;
 import com.metric.boet.api.payload.response.BasicMessageResponse;
 import com.metric.boet.api.repository.DeviceRepository;
 import com.metric.boet.api.repository.UserRepository;
-import com.metric.boet.api.service.dto.mapper.imp.SimpleMapperService;
+import com.metric.boet.api.service.mapper.imp.SimpleMapperService;
 
 import jdk.jshell.spi.ExecutionControl;
 
