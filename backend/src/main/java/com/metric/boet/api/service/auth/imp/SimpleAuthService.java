@@ -1,18 +1,17 @@
 package com.metric.boet.api.service.auth.imp;
 
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.payload.request.LoginRequest;
-import com.metric.boet.api.payload.request.SignupRequest;
-import com.metric.boet.api.payload.response.BasicMessageResponse;
-import com.metric.boet.api.payload.response.JwtResponse;
+import com.metric.boet.api.payloads.request.auth.LoginRequest;
+import com.metric.boet.api.payloads.request.auth.RegisterRequest;
+import com.metric.boet.api.payloads.response.BasicAPIResponse;
+import com.metric.boet.api.payloads.response.auth.JwtResponse;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.security.jwt.JwtUtils;
 import com.metric.boet.api.security.services.UserDetailsImpl;
 
 import com.metric.boet.api.service.auth.IAuthService;
+import com.metric.boet.api.service.uiid.imp.SimpleUuidService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,6 +29,9 @@ public class SimpleAuthService implements IAuthService {
     AuthenticationManager authenticationManager;
 
     @Autowired
+    SimpleUuidService simpleUuidService;
+
+    @Autowired
     PasswordEncoder encoder;
 
     @Autowired
@@ -39,7 +41,7 @@ public class SimpleAuthService implements IAuthService {
     JwtUtils jwtUtils;
 
     @Override
-    public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
+    public JwtResponse authenticateUser(LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -53,29 +55,33 @@ public class SimpleAuthService implements IAuthService {
                     .map(item -> item.getAuthority())
                     .collect(Collectors.toList());
 
-            return ResponseEntity.ok(new JwtResponse(jwt,
+          return new JwtResponse(jwt,
+                    "Generated Token",
+                    true,
                     userDetails.getId(),
                     userDetails.getUsername(),
                     userDetails.getEmail(),
-                    roles));
+                    roles);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new BasicMessageResponse("Details provided don`t seem to work on our side! Please contact System support should this reoccur.", false));
+            return new JwtResponse("Error", "Something unexpected happened on our side when trying to validate username and password", false, 0L, "Error", "Error", new ArrayList<>());
         }
     }
 
+
     @Override
-    public BasicMessageResponse registerUser(SignupRequest signUpRequest) {
+    public BasicAPIResponse registerUser(RegisterRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new BasicMessageResponse("Error: Username is already taken!", false);
+            return new BasicAPIResponse("Error: Username is already taken!", false);
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new BasicMessageResponse("Error: Email is already in use!", false);
+            return new BasicAPIResponse("Error: Email is already in use!", false);
         }
 
         User user = new User();
 
         user.setFirstName(signUpRequest.getFirstName());
+        user.setAccountCode(simpleUuidService.getNextUserAccountCode());
         user.setLastName(signUpRequest.getLastName());
         user.setUsername(signUpRequest.getUsername());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
@@ -84,7 +90,7 @@ public class SimpleAuthService implements IAuthService {
 
         userRepository.save(user);
 
-        return new BasicMessageResponse("User registered successfully!", true);
+        return new BasicAPIResponse("User registered successfully!", true);
     }
 
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {

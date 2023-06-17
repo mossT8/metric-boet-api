@@ -11,16 +11,12 @@ import javax.persistence.*;
                 @UniqueConstraint(columnNames = "name"),
         })
 public class Role extends BasicDataBean {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
-    
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;
 
     public Role() {
-        super(BasicUsers.ADMIN_USER);
+        super(BasicUsers.ADMIN_AUDIT);
     }
 
     public Role(ERole name, User user) {

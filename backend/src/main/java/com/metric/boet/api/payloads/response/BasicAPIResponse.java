@@ -1,10 +1,10 @@
-package com.metric.boet.api.payload.response;
+package com.metric.boet.api.payloads.response;
 
-public class BasicMessageResponse {
+public class BasicAPIResponse {
     private String message;
     private Boolean successful;
 
-    public BasicMessageResponse(String message, Boolean successful) {
+    public BasicAPIResponse(String message, Boolean successful) {
         this.message = message;
         this.successful = successful;
     }

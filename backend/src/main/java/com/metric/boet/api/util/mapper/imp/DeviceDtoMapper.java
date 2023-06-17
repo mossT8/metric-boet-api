@@ -1,5 +1,6 @@
 package com.metric.boet.api.util.mapper.imp;
 
+import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.util.mapper.IDtoMapper;
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
@@ -11,6 +12,9 @@ public class DeviceDtoMapper implements IDtoMapper<Device, DeviceDto> {
 
     @Autowired
     UserDtoMapper userDtoMapper;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public DeviceDto removeSensitiveInformation(Device inputObject) {

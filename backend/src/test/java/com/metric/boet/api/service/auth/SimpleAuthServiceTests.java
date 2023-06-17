@@ -13,10 +13,10 @@ import java.util.Optional;
 
 import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.payload.request.LoginRequest;
-import com.metric.boet.api.payload.request.SignupRequest;
-import com.metric.boet.api.payload.response.BasicMessageResponse;
-import com.metric.boet.api.payload.response.JwtResponse;
+import com.metric.boet.api.payloads.request.auth.LoginRequest;
+import com.metric.boet.api.payloads.request.auth.RegisterRequest;
+import com.metric.boet.api.payloads.response.BasicAPIResponse;
+import com.metric.boet.api.payloads.response.auth.JwtResponse;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.security.jwt.JwtUtils;
 import com.metric.boet.api.security.services.UserDetailsImpl;
@@ -30,8 +30,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -85,25 +83,28 @@ public class SimpleAuthServiceTests {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = "testjwt";
-        JwtResponse expectedResponse = new JwtResponse(jwt, userDetails.getId(),
-                userDetails.getUsername(), userDetails.getEmail(), roles);
+        JwtResponse expectedResponse = new JwtResponse(
+                jwt,
+                "Token Generated",
+                true,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                roles);
 
         when(authenticationManager.authenticate(any())).thenReturn(authentication);
         when(userRepository.findByUsername(loginRequest.getUsername())).thenReturn(Optional.of(user));
         when(jwtUtils.generateJwtToken(any())).thenReturn(jwt);
 
         // when
-        ResponseEntity<?> response = simpleAuthService.authenticateUser(loginRequest);
+        JwtResponse response = simpleAuthService.authenticateUser(loginRequest);
 
         // then
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getBody() instanceof JwtResponse);
-        JwtResponse actualResponse = (JwtResponse) response.getBody();
-        assertEquals(expectedResponse.getAccessToken(), actualResponse.getAccessToken());
-        assertEquals(expectedResponse.getId(), actualResponse.getId());
-        assertEquals(expectedResponse.getUsername(), actualResponse.getUsername());
-        assertEquals(expectedResponse.getEmail(), actualResponse.getEmail());
-        assertEquals(expectedResponse.getRoles(), actualResponse.getRoles());
+        assertEquals(expectedResponse.getAccessToken(), response.getAccessToken());
+        assertEquals(expectedResponse.getId(), response.getId());
+        assertEquals(expectedResponse.getUsername(), response.getUsername());
+        assertEquals(expectedResponse.getEmail(), response.getEmail());
+        assertEquals(expectedResponse.getRoles(), response.getRoles());
     }
 
     @Test
@@ -116,33 +117,33 @@ public class SimpleAuthServiceTests {
         when(authenticationManager.authenticate(any())).thenThrow(new RuntimeException());
 
         // when
-        ResponseEntity<?> response = simpleAuthService.authenticateUser(loginRequest);
+        JwtResponse response = simpleAuthService.authenticateUser(loginRequest);
 
         // then
-        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+        assertEquals(false, response.getSuccessful());
     }
 
     @Test
     public void testRegisterUserSuccess() throws Exception {
         // Create a mock SignupRequest
-        SignupRequest mockSignupRequest = new SignupRequest();
-        mockSignupRequest.setFirstName("test");
-        mockSignupRequest.setLastName("test");
-        mockSignupRequest.setUsername("testuser");
-        mockSignupRequest.setEmail("testuser@example.com");
-        mockSignupRequest.setPassword("123456");
-        mockSignupRequest.setPhone("+1234567890");
+        RegisterRequest mockRegisterRequest = new RegisterRequest();
+        mockRegisterRequest.setFirstName("test");
+        mockRegisterRequest.setLastName("test");
+        mockRegisterRequest.setUsername("testuser");
+        mockRegisterRequest.setEmail("testuser@example.com");
+        mockRegisterRequest.setPassword("123456");
+        mockRegisterRequest.setPhone("+1234567890");
 
-        User user = new User("TEST", mockSignupRequest.getFirstName(), mockSignupRequest.getLastName(), mockSignupRequest.getPhone(), mockSignupRequest.getUsername(), mockSignupRequest.getEmail(), mockSignupRequest.getPassword(), BasicUsers.ADMIN_USER);
+        User user = new User("TEST", mockRegisterRequest.getFirstName(), mockRegisterRequest.getLastName(), mockRegisterRequest.getPhone(), mockRegisterRequest.getUsername(), mockRegisterRequest.getEmail(), mockRegisterRequest.getPassword(), BasicUsers.ADMIN_USER);
 
         // Mock the UserRepository to return null when checking for existing user
         when(userRepository.existsByUsername(anyString())).thenReturn(false);
         when(userRepository.existsByEmail(anyString())).thenReturn(false);
         when(userRepository.save(any(User.class))).thenReturn(user);
-        when(passwordEncoder.encode(any())).thenReturn(mockSignupRequest.getPassword());
+        when(passwordEncoder.encode(any())).thenReturn(mockRegisterRequest.getPassword());
 
         // Verify that the response contains a success message
-        BasicMessageResponse response = simpleAuthService.registerUser(mockSignupRequest);
+        BasicAPIResponse response = simpleAuthService.registerUser(mockRegisterRequest);
         assertTrue(response.getSuccessful());
         assertEquals("User registered successfully!", response.getMessage());
 
@@ -150,16 +151,16 @@ public class SimpleAuthServiceTests {
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepository, times(1)).save(userCaptor.capture());
         User savedUser = userCaptor.getValue();
-        assertEquals(mockSignupRequest.getEmail(), savedUser.getEmail());
-        assertEquals(mockSignupRequest.getUsername(), savedUser.getUsername());
-        assertEquals(mockSignupRequest.getPassword(), savedUser.getPassword());
-        assertEquals(mockSignupRequest.getPhone(), savedUser.getPhone());
+        assertEquals(mockRegisterRequest.getEmail(), savedUser.getEmail());
+        assertEquals(mockRegisterRequest.getUsername(), savedUser.getUsername());
+        assertEquals(mockRegisterRequest.getPassword(), savedUser.getPassword());
+        assertEquals(mockRegisterRequest.getPhone(), savedUser.getPhone());
     }
 
     @Test
     public void testRegisterUserFailureDuplicateUsername() throws Exception {
         // given
-        SignupRequest request = new SignupRequest();
+        RegisterRequest request = new RegisterRequest();
         request.setFirstName("John");
         request.setLastName("Doe");
         request.setUsername("johndoe");
@@ -170,15 +171,15 @@ public class SimpleAuthServiceTests {
         given(userRepository.existsByUsername(request.getUsername())).willReturn(true);
 
         // assert
-        BasicMessageResponse basicMessageResponse = simpleAuthService.registerUser(request);
-        assertEquals(basicMessageResponse.getMessage(), "Error: Username is already taken!");
-        assertFalse(basicMessageResponse.getSuccessful());
+        BasicAPIResponse basicAPIResponse = simpleAuthService.registerUser(request);
+        assertEquals(basicAPIResponse.getMessage(), "Error: Username is already taken!");
+        assertFalse(basicAPIResponse.getSuccessful());
     }
 
     @Test
     public void testRegisterUserFailureDuplicateEmail() throws Exception {
         // given
-        SignupRequest request = new SignupRequest();
+        RegisterRequest request = new RegisterRequest();
         request.setFirstName("John");
         request.setLastName("Doe");
         request.setUsername("johndoe");
@@ -189,8 +190,8 @@ public class SimpleAuthServiceTests {
         given(userRepository.existsByEmail(request.getEmail())).willReturn(true);
 
         // assert
-        BasicMessageResponse basicMessageResponse = simpleAuthService.registerUser(request);
-        assertEquals(basicMessageResponse.getMessage(), "Error: Email is already in use!");
-        assertFalse(basicMessageResponse.getSuccessful());
+        BasicAPIResponse basicAPIResponse = simpleAuthService.registerUser(request);
+        assertEquals(basicAPIResponse.getMessage(), "Error: Email is already in use!");
+        assertFalse(basicAPIResponse.getSuccessful());
     }
 }

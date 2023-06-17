@@ -40,11 +40,11 @@ CREATE TABLE "users" (
 );
 
 INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_created_type_id") 
-VALUES (1, 'A1', 'admin@test.com', 'Jane', 'Doe', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281163', 'Admin', 1, 1);
+VALUES (1, 'A001', 'admin@test.com', 'Jane', 'Doe', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281163', 'Admin', 1, 1);
 INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_created_type_id")  
-VALUES (2, 'A2', 'moderator@test.com', 'Michael', 'Rogers', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281162', 'Moderator', 1, 1);
+VALUES (2, 'A002', 'moderator@test.com', 'Michael', 'Rogers', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281162', 'Moderator', 1, 1);
 INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_created_type_id") 
-VALUES (3, 'A3', 'blikkies@test.com', 'Blikkies', 'Blignaut', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281161', 'Blikkies', 1, 1);
+VALUES (3, 'A003', 'blikkies@test.com', 'Blikkies', 'Blignaut', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281161', 'Blikkies', 1, 1);
 COMMIT;
 
 -- Create user_roles table

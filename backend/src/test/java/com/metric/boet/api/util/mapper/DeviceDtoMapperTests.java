@@ -2,6 +2,7 @@ package com.metric.boet.api.util.mapper;
 
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
+import com.metric.boet.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,6 @@ public class DeviceDtoMapperTests implements IDtoMapper<Device, DeviceDto> {
         networkSafeObject.setCreatedAt(inputObject.getCreatedAt());
         networkSafeObject.setUpdatedAt(inputObject.getUpdatedAt());
         networkSafeObject.setToken(inputObject.getToken());
-        networkSafeObject.setUser(userDtoMapperTests.removeSensitiveInformation(inputObject.getUser()));
 
         return networkSafeObject;
     }

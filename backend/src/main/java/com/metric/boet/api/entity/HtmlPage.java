@@ -11,10 +11,6 @@ import javax.validation.constraints.NotBlank;
                 @UniqueConstraint(columnNames = "url")
         })
 public class HtmlPage extends BasicDataBean {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
-
     @Column(nullable = false)
     private String url;
 
@@ -31,7 +27,7 @@ public class HtmlPage extends BasicDataBean {
     private Boolean visibleForModerators;
 
     public HtmlPage() {
-        super(BasicUsers.ADMIN_USER);
+        super(BasicUsers.ADMIN_AUDIT);
         this.visibleForUsers = true;
         this.visibleForModerators = true;
     }

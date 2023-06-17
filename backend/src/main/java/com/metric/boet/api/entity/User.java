@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Configurable
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
@@ -22,10 +22,6 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "accountCode"),
         })
 public class User extends BasicDataBean implements IUserAudit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
-
     @NotBlank
     @Size(max = 50)
     private String accountCode;
@@ -62,7 +58,7 @@ public class User extends BasicDataBean implements IUserAudit {
     private Set<Role> roles = new HashSet<>();
 
     public User() {
-        super(BasicUsers.ADMIN_USER);
+        super(BasicUsers.ADMIN_AUDIT);
     }
 
     public User(String accountCode, String firstName, String lastName, String phone, String username, String email, String password, IUserAudit userAudit) {

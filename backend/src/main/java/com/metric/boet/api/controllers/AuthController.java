@@ -2,12 +2,15 @@ package com.metric.boet.api.controllers;
 
 import javax.validation.Valid;
 
-import com.metric.boet.api.payload.request.LoginRequest;
-import com.metric.boet.api.payload.request.SignupRequest;
+import com.metric.boet.api.payloads.request.auth.LoginRequest;
+import com.metric.boet.api.payloads.request.auth.RegisterRequest;
 
+import com.metric.boet.api.payloads.response.BasicAPIResponse;
+import com.metric.boet.api.payloads.response.auth.JwtResponse;
 import com.metric.boet.api.service.auth.imp.SimpleAuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,11 +30,17 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        return simpleAuthService.authenticateUser(loginRequest);
+        JwtResponse response = simpleAuthService.authenticateUser(loginRequest);
+
+        if (response.getSuccessful()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new BasicAPIResponse("Details provided don`t seem to work on our side! Please contact System support should this reoccur.", false));
+        }
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
         return ResponseEntity.ok(simpleAuthService.registerUser(signUpRequest));
     }
 }

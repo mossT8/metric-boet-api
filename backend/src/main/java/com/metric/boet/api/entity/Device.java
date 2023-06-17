@@ -15,10 +15,6 @@ import java.util.Date;
         @UniqueConstraint(columnNames = "uuid")
 })
 public class Device extends BasicDataBean {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
-
     @NotBlank
     @Size(max = 255)
     private String uuid;
@@ -42,18 +38,8 @@ public class Device extends BasicDataBean {
     @Size(max = 255)
     private String token;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_created_id", nullable = false)
-    private User user;
-
-    // overriting abstract database so that jpa can pick up createdAt for last created query
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    protected Date createdAt;
-
     public Device() {
-        super(BasicUsers.ADMIN_USER);
+        super(BasicUsers.ADMIN_AUDIT);
     }
 
     public Device(String name, String uuid, String type, String location, Boolean status, String token, User user) {
@@ -64,7 +50,6 @@ public class Device extends BasicDataBean {
         this.location = location;
         this.status = status;
         this.token = token;
-        this.user = user;
     }
 
     public String getName() {
@@ -105,14 +90,6 @@ public class Device extends BasicDataBean {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getUuid() {

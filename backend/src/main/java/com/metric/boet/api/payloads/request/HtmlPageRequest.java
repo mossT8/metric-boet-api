@@ -1,4 +1,4 @@
-package com.metric.boet.api.payload.request;
+package com.metric.boet.api.payloads.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

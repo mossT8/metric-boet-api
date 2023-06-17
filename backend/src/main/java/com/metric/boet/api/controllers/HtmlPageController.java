@@ -3,8 +3,8 @@ package com.metric.boet.api.controllers;
 import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.payload.request.HtmlPageRequest;
-import com.metric.boet.api.payload.response.BasicMessageResponse;
+import com.metric.boet.api.payloads.request.HtmlPageRequest;
+import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.repository.HtmlPageRepository;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.service.mapper.imp.SimpleMapperService;
@@ -90,7 +90,7 @@ public class HtmlPageController {
         Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
 
         if (possiblePage.isPresent()) {
-            return ResponseEntity.badRequest().body(new BasicMessageResponse("Error: Url is already in use!", false));
+            return ResponseEntity.badRequest().body(new BasicAPIResponse("Error: Url is already in use!", false));
         }
 
         // add page
@@ -99,7 +99,7 @@ public class HtmlPageController {
         htmlPage.setUrl(htmlPage.getUrl());
         htmlPageRepository.save(htmlPage);
 
-        return ResponseEntity.ok(new BasicMessageResponse("Html Page created successfully!", true));
+        return ResponseEntity.ok(new BasicAPIResponse("Html Page created successfully!", true));
     }
 
     @PostMapping("/update")
@@ -118,7 +118,7 @@ public class HtmlPageController {
         Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
 
         if (!possiblePage.isPresent()) {
-            return ResponseEntity.badRequest().body(new BasicMessageResponse("Error: Url is not in use!", false));
+            return ResponseEntity.badRequest().body(new BasicAPIResponse("Error: Url is not in use!", false));
         }
 
         // update page
@@ -131,7 +131,7 @@ public class HtmlPageController {
 
         htmlPageRepository.save(htmlPage);
 
-        return ResponseEntity.ok(new BasicMessageResponse("Html Page updated successfully!", true));
+        return ResponseEntity.ok(new BasicAPIResponse("Html Page updated successfully!", true));
     }
 }
 

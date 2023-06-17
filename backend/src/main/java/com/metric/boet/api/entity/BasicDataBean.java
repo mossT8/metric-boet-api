@@ -9,31 +9,39 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Date;
 
-
+@MappedSuperclass
 public abstract class BasicDataBean {
-    // note each @entity requires an @id so why we exclude here
-    public long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected long id;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    public Date createdAt;
+    protected Date createdAt;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    public Date updatedAt;
+    protected Date updatedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_created_id", nullable = false)
+    private User user;
 
     @NotNull
     @PositiveOrZero
-    public long userCreatedId = 0;
+    protected int userCreatedTypeId = 0;
 
-    @NotNull
-    @PositiveOrZero
-    public int userCreatedTypeId = 0;
+    protected BasicDataBean() {
+        Date createDate = new Date();
+        this.createdAt = new Date(createDate.getTime());
+        this.updatedAt = new Date(createDate.getTime());
+    }
 
     public BasicDataBean(IUserAudit userAudit) {
-        this.userCreatedId = userAudit.getUserId();
+        this();
+        this.user = userAudit.getUser();
         this.userCreatedTypeId = userAudit.getUserRole().ordinal();
     }
 
@@ -45,12 +53,12 @@ public abstract class BasicDataBean {
         this.id = id;
     }
 
-    public long getUserCreatedId() {
-        return userCreatedId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserCreatedId(long userCreatedId) {
-        this.userCreatedId = userCreatedId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getUserCreatedTypeId() {
@@ -94,5 +102,4 @@ public abstract class BasicDataBean {
             return false;
         return true;
     }
-
 }
