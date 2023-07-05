@@ -1,6 +1,7 @@
 package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotBlank;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "url")
         })
-public class HtmlPage extends BasicDataBean {
+public class HtmlPage extends AbstractDataBean {
     @Column(nullable = false)
     private String url;
 

@@ -28,7 +28,7 @@ public class DeviceDtoMapper implements IDtoMapper<Device, DeviceDto> {
         networkSafeObject.setCreatedAt(inputObject.getCreatedAt());
         networkSafeObject.setUpdatedAt(inputObject.getUpdatedAt());
         networkSafeObject.setToken(inputObject.getToken());
-        networkSafeObject.setUser(userDtoMapper.removeSensitiveInformation(inputObject.getUser()));
+        networkSafeObject.setUser(userDtoMapper.removeSensitiveInformation(inputObject.getUserCreated()));
 
         return networkSafeObject;
     }

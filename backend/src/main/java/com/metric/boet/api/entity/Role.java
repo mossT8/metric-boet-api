@@ -1,7 +1,8 @@
 package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
-import com.metric.boet.api.entity.enums.ERole;
+import com.metric.boet.api.util.enums.ERole;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "name"),
         })
-public class Role extends BasicDataBean {
+public class Role extends AbstractDataBean {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;

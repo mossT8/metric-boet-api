@@ -1,20 +1,19 @@
 package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Entity
 @Configurable
 @Table(name = "device", uniqueConstraints = {
         @UniqueConstraint(columnNames = "uuid")
 })
-public class Device extends BasicDataBean {
+public class Device extends AbstractDataBean {
     @NotBlank
     @Size(max = 255)
     private String uuid;

@@ -2,8 +2,8 @@
 DROP TABLE IF EXISTS "device";
 DROP TABLE IF EXISTS "user_roles";
 DROP TABLE IF EXISTS "roles";
-DROP TABLE IF EXISTS "users";
 DROP TABLE IF EXISTS "html_pages";
+DROP TABLE IF EXISTS "users";
 
 -- Create roles table
 CREATE TABLE "roles" (
@@ -33,17 +33,17 @@ CREATE TABLE "users" (
     "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "user_created_id" SERIAL NOT NULL,
-    "user_created_type_id" INT NOT NULL,
+    "user_updated_id" SERIAL NOT NULL,
     CONSTRAINT "unique_username" UNIQUE ("username"),
     CONSTRAINT "unique_email" UNIQUE ("email"),
     CONSTRAINT "unique_account_code" UNIQUE ("account_code")
 );
 
-INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_created_type_id") 
+INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_updated_id") 
 VALUES (1, 'A001', 'admin@test.com', 'Jane', 'Doe', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281163', 'Admin', 1, 1);
-INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_created_type_id")  
+INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_updated_id")  
 VALUES (2, 'A002', 'moderator@test.com', 'Michael', 'Rogers', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281162', 'Moderator', 1, 1);
-INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_created_type_id") 
+INSERT INTO "users" ("id", "account_code", "email", "first_name", "last_name", "password", "phone", "username", "user_created_id", "user_updated_id") 
 VALUES (3, 'A003', 'blikkies@test.com', 'Blikkies', 'Blignaut', '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq', '0605281161', 'Blikkies', 1, 1);
 COMMIT;
 

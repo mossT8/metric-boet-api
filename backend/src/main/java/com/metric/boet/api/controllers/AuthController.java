@@ -3,7 +3,7 @@ package com.metric.boet.api.controllers;
 import javax.validation.Valid;
 
 import com.metric.boet.api.payloads.request.auth.LoginRequest;
-import com.metric.boet.api.payloads.request.auth.RegisterRequest;
+import com.metric.boet.api.payloads.request.user.UserRequest;
 
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.payloads.response.auth.JwtResponse;
@@ -40,7 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserRequest signUpRequest) {
         return ResponseEntity.ok(simpleAuthService.registerUser(signUpRequest));
     }
 }

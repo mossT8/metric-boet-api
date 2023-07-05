@@ -14,7 +14,7 @@ import java.util.Optional;
 import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payloads.request.auth.LoginRequest;
-import com.metric.boet.api.payloads.request.auth.RegisterRequest;
+import com.metric.boet.api.payloads.request.user.UserRequest;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.payloads.response.auth.JwtResponse;
 import com.metric.boet.api.repository.UserRepository;
@@ -126,24 +126,24 @@ public class SimpleAuthServiceTests {
     @Test
     public void testRegisterUserSuccess() throws Exception {
         // Create a mock SignupRequest
-        RegisterRequest mockRegisterRequest = new RegisterRequest();
-        mockRegisterRequest.setFirstName("test");
-        mockRegisterRequest.setLastName("test");
-        mockRegisterRequest.setUsername("testuser");
-        mockRegisterRequest.setEmail("testuser@example.com");
-        mockRegisterRequest.setPassword("123456");
-        mockRegisterRequest.setPhone("+1234567890");
+        UserRequest mockUserRequest = new UserRequest();
+        mockUserRequest.setFirstName("test");
+        mockUserRequest.setLastName("test");
+        mockUserRequest.setUsername("testuser");
+        mockUserRequest.setEmail("testuser@example.com");
+        mockUserRequest.setPassword("123456");
+        mockUserRequest.setPhone("+1234567890");
 
-        User user = new User("TEST", mockRegisterRequest.getFirstName(), mockRegisterRequest.getLastName(), mockRegisterRequest.getPhone(), mockRegisterRequest.getUsername(), mockRegisterRequest.getEmail(), mockRegisterRequest.getPassword(), BasicUsers.ADMIN_USER);
+        User user = new User("TEST", mockUserRequest.getFirstName(), mockUserRequest.getLastName(), mockUserRequest.getPhone(), mockUserRequest.getUsername(), mockUserRequest.getEmail(), mockUserRequest.getPassword(), BasicUsers.ADMIN_USER);
 
         // Mock the UserRepository to return null when checking for existing user
         when(userRepository.existsByUsername(anyString())).thenReturn(false);
         when(userRepository.existsByEmail(anyString())).thenReturn(false);
         when(userRepository.save(any(User.class))).thenReturn(user);
-        when(passwordEncoder.encode(any())).thenReturn(mockRegisterRequest.getPassword());
+        when(passwordEncoder.encode(any())).thenReturn(mockUserRequest.getPassword());
 
         // Verify that the response contains a success message
-        BasicAPIResponse response = simpleAuthService.registerUser(mockRegisterRequest);
+        BasicAPIResponse response = simpleAuthService.registerUser(mockUserRequest);
         assertTrue(response.getSuccessful());
         assertEquals("User registered successfully!", response.getMessage());
 
@@ -151,16 +151,16 @@ public class SimpleAuthServiceTests {
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         verify(userRepository, times(1)).save(userCaptor.capture());
         User savedUser = userCaptor.getValue();
-        assertEquals(mockRegisterRequest.getEmail(), savedUser.getEmail());
-        assertEquals(mockRegisterRequest.getUsername(), savedUser.getUsername());
-        assertEquals(mockRegisterRequest.getPassword(), savedUser.getPassword());
-        assertEquals(mockRegisterRequest.getPhone(), savedUser.getPhone());
+        assertEquals(mockUserRequest.getEmail(), savedUser.getEmail());
+        assertEquals(mockUserRequest.getUsername(), savedUser.getUsername());
+        assertEquals(mockUserRequest.getPassword(), savedUser.getPassword());
+        assertEquals(mockUserRequest.getPhone(), savedUser.getPhone());
     }
 
     @Test
     public void testRegisterUserFailureDuplicateUsername() throws Exception {
         // given
-        RegisterRequest request = new RegisterRequest();
+        UserRequest request = new UserRequest();
         request.setFirstName("John");
         request.setLastName("Doe");
         request.setUsername("johndoe");
@@ -179,7 +179,7 @@ public class SimpleAuthServiceTests {
     @Test
     public void testRegisterUserFailureDuplicateEmail() throws Exception {
         // given
-        RegisterRequest request = new RegisterRequest();
+        UserRequest request = new UserRequest();
         request.setFirstName("John");
         request.setLastName("Doe");
         request.setUsername("johndoe");

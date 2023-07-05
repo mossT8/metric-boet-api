@@ -8,7 +8,7 @@ import com.metric.boet.api.payloads.request.DeviceRequest;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.repository.DeviceRepository;
 import com.metric.boet.api.repository.UserRepository;
-import com.metric.boet.api.service.mapper.imp.SimpleMapperService;
+import com.metric.boet.api.service.mapper.imp.MapperService;
 
 import jdk.jshell.spi.ExecutionControl;
 
@@ -39,7 +39,7 @@ public class DevicesController {
     private DeviceRepository deviceRepository;
 
     @Autowired
-    private SimpleMapperService simpleMapperService;
+    private MapperService mapperService;
 
     @GetMapping("/list")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
@@ -54,8 +54,8 @@ public class DevicesController {
         }
 
         // get list
-        List<Device> devices = deviceRepository.findByUserUsername(username);
-        List<DeviceDto> mappedDevices = simpleMapperService.getDevicesDto(devices);
+        List<Device> devices = new ArrayList<>();
+        List<DeviceDto> mappedDevices = mapperService.getDevicesDto(devices);
 
         return ResponseEntity.ok(mappedDevices);
     }
@@ -75,7 +75,7 @@ public class DevicesController {
         // get device
         Optional<Device> device = deviceRepository.findByUuid(uid);
         if (device.isPresent()) {
-            DeviceDto deviceDto = simpleMapperService.getDeviceDto(device.get());
+            DeviceDto deviceDto = mapperService.getDeviceDto(device.get());
             return ResponseEntity.ok(deviceDto);
         }
 

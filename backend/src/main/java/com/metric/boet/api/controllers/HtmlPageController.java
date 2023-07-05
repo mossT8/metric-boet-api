@@ -7,7 +7,7 @@ import com.metric.boet.api.payloads.request.HtmlPageRequest;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.repository.HtmlPageRepository;
 import com.metric.boet.api.repository.UserRepository;
-import com.metric.boet.api.service.mapper.imp.SimpleMapperService;
+import com.metric.boet.api.service.mapper.imp.MapperService;
 import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class HtmlPageController {
     private HtmlPageRepository htmlPageRepository;
 
     @Autowired
-    private SimpleMapperService simpleMapperService;
+    private MapperService mapperService;
 
     @GetMapping("/list")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
@@ -47,7 +47,7 @@ public class HtmlPageController {
         }
         // get list
         List<HtmlPage> htmlPages = htmlPageRepository.findAll();
-        List<HtmlPageDto> mappedDevices = simpleMapperService.getHtmlPagesDto(htmlPages);
+        List<HtmlPageDto> mappedDevices = mapperService.getHtmlPagesDto(htmlPages);
 
 
         return ResponseEntity.ok(mappedDevices);
@@ -67,7 +67,7 @@ public class HtmlPageController {
         // get page
         Optional<HtmlPage> htmlPage = htmlPageRepository.getByUrl(url);
         if (htmlPage.isPresent()) {
-            HtmlPageDto htmlPageDto = simpleMapperService.getHtmlPageDto(htmlPage.get());
+            HtmlPageDto htmlPageDto = mapperService.getHtmlPageDto(htmlPage.get());
             return ResponseEntity.ok(htmlPageDto);
         }
 

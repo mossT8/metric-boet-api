@@ -1,4 +1,4 @@
-package com.metric.boet.api.entity.enums;
+package com.metric.boet.api.util.enums;
 
 public enum ERole {
   ROLE_ADMIN,

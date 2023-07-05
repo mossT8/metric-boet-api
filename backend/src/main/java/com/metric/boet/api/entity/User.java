@@ -2,8 +2,8 @@ package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.authorization.IUserAudit;
-import com.metric.boet.api.entity.enums.ERole;
-import org.springframework.beans.factory.annotation.Configurable;
+import com.metric.boet.api.util.enums.ERole;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "email"),
                 @UniqueConstraint(columnNames = "accountCode"),
         })
-public class User extends BasicDataBean implements IUserAudit {
+public class User extends AbstractDataBean implements IUserAudit {
     @NotBlank
     @Size(max = 50)
     private String accountCode;
@@ -59,6 +59,11 @@ public class User extends BasicDataBean implements IUserAudit {
 
     public User() {
         super(BasicUsers.ADMIN_AUDIT);
+    }
+
+
+    public User(IUserAudit userAudit) {
+        super(userAudit);
     }
 
     public User(String accountCode, String firstName, String lastName, String phone, String username, String email, String password, IUserAudit userAudit) {
@@ -139,6 +144,11 @@ public class User extends BasicDataBean implements IUserAudit {
     @Override
     public long getUserId() {
         return id;
+    }
+
+    @Override
+    public User getUser() {
+        return this;
     }
 
     @Override

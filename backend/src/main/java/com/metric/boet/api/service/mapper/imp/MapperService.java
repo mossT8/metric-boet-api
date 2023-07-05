@@ -12,7 +12,7 @@ import com.metric.boet.api.entity.Device;
 import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.entity.Role;
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.service.mapper.ISimpleMapperService;
+import com.metric.boet.api.service.mapper.IMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SimpleMapperService implements ISimpleMapperService {
+public class MapperService implements IMapperService {
     // mappers
     @Autowired
     DeviceDtoMapper deviceDtoMapper;

@@ -1,6 +1,6 @@
 package com.metric.boet.api.authorization;
 
-import com.metric.boet.api.entity.enums.ERole;
+import com.metric.boet.api.util.enums.ERole;
 import com.metric.boet.api.entity.User;
 
 public class BasicUsers {

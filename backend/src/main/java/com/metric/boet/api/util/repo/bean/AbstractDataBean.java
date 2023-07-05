@@ -1,16 +1,15 @@
-package com.metric.boet.api.entity;
+package com.metric.boet.api.util.repo.bean;
 
 import com.metric.boet.api.authorization.IUserAudit;
+import com.metric.boet.api.entity.User;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 import java.util.Date;
 
 @MappedSuperclass
-public abstract class BasicDataBean {
+public abstract class AbstractDataBean {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
@@ -27,22 +26,22 @@ public abstract class BasicDataBean {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_created_id", nullable = false)
-    private User user;
+    private User userCreated;
 
-    @NotNull
-    @PositiveOrZero
-    protected int userCreatedTypeId = 0;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_updated_id", nullable = false)
+    private User lastUpdatedUser;
 
-    protected BasicDataBean() {
+    protected AbstractDataBean() {
         Date createDate = new Date();
         this.createdAt = new Date(createDate.getTime());
         this.updatedAt = new Date(createDate.getTime());
     }
 
-    public BasicDataBean(IUserAudit userAudit) {
+    public AbstractDataBean(IUserAudit userAudit) {
         this();
-        this.user = userAudit.getUser();
-        this.userCreatedTypeId = userAudit.getUserRole().ordinal();
+        this.lastUpdatedUser = userAudit.getUser();
+        this.userCreated = userAudit.getUser();
     }
 
     public long getId() {
@@ -53,20 +52,24 @@ public abstract class BasicDataBean {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public User getUserCreated() {
+        return userCreated;
     }
 
-    public int getUserCreatedTypeId() {
-        return userCreatedTypeId;
+    public void setUserCreated(User userCreated) {
+        this.userCreated = userCreated;
     }
 
-    public void setUserCreatedTypeId(int userCreatedTypeId) {
-        this.userCreatedTypeId = userCreatedTypeId;
+    public User getLastUpdatedUser() {
+        return lastUpdatedUser;
+    }
+
+    public void setLastUpdatedUser(User lastUpdatedUser) {
+        this.lastUpdatedUser = lastUpdatedUser;
     }
 
     public Date getCreatedAt() {
@@ -97,7 +100,7 @@ public abstract class BasicDataBean {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        BasicDataBean other = (BasicDataBean) obj;
+        AbstractDataBean other = (AbstractDataBean) obj;
         if (id != other.id)
             return false;
         return true;

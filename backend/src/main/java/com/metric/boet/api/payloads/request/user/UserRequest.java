@@ -1,4 +1,4 @@
-package com.metric.boet.api.payloads.request.auth;
+package com.metric.boet.api.payloads.request.user;
 
 import com.metric.boet.api.util.api.ApiEndpointRequest;
 import com.metric.boet.api.util.api.IPrettyObjects;
@@ -7,7 +7,7 @@ import java.util.Set;
 
 import javax.validation.constraints.*;
 
-public class RegisterRequest extends ApiEndpointRequest<RegisterRequest> implements IPrettyObjects {
+public class UserRequest extends ApiEndpointRequest<UserRequest> implements IPrettyObjects {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
@@ -93,7 +93,7 @@ public class RegisterRequest extends ApiEndpointRequest<RegisterRequest> impleme
     }
 
     @Override
-    public RegisterRequest fromJson(String json) {
-        return deserialize(json, RegisterRequest.class);
+    public UserRequest fromJson(String json) {
+        return deserialize(json, UserRequest.class);
     }
 }

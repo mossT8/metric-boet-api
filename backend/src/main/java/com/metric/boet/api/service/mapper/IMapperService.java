@@ -11,7 +11,7 @@ import com.metric.boet.api.entity.User;
 
 import java.util.*;
 
-public interface ISimpleMapperService {
+public interface IMapperService {
     // device mappings
     DeviceDto getDeviceDto(Device device);
 
