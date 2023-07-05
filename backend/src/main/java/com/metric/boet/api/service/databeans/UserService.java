@@ -29,7 +29,7 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
 
 
     @Override
-    public BasicAPIResponse getById(Long id) {
+    public BasicAPIResponse findById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isPresent()) {
@@ -43,8 +43,8 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse getByCreatedDate(Date createdAt) {
-        List<User> users = userRepository.getByCreatedAt(createdAt);
+    public BasicAPIResponse findByCreatedDate(Date createdAt) {
+        List<User> users = userRepository.findByCreatedAt(createdAt);
         BasicAPIResponse response = new BasicAPIResponse();
         response.setData(mapperService.getUsersDto(users));
 
@@ -52,8 +52,8 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse getByUpdatedDate(Date updatedAt) {
-        List<User> users = userRepository.getByUpdatedAt(updatedAt);
+    public BasicAPIResponse findByUpdatedDate(Date updatedAt) {
+        List<User> users = userRepository.findByUpdatedAt(updatedAt);
         BasicAPIResponse response = new BasicAPIResponse();
         response.setData(mapperService.getUsersDto(users));
 
@@ -61,20 +61,20 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse getByCreatedUserId(Long userId) {
+    public BasicAPIResponse findByCreatedUserId(Long userId) {
 
         Optional<User> userOptional = userRepository.findById(userId);
 
         if (userOptional.isPresent()) {
-            return getByCreatedUser(userOptional.get());
+            return findByCreatedUser(userOptional.get());
         }
 
         return getNegativeResponse();
     }
 
     @Override
-    public BasicAPIResponse getByCreatedUser(User user) {
-        List<User> users = userRepository.getByUserCreated(user);
+    public BasicAPIResponse findByCreatedUser(User user) {
+        List<User> users = userRepository.findByUserCreated(user);
         BasicAPIResponse response = new BasicAPIResponse();
         response.setData(mapperService.getUsersDto(users));
 
@@ -82,19 +82,19 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse getByUpdatedUserId(Long userId) {
+    public BasicAPIResponse findByUpdatedUserId(Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
 
         if (userOptional.isPresent()) {
-            return getByUpdatedUser(userOptional.get());
+            return findByUpdatedUser(userOptional.get());
         }
 
         return getNegativeResponse();
     }
 
     @Override
-    public BasicAPIResponse getByUpdatedUser(User user) {
-        List<User> users = userRepository.getByLastUpdatedUser(user);
+    public BasicAPIResponse findByUpdatedUser(User user) {
+        List<User> users = userRepository.findByLastUpdatedUser(user);
         BasicAPIResponse response = new BasicAPIResponse();
         response.setData(mapperService.getUsersDto(users));
 

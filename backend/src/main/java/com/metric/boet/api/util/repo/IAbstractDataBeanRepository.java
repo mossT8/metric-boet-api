@@ -11,11 +11,11 @@ import java.util.List;
 @NoRepositoryBean
 public interface IAbstractDataBeanRepository<BEAN_CLASS extends AbstractDataBean> extends JpaRepository<BEAN_CLASS, Long> {
 
-    List<BEAN_CLASS> getByCreatedAt(Date createdAt);
+    List<BEAN_CLASS> findByCreatedAt(Date createdAt);
 
-    List<BEAN_CLASS> getByUpdatedAt(Date updatedAt);
+    List<BEAN_CLASS> findByUpdatedAt(Date updatedAt);
 
-    List<BEAN_CLASS> getByUserCreated(User user);
+    List<BEAN_CLASS> findByUserCreated(User user);
 
-    List<BEAN_CLASS> getByLastUpdatedUser(User user);
+    List<BEAN_CLASS> findByLastUpdatedUser(User user);
 }

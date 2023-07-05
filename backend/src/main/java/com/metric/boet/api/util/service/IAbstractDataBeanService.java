@@ -6,11 +6,11 @@ import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import java.util.Date;
 
 public interface IAbstractDataBeanService {
-    BasicAPIResponse getById(Long id);
-    BasicAPIResponse getByCreatedDate(Date createdAt);
-    BasicAPIResponse getByUpdatedDate(Date updatedAt);
-    BasicAPIResponse getByCreatedUserId(Long userId);
-    BasicAPIResponse getByCreatedUser(User user);
-    BasicAPIResponse getByUpdatedUserId(Long userId);
-    BasicAPIResponse getByUpdatedUser(User user);
+    BasicAPIResponse findById(Long id);
+    BasicAPIResponse findByCreatedDate(Date createdAt);
+    BasicAPIResponse findByUpdatedDate(Date updatedAt);
+    BasicAPIResponse findByCreatedUserId(Long userId);
+    BasicAPIResponse findByCreatedUser(User user);
+    BasicAPIResponse findByUpdatedUserId(Long userId);
+    BasicAPIResponse findByUpdatedUser(User user);
 }
