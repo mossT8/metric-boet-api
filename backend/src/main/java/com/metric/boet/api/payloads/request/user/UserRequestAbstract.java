@@ -1,13 +1,12 @@
 package com.metric.boet.api.payloads.request.user;
 
-import com.metric.boet.api.util.api.ApiEndpointRequest;
-import com.metric.boet.api.util.api.IPrettyObjects;
+import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
 
 import java.util.Set;
 
 import javax.validation.constraints.*;
 
-public class UserRequest extends ApiEndpointRequest<UserRequest> implements IPrettyObjects {
+public class UserRequestAbstract extends AbstractWebAppEndpointApiRequest<UserRequestAbstract> {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
@@ -90,10 +89,5 @@ public class UserRequest extends ApiEndpointRequest<UserRequest> implements IPre
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    @Override
-    public UserRequest fromJson(String json) {
-        return deserialize(json, UserRequest.class);
     }
 }

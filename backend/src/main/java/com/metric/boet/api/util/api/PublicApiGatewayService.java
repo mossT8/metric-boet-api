@@ -1,6 +1,6 @@
 package com.metric.boet.api.util.api;
 
-import com.metric.boet.api.util.annotations.WebAppEndpoint;
+import com.metric.boet.api.util.annotations.PublicWebAppEndpoint;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,25 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Service
-public class ApiGatewayService {
+public class PublicApiGatewayService {
 
     private final ListableBeanFactory beanFactory;
     private final Map<String, Object> endpointProcessors;
 
     @Autowired
-    public ApiGatewayService(ListableBeanFactory beanFactory) {
+    public PublicApiGatewayService(ListableBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
-        this.endpointProcessors = beanFactory.getBeansWithAnnotation(WebAppEndpoint.class);
+        this.endpointProcessors = beanFactory.getBeansWithAnnotation(PublicWebAppEndpoint.class);
     }
 
     public ResponseEntity<?> handleRequestProcess(HttpServletRequest request, ApiRequest<?> payload) {
         for (Object endpointProcessor : endpointProcessors.values()) {
-            if (endpointProcessor instanceof WebAppEndpointHandler
+            if (endpointProcessor instanceof AbstractPublicWebAppEndpointHandler
                     && endpointProcessor.getClass().getName().equals(payload.getFullyQualifiedClassName())) {
                 @SuppressWarnings("unchecked")
-                WebAppEndpointHandler<Object, Object> processor = (WebAppEndpointHandler<Object, Object>) endpointProcessor;
+                AbstractPublicWebAppEndpointHandler<AbstractWebAppEndpointApiRequest> processor = (AbstractPublicWebAppEndpointHandler<AbstractWebAppEndpointApiRequest>) endpointProcessor;
                 try {
-                    Object mappedPayload = processor.getRequestFromString(toJsonObject(payload.getRequestObject().toString()));
+                    AbstractWebAppEndpointApiRequest mappedPayload = processor.getRequestFromString(toJsonObject(payload.getRequestObject().toString()));
                     if (processor.authoriseRequest(request, mappedPayload))
                         return ResponseEntity.ok().body(processor.processRequest(request, mappedPayload));
                     else

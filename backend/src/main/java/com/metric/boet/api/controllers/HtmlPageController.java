@@ -3,7 +3,7 @@ package com.metric.boet.api.controllers;
 import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.payloads.request.HtmlPageRequest;
+import com.metric.boet.api.payloads.request.HtmlPageApiRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.repository.HtmlPageRepository;
 import com.metric.boet.api.repository.UserRepository;
@@ -65,7 +65,7 @@ public class HtmlPageController {
             return ResponseEntity.notFound().build();
         }
         // get page
-        Optional<HtmlPage> htmlPage = htmlPageRepository.getByUrl(url);
+        Optional<HtmlPage> htmlPage = htmlPageRepository.findByUrl(url);
         if (htmlPage.isPresent()) {
             HtmlPageDto htmlPageDto = mapperService.getHtmlPageDto(htmlPage.get());
             return ResponseEntity.ok(htmlPageDto);
@@ -76,7 +76,7 @@ public class HtmlPageController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> createPage(@Valid @RequestBody HtmlPageRequest htmlPageRequest) {
+    public ResponseEntity<?> createPage(@Valid @RequestBody HtmlPageApiRequestAbstract htmlPageRequest) {
         // authenticate user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -87,7 +87,7 @@ public class HtmlPageController {
         }
 
         // check page url not in already
-        Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
+        Optional<HtmlPage> possiblePage = htmlPageRepository.findByUrl(htmlPageRequest.getUrl());
 
         if (possiblePage.isPresent()) {
             return ResponseEntity.badRequest().body(new BasicAPIResponse("Error: Url is already in use!", false));
@@ -104,7 +104,7 @@ public class HtmlPageController {
 
     @PostMapping("/update")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> updatePage(@Valid @RequestBody HtmlPageRequest htmlPageRequest) {
+    public ResponseEntity<?> updatePage(@Valid @RequestBody HtmlPageApiRequestAbstract htmlPageRequest) {
         // authenticate user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -115,7 +115,7 @@ public class HtmlPageController {
         }
 
         // check page url is in use
-        Optional<HtmlPage> possiblePage = htmlPageRepository.getByUrl(htmlPageRequest.getUrl());
+        Optional<HtmlPage> possiblePage = htmlPageRepository.findByUrl(htmlPageRequest.getUrl());
 
         if (!possiblePage.isPresent()) {
             return ResponseEntity.badRequest().body(new BasicAPIResponse("Error: Url is not in use!", false));

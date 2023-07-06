@@ -13,8 +13,8 @@ import java.util.Optional;
 
 import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.payloads.request.auth.LoginRequest;
-import com.metric.boet.api.payloads.request.user.UserRequest;
+import com.metric.boet.api.payloads.request.auth.LoginRequestAbstract;
+import com.metric.boet.api.payloads.request.user.UserRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.payloads.response.auth.JwtResponse;
 import com.metric.boet.api.repository.UserRepository;
@@ -62,7 +62,7 @@ public class SimpleAuthServiceTests {
     @Test
     public void testAuthenticateUserSuccess() {
         // given
-        LoginRequest loginRequest = new LoginRequest();
+        LoginRequestAbstract loginRequest = new LoginRequestAbstract();
         loginRequest.setUsername("testuser");
         loginRequest.setPassword("testpassword");
 
@@ -97,8 +97,8 @@ public class SimpleAuthServiceTests {
         when(jwtUtils.generateJwtToken(any())).thenReturn(jwt);
 
         // when
-        JwtResponse response = simpleAuthService.authenticateUser(loginRequest);
-
+        BasicAPIResponse responseWrapper = simpleAuthService.authenticateUser(loginRequest);
+        JwtResponse response = (JwtResponse) responseWrapper.getData();
         // then
         assertEquals(expectedResponse.getAccessToken(), response.getAccessToken());
         assertEquals(expectedResponse.getId(), response.getId());
@@ -110,23 +110,23 @@ public class SimpleAuthServiceTests {
     @Test
     public void testAuthenticateUserFailure() {
         // given
-        LoginRequest loginRequest = new LoginRequest();
+        LoginRequestAbstract loginRequest = new LoginRequestAbstract();
         loginRequest.setUsername("testuser");
         loginRequest.setPassword("testpassword");
 
         when(authenticationManager.authenticate(any())).thenThrow(new RuntimeException());
 
         // when
-        JwtResponse response = simpleAuthService.authenticateUser(loginRequest);
+        BasicAPIResponse responseWrapper = simpleAuthService.authenticateUser(loginRequest);
 
         // then
-        assertEquals(false, response.getSuccessful());
+        assertEquals(false, responseWrapper.getSuccessful());
     }
 
     @Test
     public void testRegisterUserSuccess() throws Exception {
         // Create a mock SignupRequest
-        UserRequest mockUserRequest = new UserRequest();
+        UserRequestAbstract mockUserRequest = new UserRequestAbstract();
         mockUserRequest.setFirstName("test");
         mockUserRequest.setLastName("test");
         mockUserRequest.setUsername("testuser");
@@ -160,7 +160,7 @@ public class SimpleAuthServiceTests {
     @Test
     public void testRegisterUserFailureDuplicateUsername() throws Exception {
         // given
-        UserRequest request = new UserRequest();
+        UserRequestAbstract request = new UserRequestAbstract();
         request.setFirstName("John");
         request.setLastName("Doe");
         request.setUsername("johndoe");
@@ -179,7 +179,7 @@ public class SimpleAuthServiceTests {
     @Test
     public void testRegisterUserFailureDuplicateEmail() throws Exception {
         // given
-        UserRequest request = new UserRequest();
+        UserRequestAbstract request = new UserRequestAbstract();
         request.setFirstName("John");
         request.setLastName("Doe");
         request.setUsername("johndoe");

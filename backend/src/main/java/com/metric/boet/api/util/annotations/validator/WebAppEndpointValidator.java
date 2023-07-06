@@ -1,13 +1,12 @@
 package com.metric.boet.api.util.annotations.validator;
 
-import com.metric.boet.api.util.annotations.WebAppEndpoint;
+import com.metric.boet.api.util.annotations.PublicWebAppEndpoint;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class WebAppEndpointValidator  implements ConstraintValidator<WebAppEndpoint, Object> {
+public class WebAppEndpointValidator  implements ConstraintValidator<PublicWebAppEndpoint, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {

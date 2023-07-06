@@ -1,11 +1,11 @@
 package com.metric.boet.api.payloads.request.auth;
 
-import com.metric.boet.api.util.api.ApiEndpointRequest;
+import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
 import com.metric.boet.api.util.api.IPrettyObjects;
 
 import javax.validation.constraints.NotBlank;
 
-public class LoginRequest extends ApiEndpointRequest<LoginRequest> implements IPrettyObjects {
+public class LoginRequestAbstract extends AbstractWebAppEndpointApiRequest<LoginRequestAbstract> implements IPrettyObjects {
     @NotBlank
     private String username;
     @NotBlank
@@ -25,10 +25,5 @@ public class LoginRequest extends ApiEndpointRequest<LoginRequest> implements IP
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public LoginRequest fromJson(String json) {
-        return deserialize(json, LoginRequest.class);
     }
 }

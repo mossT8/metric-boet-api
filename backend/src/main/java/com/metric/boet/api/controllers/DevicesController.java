@@ -4,7 +4,7 @@ import com.metric.boet.api.util.uuid.imp.DeviceUidGenerator;
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.payloads.request.DeviceRequest;
+import com.metric.boet.api.payloads.request.DeviceApiRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.repository.DeviceRepository;
 import com.metric.boet.api.repository.UserRepository;
@@ -84,7 +84,7 @@ public class DevicesController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> addDeviceForUser(@Valid @RequestBody DeviceRequest deviceRequest) {
+    public ResponseEntity<?> addDeviceForUser(@Valid @RequestBody DeviceApiRequestAbstract deviceApiRequestAbstract) {
         // authenticate user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -95,7 +95,7 @@ public class DevicesController {
         }
 
         // add device
-        Device newDevice = new Device(deviceRequest.getName(), deviceUidGenerator.getNextUnique(), deviceRequest.getType(), deviceRequest.getLocation(), deviceRequest.getStatus(), deviceRequest.getToken(), user.get());
+        Device newDevice = new Device(deviceApiRequestAbstract.getName(), deviceUidGenerator.getNextUnique(), deviceApiRequestAbstract.getType(), deviceApiRequestAbstract.getLocation(), deviceApiRequestAbstract.getStatus(), deviceApiRequestAbstract.getToken(), user.get());
         deviceRepository.save(newDevice);
         return ResponseEntity.ok(new BasicAPIResponse("Device added successfully for user!", true));
     }

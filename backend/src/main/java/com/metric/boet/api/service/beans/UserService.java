@@ -1,8 +1,8 @@
-package com.metric.boet.api.service.databeans;
+package com.metric.boet.api.service.beans;
 
 import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.payloads.request.user.UserRequest;
+import com.metric.boet.api.payloads.request.user.UserRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.service.uiid.imp.SimpleUuidService;
@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Service
-public class UserService extends AbstractDataBeanService<UserRequest> {
+public class UserService extends AbstractDataBeanService<UserRequestAbstract> {
 
     @Autowired
     UserRepository userRepository;
@@ -102,7 +102,7 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse create(UserRequest requestBean, IUserAudit userAudit) {
+    public BasicAPIResponse create(UserRequestAbstract requestBean, IUserAudit userAudit) {
 
         if (userRepository.existsByUsername(requestBean.getUsername())) {
             return new BasicAPIResponse("Error: Username is already taken!", false);
@@ -128,7 +128,7 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse replace(UserRequest requestBean, IUserAudit userAudit) {
+    public BasicAPIResponse replace(UserRequestAbstract requestBean, IUserAudit userAudit) {
         Optional<User> userOptional = userRepository.findByUsername(requestBean.getUsername());
 
         if (userOptional.isPresent()) {
@@ -142,6 +142,8 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
             user.setEmail(requestBean.getEmail());
             user.setPhone(requestBean.getPhone());
 
+            updateLastUpdated(user, userAudit);
+
             userRepository.save(user);
 
             return new BasicAPIResponse("User replaced successfully!", true);
@@ -152,7 +154,7 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse update(UserRequest requestBean, IUserAudit userAudit) {
+    public BasicAPIResponse update(UserRequestAbstract requestBean, IUserAudit userAudit) {
         Optional<User> userOptional = userRepository.findByUsername(requestBean.getUsername());
 
         if (userOptional.isPresent()) {
@@ -161,6 +163,8 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
             user.setFirstName(requestBean.getFirstName());
             user.setLastName(requestBean.getLastName());
             user.setPhone(requestBean.getPhone());
+
+            updateLastUpdated(user, userAudit);
 
             userRepository.save(user);
 
@@ -172,7 +176,7 @@ public class UserService extends AbstractDataBeanService<UserRequest> {
     }
 
     @Override
-    public BasicAPIResponse delete(UserRequest requestBean, IUserAudit userAudit) {
+    public BasicAPIResponse delete(UserRequestAbstract requestBean, IUserAudit userAudit) {
         Optional<User> userOptional = userRepository.findByUsername(requestBean.getUsername());
 
         if (userOptional.isPresent()) {

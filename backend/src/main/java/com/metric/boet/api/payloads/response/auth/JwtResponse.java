@@ -4,7 +4,7 @@ import com.metric.boet.api.payloads.response.BasicAPIResponse;
 
 import java.util.List;
 
-public class JwtResponse extends BasicAPIResponse {
+public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
 	private Long id;
@@ -13,7 +13,6 @@ public class JwtResponse extends BasicAPIResponse {
 	private List<String> roles;
 
 	public JwtResponse(String accessToken, String message, Boolean successful, Long id, String username, String email, List<String> roles) {
-		super(message, successful);
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;

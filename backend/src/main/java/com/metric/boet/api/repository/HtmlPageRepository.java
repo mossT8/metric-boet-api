@@ -1,13 +1,15 @@
 package com.metric.boet.api.repository;
 
 import com.metric.boet.api.entity.HtmlPage;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.metric.boet.api.util.repo.IAbstractDataBeanRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-
-public interface HtmlPageRepository extends JpaRepository<HtmlPage, Long> {
+@Repository
+public interface HtmlPageRepository extends IAbstractDataBeanRepository<HtmlPage> {
 
     Boolean existsByUrl(String url);
-    Optional<HtmlPage> getByUrl(String url);
+
+    Optional<HtmlPage> findByUrl(String url);
 }

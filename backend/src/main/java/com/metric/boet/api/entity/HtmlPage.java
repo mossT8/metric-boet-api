@@ -1,6 +1,7 @@
 package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
+import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import javax.persistence.*;
@@ -29,6 +30,12 @@ public class HtmlPage extends AbstractDataBean {
 
     public HtmlPage() {
         super(BasicUsers.ADMIN_AUDIT);
+        this.visibleForUsers = true;
+        this.visibleForModerators = true;
+    }
+
+    public HtmlPage(IUserAudit userAudit) {
+        super(userAudit);
         this.visibleForUsers = true;
         this.visibleForModerators = true;
     }

@@ -1,14 +1,28 @@
 package com.metric.boet.api.util.service;
 
+import com.metric.boet.api.authorization.IUserAudit;
+import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.service.mapper.imp.MapperService;
-import com.metric.boet.api.util.api.ApiEndpointRequest;
+import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractDataBeanService<REQUEST_BEAN_CLASS extends ApiEndpointRequest>
+import java.util.Date;
+
+public abstract class AbstractDataBeanService<REQUEST_BEAN_CLASS extends AbstractWebAppEndpointApiRequest>
         implements IAbstractDataBeanService, ICRUDAbstractDataBeanService<REQUEST_BEAN_CLASS> {
     @Autowired
     protected MapperService mapperService;
+
+    private void updateLastUpdated(AbstractDataBean updatingBean, User user) {
+        updatingBean.setUpdatedAt(new Date());
+        updatingBean.setLastUpdatedUser(user);
+    }
+
+    protected void updateLastUpdated(AbstractDataBean updatingBean, IUserAudit userAudit) {
+        updateLastUpdated(updatingBean, userAudit.getUser());
+    }
 
     public static BasicAPIResponse getNegativeResponse() {
         return new BasicAPIResponse("Error: could not resolve request. Please contact system support if this error persist", false);

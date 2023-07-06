@@ -1,13 +1,20 @@
 package com.metric.boet.api.payloads.request;
 
+import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
+import com.metric.boet.api.util.api.IPrettyObjects;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class DeviceRequest {
+public class DeviceApiRequestAbstract extends AbstractWebAppEndpointApiRequest<DeviceApiRequestAbstract> implements IPrettyObjects {
     @NotBlank
     @Size(max = 50)
     private String name;
+
+    @NotBlank
+    @Size(max = 50)
+    private String uuid;
 
     @NotBlank
     @Size(max = 50)
@@ -63,5 +70,13 @@ public class DeviceRequest {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }
