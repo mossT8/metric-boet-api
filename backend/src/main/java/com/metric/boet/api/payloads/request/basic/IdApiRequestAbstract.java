@@ -1,11 +1,10 @@
 package com.metric.boet.api.payloads.request.basic;
 
-import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
-import com.metric.boet.api.util.api.IPrettyObjects;
+import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 
 import javax.validation.constraints.Positive;
 
-public class IdApiRequestAbstract extends AbstractWebAppEndpointApiRequest<IdApiRequestAbstract> implements IPrettyObjects {
+public class IdApiRequestAbstract extends AbstractWebAppEndpointPayload<IdApiRequestAbstract> {
     @Positive
     private long id;
 

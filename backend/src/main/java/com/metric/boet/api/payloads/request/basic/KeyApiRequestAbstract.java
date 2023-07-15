@@ -1,11 +1,10 @@
 package com.metric.boet.api.payloads.request.basic;
 
-import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
-import com.metric.boet.api.util.api.IPrettyObjects;
+import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 
 import javax.validation.constraints.NotBlank;
 
-public class KeyApiRequestAbstract  extends AbstractWebAppEndpointApiRequest<KeyApiRequestAbstract> implements IPrettyObjects {
+public class KeyApiRequestAbstract  extends AbstractWebAppEndpointPayload<KeyApiRequestAbstract> {
     @NotBlank
     private String key;
 

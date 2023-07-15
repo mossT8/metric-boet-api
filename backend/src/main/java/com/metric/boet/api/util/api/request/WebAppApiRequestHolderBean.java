@@ -1,18 +1,19 @@
-package com.metric.boet.api.util.api;
+package com.metric.boet.api.util.api.request;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ApiRequest<T> {
+public class WebAppApiRequestHolderBean {
     private String packagePrefix;
     private String apiGroupKey;
     private String endpointClassName;
-    private T requestObject;
+    private LinkedHashMap<String, Object> requestObject;
     private Map<String, Object> additionalProperties;
 
-    public ApiRequest() {
+    public WebAppApiRequestHolderBean() {
     }
 
-    public ApiRequest(String packagePrefix, String apiGroupKey, String endpointClassName, T requestObject, Map<String, Object> additionalProperties) {
+    public WebAppApiRequestHolderBean(String packagePrefix, String apiGroupKey, String endpointClassName, LinkedHashMap<String, Object> requestObject, Map<String, Object> additionalProperties) {
         this.packagePrefix = packagePrefix;
         this.apiGroupKey = apiGroupKey;
         this.endpointClassName = endpointClassName;
@@ -44,11 +45,11 @@ public class ApiRequest<T> {
         this.endpointClassName = endpointClassName;
     }
 
-    public T getRequestObject() {
+    public LinkedHashMap<String, Object> getRequestObject() {
         return requestObject;
     }
 
-    public void setRequestObject(T requestObject) {
+    public void setRequestObject(LinkedHashMap<String, Object> requestObject) {
         this.requestObject = requestObject;
     }
 

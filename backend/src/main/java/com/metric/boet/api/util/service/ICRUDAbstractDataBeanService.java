@@ -2,12 +2,12 @@ package com.metric.boet.api.util.service;
 
 import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
-import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
+import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import java.util.Date;
 
-public interface ICRUDAbstractDataBeanService<REQUEST_BEAN_CLASS extends AbstractWebAppEndpointApiRequest> {
+public interface ICRUDAbstractDataBeanService<REQUEST_BEAN_CLASS extends AbstractWebAppEndpointPayload> {
     default AbstractDataBean updateLastUpdate(AbstractDataBean abstractDataBean, IUserAudit userAudit) {
         abstractDataBean.setUpdatedAt(new Date());
         abstractDataBean.setLastUpdatedUser(userAudit.getUser());

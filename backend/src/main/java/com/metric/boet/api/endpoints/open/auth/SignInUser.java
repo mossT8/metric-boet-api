@@ -4,7 +4,7 @@ import com.metric.boet.api.payloads.request.auth.LoginRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.service.auth.imp.SimpleAuthService;
 import com.metric.boet.api.util.annotations.PublicWebAppEndpoint;
-import com.metric.boet.api.util.api.AbstractPublicWebAppEndpointHandler;
+import com.metric.boet.api.util.api.open.AbstractPublicWebAppEndpointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,18 +1,18 @@
-package com.metric.boet.api.util.api;
+package com.metric.boet.api.util.api.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.lang.reflect.ParameterizedType;
 
-public abstract class AbstractWebAppEndpointApiRequest<T> {
+public abstract class AbstractWebAppEndpointPayload<T> implements IPrettyPayload {
     private Class<T> type;
 
     public T fromJson(String json) throws Exception {
         return deserialize(json, type);
     }
 
-    public AbstractWebAppEndpointApiRequest() {
+    public AbstractWebAppEndpointPayload() {
         type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 

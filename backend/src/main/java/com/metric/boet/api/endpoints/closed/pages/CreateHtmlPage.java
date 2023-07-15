@@ -5,7 +5,7 @@ import com.metric.boet.api.payloads.request.HtmlPageApiRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.service.beans.HtmlPageService;
 import com.metric.boet.api.util.annotations.PrivateWebAppEndpoint;
-import com.metric.boet.api.util.api.AbstractPrivateWebAppEndpointHandler;
+import com.metric.boet.api.util.api.closed.AbstractPrivateWebAppEndpointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 

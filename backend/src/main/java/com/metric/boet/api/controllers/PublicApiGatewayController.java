@@ -1,7 +1,7 @@
 package com.metric.boet.api.controllers;
 
-import com.metric.boet.api.util.api.PublicApiGatewayService;
-import com.metric.boet.api.util.api.ApiRequest;
+import com.metric.boet.api.util.api.open.PublicApiGatewayService;
+import com.metric.boet.api.util.api.request.WebAppApiRequestHolderBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,22 +18,22 @@ public class PublicApiGatewayController {
     PublicApiGatewayService publicApiGatewayService;
 
     @PostMapping("/")
-    public ResponseEntity<?> handleRequestPost(HttpServletRequest httpServletRequest, @RequestBody ApiRequest<?> apiPayload) throws Exception {
+    public ResponseEntity<?> handleRequestPost(HttpServletRequest httpServletRequest, @RequestBody WebAppApiRequestHolderBean apiPayload) throws Exception {
         return publicApiGatewayService.handleRequestProcess(httpServletRequest, apiPayload);
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> handleRequestGet(HttpServletRequest httpServletRequest, @RequestBody ApiRequest<?> apiPayload) throws Exception {
+    public ResponseEntity<?> handleRequestGet(HttpServletRequest httpServletRequest, @RequestBody WebAppApiRequestHolderBean apiPayload) throws Exception {
         return publicApiGatewayService.handleRequestProcess(httpServletRequest, apiPayload);
     }
 
     @PatchMapping("/")
-    public ResponseEntity<?> handleRequestPatch(HttpServletRequest httpServletRequest, @RequestBody ApiRequest<?> apiPayload) throws Exception {
+    public ResponseEntity<?> handleRequestPatch(HttpServletRequest httpServletRequest, @RequestBody WebAppApiRequestHolderBean apiPayload) throws Exception {
         return publicApiGatewayService.handleRequestProcess(httpServletRequest, apiPayload);
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<?> handleRequestDelete(HttpServletRequest httpServletRequest, @RequestBody ApiRequest<?> apiPayload) throws Exception {
+    public ResponseEntity<?> handleRequestDelete(HttpServletRequest httpServletRequest, @RequestBody WebAppApiRequestHolderBean apiPayload) throws Exception {
         return publicApiGatewayService.handleRequestProcess(httpServletRequest, apiPayload);
     }
 }

@@ -1,13 +1,12 @@
 package com.metric.boet.api.payloads.request;
 
-import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
-import com.metric.boet.api.util.api.IPrettyObjects;
+import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class HtmlPageApiRequestAbstract extends AbstractWebAppEndpointApiRequest<HtmlPageApiRequestAbstract> implements IPrettyObjects {
+public class HtmlPageApiRequestAbstract extends AbstractWebAppEndpointPayload<HtmlPageApiRequestAbstract> {
     @NotBlank
     @Size(min = 3, max = 20)
     private String url;

@@ -2,7 +2,7 @@ package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.authorization.IUserAudit;
-import com.metric.boet.api.util.enums.ERole;
+import com.metric.boet.api.authorization.enums.ERole;
 import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import java.util.HashSet;

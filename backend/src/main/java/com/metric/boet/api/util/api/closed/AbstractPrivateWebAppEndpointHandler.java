@@ -1,17 +1,18 @@
-package com.metric.boet.api.util.api;
+package com.metric.boet.api.util.api.closed;
 
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.repository.UserRepository;
 import com.metric.boet.api.security.jwt.JwtUtils;
+import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
+import com.metric.boet.api.util.api.AbstractWebAppEndpointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.ParameterizedType;
 
 
-public abstract class AbstractPrivateWebAppEndpointHandler<REQUEST_CLASS extends AbstractWebAppEndpointApiRequest> extends AbstractWebAppEndpointHandler<REQUEST_CLASS> {
+public abstract class AbstractPrivateWebAppEndpointHandler<REQUEST_CLASS extends AbstractWebAppEndpointPayload> extends AbstractWebAppEndpointHandler<REQUEST_CLASS> {
 
     @Autowired
     protected UserRepository userRepo;
@@ -31,7 +32,7 @@ public abstract class AbstractPrivateWebAppEndpointHandler<REQUEST_CLASS extends
 
     protected abstract boolean isRequestForUser(HttpServletRequest httpServletRequest, REQUEST_CLASS payload, User user) throws Exception;
 
-    protected ResponseEntity<BasicAPIResponse> processRequest(HttpServletRequest httpServletRequest, REQUEST_CLASS payload) {
+    public ResponseEntity<BasicAPIResponse> processRequest(HttpServletRequest httpServletRequest, REQUEST_CLASS payload) {
         try {
             User user = getUserFromRequest(httpServletRequest, payload);
             if (isRequestForUser(httpServletRequest, payload, user)) {

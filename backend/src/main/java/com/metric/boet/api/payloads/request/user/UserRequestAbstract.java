@@ -1,12 +1,12 @@
 package com.metric.boet.api.payloads.request.user;
 
-import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
+import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 
 import java.util.Set;
 
 import javax.validation.constraints.*;
 
-public class UserRequestAbstract extends AbstractWebAppEndpointApiRequest<UserRequestAbstract> {
+public class UserRequestAbstract extends AbstractWebAppEndpointPayload<UserRequestAbstract> {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;

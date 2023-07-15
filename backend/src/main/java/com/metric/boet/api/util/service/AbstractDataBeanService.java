@@ -4,13 +4,13 @@ import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 import com.metric.boet.api.service.mapper.imp.MapperService;
-import com.metric.boet.api.util.api.AbstractWebAppEndpointApiRequest;
+import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
-public abstract class AbstractDataBeanService<REQUEST_BEAN_CLASS extends AbstractWebAppEndpointApiRequest>
+public abstract class AbstractDataBeanService<REQUEST_BEAN_CLASS extends AbstractWebAppEndpointPayload>
         implements IAbstractDataBeanService, ICRUDAbstractDataBeanService<REQUEST_BEAN_CLASS> {
     @Autowired
     protected MapperService mapperService;
