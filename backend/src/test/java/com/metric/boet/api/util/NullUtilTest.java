@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.*;
 
 @SpringBootTest
-public class NullUtilTests {
+public class NullUtilTest {
 
     /**
      * Test case for the {@link NullUtil#isNull(Object)} method with a null object.

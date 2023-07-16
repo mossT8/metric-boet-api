@@ -8,6 +8,7 @@ import com.metric.boet.api.service.beans.HtmlPageService;
 import com.metric.boet.api.util.annotations.PrivateWebAppEndpoint;
 import com.metric.boet.api.util.api.closed.AbstractPrivateWebAppEndpointHandler;
 
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -23,8 +24,7 @@ public class GetHtmlPage extends AbstractPrivateWebAppEndpointHandler<KeyApiRequ
         BasicAPIResponse htmlPageResponse = htmlPageService.findByUrl(payload.getKey());
 
         if (htmlPageResponse.getSuccessful()) {
-            HtmlPage htmlPage = (HtmlPage) htmlPageResponse.getData();
-            return htmlPage.getUserCreated().equals(user);
+            return htmlPageService.doesBelongToUser((AbstractDataBean) htmlPageResponse.getData(), user);
         }
 
         return false;
@@ -32,6 +32,6 @@ public class GetHtmlPage extends AbstractPrivateWebAppEndpointHandler<KeyApiRequ
 
     @Override
     protected ResponseEntity<BasicAPIResponse> performRequest(HttpServletRequest httpServletRequest, KeyApiRequestAbstract payload, User user) throws Exception {
-        return ResponseEntity.ok().body(htmlPageService.findByUrl(payload.getKey()));
+        return ResponseEntity.ok().body(htmlPageService.findDtoByUrl(payload.getKey()));
     }
 }

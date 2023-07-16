@@ -37,14 +37,29 @@ public class HtmlPageService extends AbstractDataBeanService<HtmlPageApiRequestA
         return getNegativeResponse();
     }
 
-    public BasicAPIResponse findByUrl(String url) throws Exception {
+    public BasicAPIResponse findDtoByUrl(String url) throws Exception {
+        BasicAPIResponse basicAPIResponse = findByUrl(url);
+
+        if (basicAPIResponse.getSuccessful()) {
+            basicAPIResponse.setData(mapperService.getHtmlPageDto((HtmlPage) basicAPIResponse.getData()));
+            return basicAPIResponse;
+        }
+
+        return basicAPIResponse;
+    }
+
+
+    public BasicAPIResponse findByUrl(String url) {
         Optional<HtmlPage> htmlPageOptional = htmlPageRepository.findByUrl(url);
         BasicAPIResponse basicAPIResponse = new BasicAPIResponse();
 
         if (htmlPageOptional.isPresent()) {
-            basicAPIResponse.setData(mapperService.getHtmlPageDto(htmlPageOptional.get()));
+            basicAPIResponse.setData(htmlPageOptional.get());
             return basicAPIResponse;
         }
+
+        basicAPIResponse.setSuccessful(false);
+        basicAPIResponse.setMessage("Unable to find by url provided.");
 
         return basicAPIResponse;
     }
@@ -136,7 +151,7 @@ public class HtmlPageService extends AbstractDataBeanService<HtmlPageApiRequestA
 
         if (htmlPageOptional.isPresent()) {
             HtmlPage htmlPage = htmlPageOptional.get();
-            
+
             htmlPage.setUrl(requestBean.getUrl());
             htmlPage.setHtml(requestBean.getHtml());
             htmlPage.setVisibleOnNav(requestBean.getVisibleOnNav());

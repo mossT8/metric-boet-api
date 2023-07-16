@@ -5,7 +5,7 @@ import com.metric.boet.api.entity.HtmlPage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HtmlPageDtoMapperTests implements IDtoMapper<HtmlPage, HtmlPageDto> {
+public class HtmlPageDtoMapperTest implements IDtoMapper<HtmlPage, HtmlPageDto> {
 
     @Override
     public HtmlPageDto removeSensitiveInformation(HtmlPage inputObject) {

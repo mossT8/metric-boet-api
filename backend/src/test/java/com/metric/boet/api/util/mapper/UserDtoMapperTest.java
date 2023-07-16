@@ -5,7 +5,7 @@ import com.metric.boet.api.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDtoMapperTests implements IDtoMapper<User, UserDto> {
+public class UserDtoMapperTest implements IDtoMapper<User, UserDto> {
 
     @Override
     public UserDto removeSensitiveInformation(User inputObject) {

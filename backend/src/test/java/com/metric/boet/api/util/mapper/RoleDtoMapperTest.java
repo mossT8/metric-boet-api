@@ -5,7 +5,7 @@ import com.metric.boet.api.entity.Role;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RoleDtoMapperTests implements IDtoMapper<Role, RoleDto> {
+public class RoleDtoMapperTest implements IDtoMapper<Role, RoleDto> {
 
 
     @Override

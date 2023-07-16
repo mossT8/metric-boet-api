@@ -1,4 +1,4 @@
 package com.metric.boet.api.service.mapper;
 
-public class SimpleMapperServiceTests {
+public class SimpleMapperServiceTest {
 }

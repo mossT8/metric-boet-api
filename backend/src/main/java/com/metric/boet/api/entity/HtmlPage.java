@@ -19,13 +19,13 @@ public class HtmlPage extends AbstractDataBean {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String html;
 
-    @NotBlank
+    @Column
     private Boolean visibleOnNav;
 
-    @NotBlank
+    @Column
     private Boolean visibleForUsers;
 
-    @NotBlank
+    @Column
     private Boolean visibleForModerators;
 
     public HtmlPage() {
