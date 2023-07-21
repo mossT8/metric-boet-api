@@ -1,50 +1,81 @@
-import { LoginRequest, LoginResponse, RegisterResponse } from '@/types/auth/auth';
-import { User } from '@/types/user/user';
-import axios, { AxiosResponse } from 'axios';
+import {
+  LoginRequest,
+  LoginResponse,
+  RegisterResponse,
+} from "@/types/auth/auth";
+import { User } from "@/types/user/user";
+import { ApiGatewayService, HTTP_PROTOCOLS } from "./api-gateway-service";
 
-const AUTH_API_URL = 'http://localhost:8080/api/v1/auth/';
+const AUTH_API_PACKAGE_PREFIX = "com.metric.boet.api.endpoints.open";
+const AUTH_API_GROUP_KEY = "auth";
+
+const AUTH_API_SIGN_IN_ENDPOINT = "SignInUser";
+const AUTH_API_SIGN_UP_ENDPOINT = "SignUpUser";
 
 class AuthService {
-  login(user: LoginRequest): Promise<LoginResponse> {
-    return axios
-      .post<LoginResponse>(AUTH_API_URL + 'signin', {
-        username: user.username,
-        password: user.password
-      })
-      .then((response: AxiosResponse<LoginResponse>) => {
-        if (response.data.accessToken) {
-          localStorage.setItem('user', JSON.stringify(response.data));
-        }
+  private apiService: ApiGatewayService;
 
-        return response.data;
+  constructor() {
+    this.apiService = new ApiGatewayService();
+  }
+
+  login(userRequest: LoginRequest): Promise<LoginResponse> {
+    const response = this.apiService
+      .callApiRequest<LoginResponse>(
+        AUTH_API_PACKAGE_PREFIX,
+        AUTH_API_GROUP_KEY,
+        AUTH_API_SIGN_IN_ENDPOINT,
+        userRequest,
+        HTTP_PROTOCOLS.POST,
+        undefined, // No additional properties needed for this request
+        true // Public subdomain for login
+      )
+      .then((response) => {
+        console.log(response);
+        
+        if (response.accessToken) {
+          localStorage.setItem("user", JSON.stringify(response));
+        }
+        return response;
       });
+
+      console.log(response);
+
+      return response;
+      
   }
 
   logout(): void {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
   }
 
   async register(user: User): Promise<RegisterResponse> {
-    const response = await axios.post(AUTH_API_URL + 'signup', {
+    const requestObject = {
       username: user.username,
       email: user.email,
       password: user.password,
       firstName: user.firstName,
       lastName: user.lastName,
-      phone: user.phone
-    });
+      phone: user.phone,
+    };
+
+    const response = await this.apiService.callApiRequest<RegisterResponse>(
+      AUTH_API_PACKAGE_PREFIX,
+      AUTH_API_GROUP_KEY,
+      AUTH_API_SIGN_UP_ENDPOINT,
+      requestObject,
+      HTTP_PROTOCOLS.POST,
+      undefined, // No additional properties needed for this request
+      true // Public subdomain for registration
+    );
 
     // Make sure the response data contains the expected properties
-    if (
-      response.data &&
-      typeof response.data.message === 'string'
-    ) {
-      return response.data;
+    if (response.data && typeof response.data.message === "string") {
+      return response;
     } else {
-      throw new Error('Invalid response from server');
+      throw new Error("Invalid response from server");
     }
   }
-
 }
 
 export default new AuthService();

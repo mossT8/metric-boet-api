@@ -1,34 +1,61 @@
 import { HtmlPage, HtmlPageMapped } from "@/types/pages/html-pages";
-import axios from "axios";
+import { ApiGatewayService, HTTP_PROTOCOLS } from "./api-gateway-service";
 import authHeader from "@/services/auth-header";
 import { formatDate } from "@/types/dates/date-util";
 
-const API_URL = "http://localhost:8080/api/v1/html/pages";
+const API_PACKAGE_PREFIX = "com.metric.boet.api.endpoints.closed";
+const API_GROUP_KEY = "pages";
 
 class HtmlPageServices {
-  addPage(page: HtmlPage) {
-    return axios.post(API_URL + "/add", page, {
-      headers: authHeader(),
-    });
-  }
-  update(page: HtmlPage) {
-    return axios.post(API_URL + "/update", page, {
-      headers: authHeader(),
-    });
-  }
-  getPageByUrl(url: string): Promise<HtmlPageMapped> {
-    const mappedDeviced = axios
-      .get<HtmlPageMapped>(API_URL + "/" + url, {
-        headers: authHeader(),
-      })
-      .then((response) => response.data);
+  private apiService: ApiGatewayService;
 
-    return mappedDeviced;
+  constructor() {
+    this.apiService = new ApiGatewayService();
   }
+
+  addPage(page: HtmlPage) {
+    return this.apiService.callApiRequest<void>(
+      API_PACKAGE_PREFIX,
+      API_GROUP_KEY,
+      "CreateHtmlPage",
+      page,
+      HTTP_PROTOCOLS.POST,
+      { headers: {Authorization: authHeader()} }, 
+    );
+  }
+
+  update(page: HtmlPage) {
+    return this.apiService.callApiRequest<void>(
+      API_PACKAGE_PREFIX,
+      API_GROUP_KEY,
+      "UpdateHtmlPage",
+      page,
+      HTTP_PROTOCOLS.POST,
+      { headers: {Authorization: authHeader()} }, 
+    );
+  }
+
+  getPageByUrl(url: string): Promise<HtmlPageMapped> {
+    return this.apiService.callApiRequest<HtmlPageMapped>(
+      API_PACKAGE_PREFIX,
+      API_GROUP_KEY,
+      "GetHtmlPage",
+      { url },
+      HTTP_PROTOCOLS.GET,
+      { headers: {Authorization: authHeader()} }, 
+    );
+  }
+
   getAllPages(): Promise<HtmlPageMapped[]> {
-    const mappedDeviced = axios
-      .get<HtmlPageMapped[]>(API_URL + "/list", { headers: authHeader() })
-      .then((response) => response.data)
+    return this.apiService
+      .callApiRequest<HtmlPageMapped[]>(
+        API_PACKAGE_PREFIX,
+        API_GROUP_KEY,
+        "ListAllHtmlPages",
+        {},
+        HTTP_PROTOCOLS.GET,
+        { headers: {Authorization: authHeader()} }, 
+        )
       .then((data) => {
         for (const record of data) {
           if (record.createdAt) {
@@ -38,8 +65,6 @@ class HtmlPageServices {
         }
         return data;
       });
-
-    return mappedDeviced;
   }
 }
 

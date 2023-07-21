@@ -29,7 +29,7 @@
 
                 <!-- Logout -->
                 <sidebar-link v-if="loggedIn" @hideSideBar="hideSidebar" key="user-logout" to="/user-logout"
-                  name="Settings" icon="fa-solid fa-sign-out-alt" />
+                  name="Logout" icon="fa-solid fa-sign-out-alt" />
 
                 <!-- Login -->
                 <sidebar-link v-else @hideSideBar="hideSidebar" key="user-login" to="/user-login" name="Login"
@@ -133,7 +133,7 @@ const Sidebar = defineComponent({
       });
     },
     isOptionPublic(option) {
-     console.log(option);
+      console.log(option);
       if (option && option.roles) {
         console.log(option.roles);
         return option.roles.includes(Roles.ROLE_PUBLIC);

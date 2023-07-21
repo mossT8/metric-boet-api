@@ -1,30 +1,51 @@
 import { Device, DeviceMapped } from "@/types/device/device";
-import axios from "axios";
+import { ApiGatewayService, HTTP_PROTOCOLS } from "./api-gateway-service";
 import authHeader from "@/services/auth-header";
 
-const API_URL = "http://localhost:8080/api/v1/";
+const API_PACKAGE_PREFIX = "com.metric.boet.api.endpoints.closed";
+const API_GROUP_KEY = "device";
 
 class DeviceService {
+  private apiService: ApiGatewayService;
+
+  constructor() {
+    this.apiService = new ApiGatewayService();
+  }
+
   addDevice(device: Device) {
-    return axios.post(API_URL + "devices/add", device, {
-      headers: authHeader(),
-    });
+    return this.apiService.callApiRequest<void>(
+      API_PACKAGE_PREFIX,
+      API_GROUP_KEY,
+      "CreateDevice",
+      device,
+      HTTP_PROTOCOLS.POST,
+      { headers: {Authorization: authHeader()} }, 
+      false
+    );
   }
+
   getDeviceByUid(uid: string): Promise<DeviceMapped> {
-    const mappedDeviced = axios
-      .get<DeviceMapped>(API_URL + "devices/" + uid, {
-        headers: authHeader(),
-      })
-      .then((response) => response.data);
-
-    return mappedDeviced;
+    return this.apiService.callApiRequest<DeviceMapped>(
+      API_PACKAGE_PREFIX,
+      API_GROUP_KEY,
+      "GetDevice",
+      { uid },
+      HTTP_PROTOCOLS.GET,
+      { headers: {Authorization: authHeader()} }, 
+      false
+    );
   }
-  getAllDevicesForUser(): Promise<DeviceMapped[]> {
-    const mappedDeviced = axios
-      .get<DeviceMapped[]>(API_URL + "devices/list", { headers: authHeader() })
-      .then((response) => response.data);
 
-    return mappedDeviced;
+  getAllDevicesForUser(): Promise<DeviceMapped[]> {
+    return this.apiService.callApiRequest<DeviceMapped[]>(
+      API_PACKAGE_PREFIX,
+      API_GROUP_KEY,
+      "ListDevices",
+      {},
+      HTTP_PROTOCOLS.POST,
+      { headers: {Authorization: authHeader()} }, 
+      false
+    );
   }
 }
 

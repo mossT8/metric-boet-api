@@ -35,6 +35,30 @@ public class DeviceService extends AbstractDataBeanService<DeviceApiRequestAbstr
         return getNegativeResponse();
     }
 
+    public BasicAPIResponse getBeanByUiid(String uiid) {
+        Optional<Device> deviceOptional = deviceRepository.findByUuid(uiid);
+
+        if (deviceOptional.isPresent()) {
+            BasicAPIResponse response = new BasicAPIResponse();
+            response.setData(deviceOptional.get());
+            return response;
+        }
+
+        return getNegativeResponse();
+    }
+
+    public BasicAPIResponse findByUiid(String uiid) {
+        Optional<Device> deviceOptional = deviceRepository.findByUuid(uiid);
+
+        if (deviceOptional.isPresent()) {
+            BasicAPIResponse response = new BasicAPIResponse();
+            response.setData(mapperService.getDeviceDto(deviceOptional.get()));
+            return response;
+        }
+
+        return getNegativeResponse();
+    }
+
     @Override
     public BasicAPIResponse findByCreatedDate(Date createdAt) {
         BasicAPIResponse response = new BasicAPIResponse();
