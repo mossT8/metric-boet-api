@@ -49,7 +49,7 @@ public class Device extends AbstractDataBean<DeviceDto> {
     }
 
     public Device() {
-        super(BasicUsers.ADMIN_AUDIT);
+        super(BasicUsers.SYSTEM_AUTO_AUDIT);
     }
 
     public Device(String name, String uuid, String type, String location, Boolean status, String token, User user) {

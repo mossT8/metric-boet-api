@@ -37,7 +37,7 @@ public class HtmlPage extends AbstractDataBean<HtmlPageDto> {
     }
 
     public HtmlPage() {
-        super(BasicUsers.ADMIN_AUDIT);
+        super(BasicUsers.SYSTEM_AUTO_AUDIT);
         this.visibleForUsers = true;
         this.visibleForModerators = true;
     }

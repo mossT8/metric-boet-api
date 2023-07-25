@@ -25,7 +25,7 @@ public class Role extends AbstractDataBean<RoleDto> {
     }
 
     public Role() {
-        super(BasicUsers.ADMIN_AUDIT);
+        super(BasicUsers.SYSTEM_AUTO_AUDIT);
     }
 
     public Role(ERole name, User user) {

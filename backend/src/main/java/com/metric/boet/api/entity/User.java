@@ -66,7 +66,7 @@ public class User extends AbstractDataBean<UserDto> implements IUserAudit {
     }
 
     public User() {
-        super(BasicUsers.ADMIN_AUDIT);
+        super(BasicUsers.SYSTEM_AUTO_AUDIT);
     }
 
 

@@ -67,6 +67,6 @@ public class SimpleAuthService implements IAuthService {
 
     @Override
     public BasicAPIResponse registerUser(UserRequestAbstract signUpRequest) {
-        return userService.create(signUpRequest, BasicUsers.ADMIN_AUDIT);
+        return userService.create(signUpRequest, BasicUsers.SYSTEM_AUTO_AUDIT);
     }
 }
