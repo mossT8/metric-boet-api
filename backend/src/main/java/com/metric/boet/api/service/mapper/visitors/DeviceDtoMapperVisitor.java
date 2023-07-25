@@ -1,14 +1,13 @@
-package com.metric.boet.api.util.mapper;
+package com.metric.boet.api.service.mapper.visitors;
 
+import com.metric.boet.api.service.mapper.EntityDtoVisitor;
 import com.metric.boet.api.dto.DeviceDto;
 import com.metric.boet.api.entity.Device;
-import com.metric.boet.api.service.mapper.EntityDtoVisitor;
-import com.metric.boet.api.service.mapper.visitors.UserDtoMapperVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeviceDtoMapperTest implements EntityDtoVisitor<Device, DeviceDto> {
+public class DeviceDtoMapperVisitor implements EntityDtoVisitor<Device, DeviceDto> {
 
     @Autowired
     UserDtoMapperVisitor userDtoMapperVisitor;

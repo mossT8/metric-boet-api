@@ -1,30 +1,33 @@
 <template>
-  <div>
+    <div class=" container jumbotron">
     <h2>Html Pages</h2>
-    <table>
-      <thead class="w-100">
+    <div class="center-table">
+      <table>
+      <thead>
         <tr>
-          <th v-for="column in columns" :key="column.value">{{ column.heading }}</th>
-          <th>Actions</th>
+          <th v-for="column in columns" :key="column.value" class="inline-text">{{ column.heading }}</th>
+          <th class="inline-text">Actions</th>
         </tr>
       </thead>
       <tbody>
         <page-item :html-page="htmlPage" v-for="htmlPage in htmlPages" :key="htmlPage.url" :columns="columnFields" />
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.center-table {
+  display: flex;
+  justify-content: center;
+}
 th,
 td {
   border: 1px solid black;
   padding: 8px;
 }
 
-thead th {
-  width: 25%;
-}
 </style>
 
 <script>

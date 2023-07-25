@@ -10,38 +10,69 @@ import com.metric.boet.api.util.service.AbstractDataBeanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class HtmlPageService extends AbstractDataBeanService<HtmlPageApiRequestAbstract> {
-
-    @Autowired
-    UserService userService;
+public class HtmlPageService extends AbstractDataBeanService<HtmlPageApiRequestAbstract, HtmlPage> {
 
     @Autowired
     HtmlPageRepository htmlPageRepository;
 
+    @Autowired
+    UserService userService;
+
     @Override
-    public BasicAPIResponse findById(Long id) {
+    public HtmlPage findBeanById(Long id) throws NoSuchElementException {
         Optional<HtmlPage> htmlPageOptional = htmlPageRepository.findById(id);
-
         if (htmlPageOptional.isPresent()) {
-            BasicAPIResponse response = new BasicAPIResponse();
-            response.setData(mapperService.getHtmlPageDto(htmlPageOptional.get()));
-
-            return response;
+            return htmlPageOptional.get();
         }
 
-        return getNegativeResponse();
+        throw new NoSuchElementException("No html page by that ID " + id);    }
+
+    @Override
+    public List<HtmlPage> findBeanByCreatedDate(Date createdAt) {
+        return htmlPageRepository.findByCreatedAt(createdAt);
+    }
+
+    @Override
+    public List<HtmlPage> findBeanByUpdatedDate(Date updatedAt) {
+        return htmlPageRepository.findByUpdatedAt(updatedAt);
+    }
+
+    @Override
+    public List<HtmlPage> findBeanByCreatedUserId(Long userId) {
+        try {
+            User user = userService.findBeanById(userId);
+            return findBeanByCreatedUser(user);
+        } catch (NoSuchElementException e) {
+            return new ArrayList<>();
+        }    }
+
+    @Override
+    public List<HtmlPage> findBeanByCreatedUser(User user) {
+        return htmlPageRepository.findByUserCreated(user);
+    }
+
+    @Override
+    public List<HtmlPage> findBeanByUpdatedUserId(Long userId) {
+        try {
+            User user = userService.findBeanById(userId);
+            return findBeanByUpdatedUser(user);
+        } catch (NoSuchElementException e) {
+            return new ArrayList<>();
+        }    }
+
+    @Override
+    public List<HtmlPage> findBeanByUpdatedUser(User user) {
+        return htmlPageRepository.findByLastUpdatedUser(user);
     }
 
     public BasicAPIResponse findDtoByUrl(String url) throws Exception {
         BasicAPIResponse basicAPIResponse = findByUrl(url);
 
         if (basicAPIResponse.getSuccessful()) {
-            basicAPIResponse.setData(mapperService.getHtmlPageDto((HtmlPage) basicAPIResponse.getData()));
+            basicAPIResponse.setData(((HtmlPage) basicAPIResponse.getData()).mapToDTO());
             return basicAPIResponse;
         }
 
@@ -62,66 +93,6 @@ public class HtmlPageService extends AbstractDataBeanService<HtmlPageApiRequestA
         basicAPIResponse.setMessage("Unable to find by url provided.");
 
         return basicAPIResponse;
-    }
-
-    @Override
-    public BasicAPIResponse findByCreatedDate(Date createdAt) {
-        List<HtmlPage> htmlPageList = htmlPageRepository.findByCreatedAt(createdAt);
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getHtmlPagesDto(htmlPageList));
-
-        return response;
-    }
-
-    @Override
-    public BasicAPIResponse findByUpdatedDate(Date updatedAt) {
-        List<HtmlPage> htmlPageList = htmlPageRepository.findByUpdatedAt(updatedAt);
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getHtmlPagesDto(htmlPageList));
-
-        return response;
-    }
-
-    @Override
-    public BasicAPIResponse findByCreatedUserId(Long userId) {
-        BasicAPIResponse userResponse = userService.findById(userId);
-
-        if (userResponse.getSuccessful()) {
-            return findByCreatedUser((User) userResponse.getData());
-        }
-
-        return getNegativeResponse();
-    }
-
-    @Override
-    public BasicAPIResponse findByCreatedUser(User user) {
-        List<HtmlPage> htmlPages = htmlPageRepository.findByUserCreated(user);
-
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getHtmlPagesDto(htmlPages));
-
-        return response;
-    }
-
-    @Override
-    public BasicAPIResponse findByUpdatedUserId(Long userId) {
-        BasicAPIResponse userResponse = userService.findById(userId);
-
-        if (userResponse.getSuccessful()) {
-            return findByUpdatedUser((User) userResponse.getData());
-        }
-
-        return getNegativeResponse();
-    }
-
-    @Override
-    public BasicAPIResponse findByUpdatedUser(User user) {
-        List<HtmlPage> htmlPages = htmlPageRepository.findByLastUpdatedUser(user);
-
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getHtmlPagesDto(htmlPages));
-
-        return response;
     }
 
     @Override

@@ -11,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class UserService extends AbstractDataBeanService<UserRequestAbstract> {
+public class UserService extends AbstractDataBeanService<UserRequestAbstract, User> {
 
     @Autowired
     UserRepository userRepository;
@@ -27,78 +25,94 @@ public class UserService extends AbstractDataBeanService<UserRequestAbstract> {
     @Autowired
     PasswordEncoder encoder;
 
-
-    @Override
-    public BasicAPIResponse findById(Long id) {
-        Optional<User> userOptional = userRepository.findById(id);
-
+    public User findBeanByUsername(String username) throws NoSuchElementException{
+        Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isPresent()) {
+            return userOptional.get();
+        }
+
+        throw new NoSuchElementException("No user by that username " + username);
+    }
+
+    public BasicAPIResponse findResponseByUsername(String accountCode) {
+        User bean = findBeanByUsername(accountCode);
+        BasicAPIResponse response = new BasicAPIResponse();
+        response.setData(bean.mapToDTO());
+        return response;
+    }
+
+    public User findBeanByAccountCode(String accountCode) throws NoSuchElementException{
+        Optional<User> userOptional = userRepository.findByAccountCode(accountCode);
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        }
+
+        throw new NoSuchElementException("No user by that Account Code " + accountCode);
+    }
+
+    public BasicAPIResponse findResponseByAccountCode(String accountCode) {
+        try {
+            User bean = findBeanByAccountCode(accountCode);
             BasicAPIResponse response = new BasicAPIResponse();
-            response.setData(mapperService.getUserDto(userOptional.get()));
-
+            response.setData(bean.mapToDTO());
             return response;
+        } catch (NoSuchElementException e) {
+            return getNegativeResponse();
+        }
+    }
+
+
+    @Override
+    public User findBeanById(Long id) throws NoSuchElementException {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            return userOptional.get();
         }
 
-        return getNegativeResponse();
+        throw new NoSuchElementException("No user by that ID " + id);
     }
 
     @Override
-    public BasicAPIResponse findByCreatedDate(Date createdAt) {
-        List<User> users = userRepository.findByCreatedAt(createdAt);
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getUsersDto(users));
+    public List<User> findBeanByCreatedDate(Date createdAt) {
 
-        return response;
+        return userRepository.findByCreatedAt(createdAt);
     }
 
     @Override
-    public BasicAPIResponse findByUpdatedDate(Date updatedAt) {
-        List<User> users = userRepository.findByUpdatedAt(updatedAt);
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getUsersDto(users));
-
-        return response;
+    public List<User> findBeanByUpdatedDate(Date updatedAt) {
+        return userRepository.findByUpdatedAt(updatedAt);
     }
 
     @Override
-    public BasicAPIResponse findByCreatedUserId(Long userId) {
-
+    public List<User> findBeanByCreatedUserId(Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
 
         if (userOptional.isPresent()) {
-            return findByCreatedUser(userOptional.get());
+            return findBeanByCreatedUser(userOptional.get());
         }
 
-        return getNegativeResponse();
+        return new ArrayList<>();
     }
 
     @Override
-    public BasicAPIResponse findByCreatedUser(User user) {
-        List<User> users = userRepository.findByUserCreated(user);
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getUsersDto(users));
-
-        return response;
+    public List<User> findBeanByCreatedUser(User user) {
+        return userRepository.findByUserCreated(user);
     }
 
     @Override
-    public BasicAPIResponse findByUpdatedUserId(Long userId) {
+    public List<User> findBeanByUpdatedUserId(Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
 
         if (userOptional.isPresent()) {
-            return findByUpdatedUser(userOptional.get());
+            return findBeanByUpdatedUser(userOptional.get());
         }
 
-        return getNegativeResponse();
+        return new ArrayList<>();
     }
 
     @Override
-    public BasicAPIResponse findByUpdatedUser(User user) {
-        List<User> users = userRepository.findByLastUpdatedUser(user);
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getUsersDto(users));
-
-        return response;
+    public List<User> findBeanByUpdatedUser(User user) {
+        return userRepository.findByLastUpdatedUser(user);
     }
 
     @Override

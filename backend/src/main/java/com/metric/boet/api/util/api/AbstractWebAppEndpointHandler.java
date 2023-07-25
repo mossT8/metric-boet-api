@@ -1,6 +1,8 @@
 package com.metric.boet.api.util.api;
 
+import com.metric.boet.api.payloads.request.basic.EmptyApiRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
+import com.metric.boet.api.util.NullUtil;
 import com.metric.boet.api.util.annotations.PrivateWebAppEndpoint;
 import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -20,13 +22,21 @@ public abstract class AbstractWebAppEndpointHandler<REQUEST_CLASS extends Abstra
         type = (Class<REQUEST_CLASS>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    public REQUEST_CLASS getRequestFromString(String request) throws Exception {
+    public AbstractWebAppEndpointPayload getRequestFromString(String request) throws Exception {
+        if (NullUtil.isNull(request) || request.equals("{}")) {
+            return new EmptyApiRequestAbstract();
+        }
+
         return (REQUEST_CLASS) (type.getDeclaredConstructor().newInstance()).fromJson(request);
     }
 
     public abstract ResponseEntity<BasicAPIResponse> processRequest(HttpServletRequest httpServletRequest, REQUEST_CLASS payload) throws Exception;
 
     public static String toJsonObject(String linkedHashMapString) {
+        if (linkedHashMapString.equals("{}")) {
+            return linkedHashMapString;
+        }
+
         String jsonString = linkedHashMapString
                 .replaceAll("^\\{", "{\"") // Remove the leading curly brace
                 .replaceAll("\\}$", "\"}") // Remove the trailing curly brace

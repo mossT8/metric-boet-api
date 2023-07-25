@@ -1,5 +1,8 @@
 package com.metric.boet.api.dto;
 
+import com.metric.boet.api.service.mapper.EntityDtoVisitor;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
+
 import java.util.Date;
 
 public class DeviceDto extends BasicObjectDto {

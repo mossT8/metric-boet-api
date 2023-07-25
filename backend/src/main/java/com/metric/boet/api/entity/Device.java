@@ -1,7 +1,11 @@
 package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
+import com.metric.boet.api.dto.DeviceDto;
+import com.metric.boet.api.service.mapper.imp.MapperService;
+import com.metric.boet.api.service.mapper.visitors.DeviceDtoMapperVisitor;
 import com.metric.boet.api.util.repo.bean.AbstractDataBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.persistence.*;
@@ -13,7 +17,8 @@ import javax.validation.constraints.Size;
 @Table(name = "device", uniqueConstraints = {
         @UniqueConstraint(columnNames = "uuid")
 })
-public class Device extends AbstractDataBean {
+public class Device extends AbstractDataBean<DeviceDto> {
+
     @NotBlank
     @Size(max = 255)
     private String uuid;
@@ -36,6 +41,12 @@ public class Device extends AbstractDataBean {
     @NotBlank
     @Size(max = 255)
     private String token;
+
+    @Override
+    public DeviceDto mapToDTO() {
+        DeviceDtoMapperVisitor mapperVisitor = new DeviceDtoMapperVisitor();
+        return mapperVisitor.visit(this);
+    }
 
     public Device() {
         super(BasicUsers.ADMIN_AUDIT);

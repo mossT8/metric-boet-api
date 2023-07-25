@@ -21,7 +21,7 @@ interface ApiRequest {
   packagePrefix: string;
   apiGroupKey: string;
   endpointClassName: string;
-  requestObject: object;
+  payload: object;
   protocol: HTTP_PROTOCOLS;
   additionalProperties?: HeadersObject;
   public?: boolean;
@@ -34,6 +34,17 @@ interface HeadersObject {
     // Add more properties as needed
     [x: string]: any;
   };
+}
+export interface EmptyReuqest {
+
+}
+
+export interface KeyRequest {
+  key: string;
+}
+
+export interface IdRequest {
+  id: number;
 }
 
 interface BasicApiResponse<T> {
@@ -54,13 +65,8 @@ export class ApiGatewayService {
     try {
       const url = request.public ? basePublicSubDomain : basePrivateSubDomain;
 
-      const headers: HeadersObject = request.additionalProperties || { headers: {Authorization: {Authorization:""}} };
-
-      console.log(headers);
-      
-      // Access the 'headers.headers' property directly since the type has been specified
-      console.log(headers.headers);
-      
+      const headers: HeadersObject = request.additionalProperties || { headers: {Authorization: {Authorization:""}} };      
+      // Access the 'headers.headers' property directly since the type has been specified      
       
 
       const requestConfig: AxiosRequestConfig = {
@@ -70,8 +76,9 @@ export class ApiGatewayService {
       const response: AxiosResponse<BasicApiResponse<T>> = await this.apiClient.post<BasicApiResponse<T>>(url, request, requestConfig);
 
 
-      if (!response.data.successful) {
-        console.log(response.data.message);
+      if (!response.data.body.successful) {
+        console.log(response.data.body);
+        // TODO: add global event for errors 
       }
 
       const data = response.data.body.data;
@@ -86,7 +93,7 @@ export class ApiGatewayService {
     packagePrefix: string,
     apiGroupKey: string,
     endpointClassName: string,
-    requestObject: object,
+    payload: object,
     protocol: HTTP_PROTOCOLS,
     additionalProperties?: HeadersObject,
     open?: boolean
@@ -97,7 +104,7 @@ export class ApiGatewayService {
       endpointClassName,
       packagePrefix,
       protocol,
-      requestObject,
+      payload,
       additionalProperties,
       public: open,
     };

@@ -2,6 +2,8 @@ package com.metric.boet.api.entity;
 
 import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.authorization.IUserAudit;
+import com.metric.boet.api.dto.HtmlPageDto;
+import com.metric.boet.api.service.mapper.visitors.HtmlPageDtoMapperVisitor;
 import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import javax.persistence.*;
@@ -12,7 +14,7 @@ import javax.validation.constraints.NotBlank;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "url")
         })
-public class HtmlPage extends AbstractDataBean {
+public class HtmlPage extends AbstractDataBean<HtmlPageDto> {
     @Column(nullable = false)
     private String url;
 
@@ -27,6 +29,12 @@ public class HtmlPage extends AbstractDataBean {
 
     @Column
     private Boolean visibleForModerators;
+
+    @Override
+    public HtmlPageDto mapToDTO() {
+        HtmlPageDtoMapperVisitor mapperVisitor = new HtmlPageDtoMapperVisitor();
+        return mapperVisitor.visit(this);
+    }
 
     public HtmlPage() {
         super(BasicUsers.ADMIN_AUDIT);

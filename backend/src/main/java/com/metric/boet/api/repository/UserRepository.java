@@ -14,6 +14,8 @@ public interface UserRepository extends IAbstractDataBeanRepository<User> {
 
     Optional<User> findByUsername(String username);
 
+    Optional<User> findByAccountCode(String accountCode);
+
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);

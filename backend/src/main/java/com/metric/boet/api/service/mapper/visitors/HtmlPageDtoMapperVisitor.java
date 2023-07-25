@@ -1,12 +1,12 @@
-package com.metric.boet.api.util.mapper;
+package com.metric.boet.api.service.mapper.visitors;
 
+import com.metric.boet.api.service.mapper.EntityDtoVisitor;
 import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.entity.HtmlPage;
-import com.metric.boet.api.service.mapper.EntityDtoVisitor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HtmlPageDtoMapperTest implements EntityDtoVisitor<HtmlPage, HtmlPageDto> {
+public class HtmlPageDtoMapperVisitor implements EntityDtoVisitor<HtmlPage, HtmlPageDto> {
 
     @Override
     public HtmlPageDto visit(HtmlPage request) {

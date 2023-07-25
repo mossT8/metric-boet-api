@@ -11,28 +11,64 @@ import com.metric.boet.api.util.service.AbstractDataBeanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-public class DeviceService extends AbstractDataBeanService<DeviceApiRequestAbstract> {
+public class DeviceService extends AbstractDataBeanService<DeviceApiRequestAbstract, Device> {
     @Autowired
     DeviceRepository deviceRepository;
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Override
-    public BasicAPIResponse findById(Long id) {
+    public Device findBeanById(Long id) throws NoSuchElementException {
         Optional<Device> deviceOptional = deviceRepository.findById(id);
-
         if (deviceOptional.isPresent()) {
-            BasicAPIResponse response = new BasicAPIResponse();
-            response.setData(mapperService.getDeviceDto(deviceOptional.get()));
-            return response;
+            return deviceOptional.get();
         }
 
-        return getNegativeResponse();
+        throw new NoSuchElementException("No device by that ID " + id);
+    }
+
+    @Override
+    public List<Device> findBeanByCreatedDate(Date createdAt) {
+        return deviceRepository.findByCreatedAt(createdAt);
+    }
+
+    @Override
+    public List<Device> findBeanByUpdatedDate(Date updatedAt) {
+        return deviceRepository.findByUpdatedAt(updatedAt);
+    }
+
+    @Override
+    public List<Device> findBeanByCreatedUserId(Long userId) {
+        try {
+            User user = userService.findBeanById(userId);
+            return findBeanByCreatedUser(user);
+        } catch (NoSuchElementException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Device> findBeanByCreatedUser(User user) {
+        return deviceRepository.findByUserCreated(user);
+    }
+
+    @Override
+    public List<Device> findBeanByUpdatedUserId(Long userId) {
+        try {
+            User user = userService.findBeanById(userId);
+            return findBeanByUpdatedUser(user);
+        } catch (NoSuchElementException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Device> findBeanByUpdatedUser(User user) {
+        return deviceRepository.findByLastUpdatedUser(user);
     }
 
     public BasicAPIResponse getBeanByUiid(String uiid) {
@@ -52,63 +88,11 @@ public class DeviceService extends AbstractDataBeanService<DeviceApiRequestAbstr
 
         if (deviceOptional.isPresent()) {
             BasicAPIResponse response = new BasicAPIResponse();
-            response.setData(mapperService.getDeviceDto(deviceOptional.get()));
+            response.setData(deviceOptional.get().mapToDTO());
             return response;
         }
 
         return getNegativeResponse();
-    }
-
-    @Override
-    public BasicAPIResponse findByCreatedDate(Date createdAt) {
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getDevicesDto(deviceRepository.findByCreatedAt(createdAt)));
-        return response;
-    }
-
-    @Override
-    public BasicAPIResponse findByUpdatedDate(Date updatedAt) {
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getDevicesDto(deviceRepository.findByCreatedAt(updatedAt)));
-        return response;
-    }
-
-    @Override
-    public BasicAPIResponse findByCreatedUserId(Long userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-
-        if (userOptional.isPresent()) {
-            return findByCreatedUser(userOptional.get());
-        }
-
-        return getNegativeResponse();
-    }
-
-    @Override
-    public BasicAPIResponse findByCreatedUser(User user) {
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getDevicesDto(deviceRepository.findByUserCreated(user)));
-
-        return response;
-    }
-
-    @Override
-    public BasicAPIResponse findByUpdatedUserId(Long userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-
-        if (userOptional.isPresent()) {
-            return findByUpdatedUser(userOptional.get());
-        }
-
-        return getNegativeResponse();
-    }
-
-    @Override
-    public BasicAPIResponse findByUpdatedUser(User user) {
-        BasicAPIResponse response = new BasicAPIResponse();
-        response.setData(mapperService.getDevicesDto(deviceRepository.findByLastUpdatedUser(user)));
-
-        return response;
     }
 
     @Override

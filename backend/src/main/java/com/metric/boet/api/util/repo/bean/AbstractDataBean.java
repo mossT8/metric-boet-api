@@ -1,6 +1,7 @@
 package com.metric.boet.api.util.repo.bean;
 
 import com.metric.boet.api.authorization.IUserAudit;
+import com.metric.boet.api.dto.BasicObjectDto;
 import com.metric.boet.api.entity.User;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
-public abstract class AbstractDataBean {
+public abstract class AbstractDataBean<DTO extends BasicObjectDto> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
@@ -31,6 +32,8 @@ public abstract class AbstractDataBean {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_updated_id", nullable = false)
     private User lastUpdatedUser;
+
+    public abstract DTO mapToDTO();
 
     protected AbstractDataBean() {
         Date createDate = new Date();

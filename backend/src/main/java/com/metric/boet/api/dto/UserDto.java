@@ -1,6 +1,8 @@
 package com.metric.boet.api.dto;
 
 import com.metric.boet.api.entity.Role;
+import com.metric.boet.api.service.mapper.EntityDtoVisitor;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -15,7 +17,7 @@ public class UserDto extends BasicObjectDto {
     String email;
     Date createdAt;
     Date updatedAt;
-    Set<Role> roles;
+    Set<RoleDto> roles;
 
     public UserDto() {
         this.roles = new HashSet<>();
@@ -69,11 +71,11 @@ public class UserDto extends BasicObjectDto {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<RoleDto> roles) {
         this.roles = roles;
     }
 

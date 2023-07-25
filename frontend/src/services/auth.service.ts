@@ -50,7 +50,7 @@ class AuthService {
   }
 
   async register(user: User): Promise<RegisterResponse> {
-    const requestObject = {
+    const payload = {
       username: user.username,
       email: user.email,
       password: user.password,
@@ -63,7 +63,7 @@ class AuthService {
       AUTH_API_PACKAGE_PREFIX,
       AUTH_API_GROUP_KEY,
       AUTH_API_SIGN_UP_ENDPOINT,
-      requestObject,
+      payload,
       HTTP_PROTOCOLS.POST,
       undefined, // No additional properties needed for this request
       true // Public subdomain for registration

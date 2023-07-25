@@ -18,7 +18,7 @@ public class ListDevices extends AbstractPrivateWebAppEndpointHandler<EmptyApiRe
 
     @Override
     protected ResponseEntity<BasicAPIResponse> performRequest(HttpServletRequest httpServletRequest, EmptyApiRequestAbstract payload, User user) throws Exception {
-        return ResponseEntity.ok(deviceService.findByCreatedUser(user));
+        return ResponseEntity.ok(deviceService.findResponseByCreatedUser(user));
     }
 
     @Override

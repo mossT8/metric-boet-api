@@ -27,7 +27,7 @@ public class PublicApiGatewayService extends AbstractWebAppService<PublicWebAppE
         for (AbstractPublicWebAppEndpointHandler<AbstractWebAppEndpointPayload> publicWebAppEndpointHandler : endpointHandlers.values()) {
             if (publicWebAppEndpointHandler.getClass().getName().equals(payload.getFullyQualifiedClassName())) {
                 try {
-                    AbstractWebAppEndpointPayload mappedPayload = publicWebAppEndpointHandler.getRequestFromString(toJsonObject(payload.getRequestObject().toString()));
+                    AbstractWebAppEndpointPayload mappedPayload = publicWebAppEndpointHandler.getRequestFromString(toJsonObject(payload.getPayload().toString()));
                     if (publicWebAppEndpointHandler.authoriseRequest(request, mappedPayload))
                         return ResponseEntity.ok().body(publicWebAppEndpointHandler.processRequest(request, mappedPayload));
                     else

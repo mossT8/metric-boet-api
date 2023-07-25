@@ -1,18 +1,17 @@
 package com.metric.boet.api.service.mapper.imp;
 
-import com.metric.boet.api.util.mapper.imp.DeviceDtoMapper;
-import com.metric.boet.api.util.mapper.imp.HtmlPageDtoMapper;
-import com.metric.boet.api.util.mapper.imp.RoleDtoMapper;
-import com.metric.boet.api.util.mapper.imp.UserDtoMapper;
-import com.metric.boet.api.dto.DeviceDto;
-import com.metric.boet.api.dto.HtmlPageDto;
-import com.metric.boet.api.dto.RoleDto;
-import com.metric.boet.api.dto.UserDto;
+import com.metric.boet.api.dto.*;
+import com.metric.boet.api.service.mapper.EntityDtoVisitor;
+import com.metric.boet.api.service.mapper.visitors.DeviceDtoMapperVisitor;
+import com.metric.boet.api.service.mapper.visitors.HtmlPageDtoMapperVisitor;
+import com.metric.boet.api.service.mapper.visitors.RoleDtoMapperVisitor;
+import com.metric.boet.api.service.mapper.visitors.UserDtoMapperVisitor;
 import com.metric.boet.api.entity.Device;
 import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.entity.Role;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.service.mapper.IMapperService;
+import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,21 +22,26 @@ import java.util.List;
 public class MapperService implements IMapperService {
     // mappers
     @Autowired
-    DeviceDtoMapper deviceDtoMapper;
+    DeviceDtoMapperVisitor deviceDtoMapperVisitor;
 
     @Autowired
-    UserDtoMapper userDtoMapper;
+    UserDtoMapperVisitor userDtoMapperVisitor;
 
     @Autowired
-    HtmlPageDtoMapper htmlPageDtoMapper;
+    HtmlPageDtoMapperVisitor htmlPageDtoMapperVisitor;
 
     @Autowired
-    RoleDtoMapper roleDtoMapper;
+    RoleDtoMapperVisitor roleDtoMapperVisitor;
+
+    // Define a generic mapping method that uses the visitor pattern
+    private <Entity extends AbstractDataBean, Dto extends BasicObjectDto> Dto mapEntityToDto(Entity entity, EntityDtoVisitor<Entity, Dto> visitor) {
+        return visitor.visit(entity);
+    }
 
     // mapping logic
     @Override
     public DeviceDto getDeviceDto(Device device) {
-        return deviceDtoMapper.removeSensitiveInformation(device);
+        return mapEntityToDto(device, deviceDtoMapperVisitor);
     }
 
     @Override
@@ -52,7 +56,7 @@ public class MapperService implements IMapperService {
 
     @Override
     public UserDto getUserDto(User user) {
-        return userDtoMapper.removeSensitiveInformation(user);
+        return mapEntityToDto(user, userDtoMapperVisitor);
     }
 
     @Override
@@ -67,7 +71,7 @@ public class MapperService implements IMapperService {
 
     @Override
     public HtmlPageDto getHtmlPageDto(HtmlPage htmlPage) {
-        return htmlPageDtoMapper.removeSensitiveInformation(htmlPage);
+        return mapEntityToDto(htmlPage, htmlPageDtoMapperVisitor);
     }
 
     @Override
@@ -82,7 +86,7 @@ public class MapperService implements IMapperService {
 
     @Override
     public RoleDto getRoleDto(Role role) {
-        return roleDtoMapper.removeSensitiveInformation(role);
+        return mapEntityToDto(role, roleDtoMapperVisitor);
     }
 
     @Override

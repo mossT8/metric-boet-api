@@ -3,6 +3,8 @@ package com.metric.boet.api.entity;
 import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.authorization.enums.ERole;
+import com.metric.boet.api.dto.UserDto;
+import com.metric.boet.api.service.mapper.visitors.UserDtoMapperVisitor;
 import com.metric.boet.api.util.repo.bean.AbstractDataBean;
 
 import java.util.HashSet;
@@ -21,7 +23,7 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "email"),
                 @UniqueConstraint(columnNames = "accountCode"),
         })
-public class User extends AbstractDataBean implements IUserAudit {
+public class User extends AbstractDataBean<UserDto> implements IUserAudit {
     @NotBlank
     @Size(max = 50)
     private String accountCode;
@@ -56,6 +58,12 @@ public class User extends AbstractDataBean implements IUserAudit {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @Override
+    public UserDto mapToDTO() {
+        UserDtoMapperVisitor mapperVisitor = new UserDtoMapperVisitor();
+        return mapperVisitor.visit(this);
+    }
 
     public User() {
         super(BasicUsers.ADMIN_AUDIT);
@@ -139,6 +147,10 @@ public class User extends AbstractDataBean implements IUserAudit {
 
     public void setAccountCode(String accountCode) {
         this.accountCode = accountCode;
+    }
+
+    public IUserAudit getAudit() {
+        return this;
     }
 
     @Override

@@ -1,5 +1,5 @@
 import { HtmlPage, HtmlPageMapped } from "@/types/pages/html-pages";
-import { ApiGatewayService, HTTP_PROTOCOLS } from "./api-gateway-service";
+import { ApiGatewayService, EmptyReuqest, HTTP_PROTOCOLS, KeyRequest } from "./api-gateway-service";
 import authHeader from "@/services/auth-header";
 import { formatDate } from "@/types/dates/date-util";
 
@@ -14,45 +14,49 @@ class HtmlPageServices {
   }
 
   addPage(page: HtmlPage) {
+    const payload: HtmlPage = page;
     return this.apiService.callApiRequest<void>(
       API_PACKAGE_PREFIX,
       API_GROUP_KEY,
       "CreateHtmlPage",
-      page,
+      payload,
       HTTP_PROTOCOLS.POST,
       { headers: {Authorization: authHeader()} }, 
     );
   }
 
   update(page: HtmlPage) {
+    const payload: HtmlPage = page;
     return this.apiService.callApiRequest<void>(
       API_PACKAGE_PREFIX,
       API_GROUP_KEY,
       "UpdateHtmlPage",
-      page,
+      payload,
       HTTP_PROTOCOLS.POST,
       { headers: {Authorization: authHeader()} }, 
     );
   }
 
   getPageByUrl(url: string): Promise<HtmlPageMapped> {
+    const payload: KeyRequest = { key: url};
     return this.apiService.callApiRequest<HtmlPageMapped>(
       API_PACKAGE_PREFIX,
       API_GROUP_KEY,
       "GetHtmlPage",
-      { url },
+      payload,
       HTTP_PROTOCOLS.GET,
       { headers: {Authorization: authHeader()} }, 
     );
   }
 
   getAllPages(): Promise<HtmlPageMapped[]> {
+    const payload: EmptyReuqest = {};
     return this.apiService
       .callApiRequest<HtmlPageMapped[]>(
         API_PACKAGE_PREFIX,
         API_GROUP_KEY,
         "ListAllHtmlPages",
-        {},
+        payload,
         HTTP_PROTOCOLS.GET,
         { headers: {Authorization: authHeader()} }, 
         )

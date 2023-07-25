@@ -7,17 +7,17 @@ public class WebAppApiRequestHolderBean {
     private String packagePrefix;
     private String apiGroupKey;
     private String endpointClassName;
-    private LinkedHashMap<String, Object> requestObject;
+    private LinkedHashMap<String, Object> payload;
     private Map<String, Object> additionalProperties;
 
     public WebAppApiRequestHolderBean() {
     }
 
-    public WebAppApiRequestHolderBean(String packagePrefix, String apiGroupKey, String endpointClassName, LinkedHashMap<String, Object> requestObject, Map<String, Object> additionalProperties) {
+    public WebAppApiRequestHolderBean(String packagePrefix, String apiGroupKey, String endpointClassName, LinkedHashMap<String, Object> payload, Map<String, Object> additionalProperties) {
         this.packagePrefix = packagePrefix;
         this.apiGroupKey = apiGroupKey;
         this.endpointClassName = endpointClassName;
-        this.requestObject = requestObject;
+        this.payload = payload;
         this.additionalProperties = additionalProperties;
     }
 
@@ -45,12 +45,12 @@ public class WebAppApiRequestHolderBean {
         this.endpointClassName = endpointClassName;
     }
 
-    public LinkedHashMap<String, Object> getRequestObject() {
-        return requestObject;
+    public LinkedHashMap<String, Object> getPayload() {
+        return payload;
     }
 
-    public void setRequestObject(LinkedHashMap<String, Object> requestObject) {
-        this.requestObject = requestObject;
+    public void setPayload(LinkedHashMap<String, Object> payload) {
+        this.payload = payload;
     }
 
     public Map<String, Object> getAdditionalProperties() {
