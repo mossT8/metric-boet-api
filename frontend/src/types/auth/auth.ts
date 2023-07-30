@@ -10,7 +10,9 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
+  [x: string]: any;
   accessToken: string;
+  user: User;
 }
 
 export interface AuthHeader {

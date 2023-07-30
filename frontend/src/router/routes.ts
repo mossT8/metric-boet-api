@@ -70,7 +70,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/user-management",
     name: "user-management",
-    component: () => import("@/pages/admin/page-management/HtmlListPage.vue"),
+    component: () => import("@/pages/admin/user-management/UserListPage.vue"),
+  },
+  {
+    path: "/user-edit/:username",
+    name: "user-edit",
+    component: () => import("@/pages/admin/user-management/UpdateUserPage.vue"),
   },
 
   /** moderator routes */
@@ -91,7 +96,7 @@ const routes: RouteRecordRaw[] = [
     component: () =>
       import("@/pages/moderator/device-management/DeviceUpdatePage.vue"),
   },
- /*  {
+  /*  {
     path: "/:catchAll(.*)",
     redirect: { name: "home" },
   }, */

@@ -90,6 +90,7 @@ public class SimpleAuthServiceTest {
         JwtResponse expectedResponse = new JwtResponse(
                 jwt,
                 "Token Generated",
+                user.mapToDTO(),
                 true,
                 userDetails.getId(),
                 userDetails.getUsername(),

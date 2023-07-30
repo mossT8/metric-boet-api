@@ -9,8 +9,12 @@
                     <form-text-input name="phone" label="Phone" />
                     <form-text-input name="username" label="Username" />
                     <form-text-input name="email" label="Email" />
-                    <form-text-input name="password" label="Password" />
+                    <form-text-input v-if="isSigningUp" name="password" label="Password" />
                     <div>
+                        <button class="btn btn-primary-outline float-right" @click.stop="handleCancel" :disabled="loading">
+                            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                            Cancel
+                        </button>
                         <button class="btn btn-primary float-right" :disabled="loading">
                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                             {{ isSigningUp ? "Sign Up" : "Update" }}
@@ -26,11 +30,16 @@
     </div>
 </template>
 <script>
+// Vue
 import { defineComponent } from "vue";
+// services
 import { userSchema } from "@/types/form/form";
+// components
 import { Form } from "vee-validate";
 import FormTextInput from "@/components/form/input/FormTextInput.vue";
-export default defineComponent({
+
+
+const UserForm = defineComponent({
     name: "user-form",
     components: {
         Form,
@@ -116,8 +125,13 @@ export default defineComponent({
         handleRegister(device) {
             this.$emit("onSubmit", device);
         },
+        handleCancel() {
+            this.$emit("onCancel");
+        },
     },
 });
+
+export default UserForm;
 </script>
 
 

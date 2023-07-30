@@ -5,6 +5,8 @@ import {
 } from "@/types/auth/auth";
 import { User } from "@/types/user/user";
 import { ApiGatewayService, HTTP_PROTOCOLS } from "./api-gateway-service";
+import store from "@/store";
+import { useAuthModuleFeatures } from "@/composables/store/useAuthModule";
 
 const AUTH_API_PACKAGE_PREFIX = "com.metric.boet.api.endpoints.open";
 const AUTH_API_GROUP_KEY = "auth";
@@ -19,6 +21,13 @@ class AuthService {
     this.apiService = new ApiGatewayService();
   }
 
+  username() {
+    if (localStorage.getItem("username")) {
+      return localStorage.getItem("username") || "";
+    }
+    return "";
+  }
+
   login(userRequest: LoginRequest): Promise<LoginResponse> {
     const response = this.apiService
       .callApiRequest<LoginResponse>(
@@ -31,18 +40,14 @@ class AuthService {
         true // Public subdomain for login
       )
       .then((response) => {
-        console.log(response);
-        
         if (response.accessToken) {
           localStorage.setItem("user", JSON.stringify(response));
+          localStorage.setItem("username", userRequest.username);
         }
         return response;
       });
 
-      console.log(response);
-
-      return response;
-      
+    return response;
   }
 
   logout(): void {

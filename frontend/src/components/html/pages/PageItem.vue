@@ -62,7 +62,7 @@ export default {
       this.$router.push({ name: 'html-edit', params: { url: htmlPage.url } })
     },
     onView() {
-
+        
     },
   }
 }

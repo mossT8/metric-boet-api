@@ -1,5 +1,6 @@
 package com.metric.boet.api.payloads.response.auth;
 
+import com.metric.boet.api.dto.UserDto;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
 
 import java.util.List;
@@ -10,14 +11,16 @@ public class JwtResponse {
 	private Long id;
 	private String username;
 	private String email;
+	private UserDto user;
 	private List<String> roles;
 
-	public JwtResponse(String accessToken, String message, Boolean successful, Long id, String username, String email, List<String> roles) {
+	public JwtResponse(String accessToken, String message, UserDto user, Boolean successful, Long id, String username, String email, List<String> roles) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.roles = roles;
+		this.user = user;
 	}
 
 	public String getAccessToken() {
@@ -62,5 +65,9 @@ public class JwtResponse {
 
 	public List<String> getRoles() {
 		return roles;
+	}
+
+	public UserDto getUser() {
+		return user;
 	}
 }

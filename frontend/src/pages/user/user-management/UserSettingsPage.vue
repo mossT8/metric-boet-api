@@ -1,14 +1,19 @@
 <template>
-    <user-form />
+    <UpdateCurrentUser />
 </template>
   
 <script>
-import UserForm from "@/components/user/UserForm.vue";
+// Vue
+import { defineComponent } from "vue";
+// Service
+import authService from "@/services/auth.service";
+// Components
+import UpdateCurrentUser from "@/components/user/UpdateCurrentUser.vue";
 
-export default {
+const UserSettingsPage = defineComponent({
     name: "user-settings-page",
     components: {
-        UserForm,
+        UpdateCurrentUser,
     },
     data() {
 
@@ -25,35 +30,16 @@ export default {
         },
     },
     mounted() {
-        if (!this.loggedIn) {
-            this.$router.push("/home");
+        // if (!this.loggedIn) {
+        //     this.$router.push("/home");
+        // }
+    },
+    computed: {
+        username() {
+            return authService.getUsername();
         }
     },
-    methods: {
-        handleRegister(user) {
-            console.log(user)
-            this.message = "";
-            this.successful = false;
-            this.loading = true;
+});
 
-            this.$store.dispatch("auth/register", user).then(
-                (data) => {
-                    this.message = data.message;
-                    this.successful = true;
-                    this.loading = false;
-                },
-                (error) => {
-                    this.message =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-                    this.successful = false;
-                    this.loading = false;
-                }
-            );
-        },
-    },
-};
+export default UserSettingsPage;
 </script>

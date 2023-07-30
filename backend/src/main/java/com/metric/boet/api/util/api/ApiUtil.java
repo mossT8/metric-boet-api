@@ -12,13 +12,13 @@ public class ApiUtil {
         User userResponse = null;
         try {
             userResponse = userService.findBeanByAccountCode(payload.getKey());
-        } catch (NoSuchElementException e) {
+        } catch (Exception e) {
            userResponse = null;
         }
         if (NullUtil.isNull(userResponse)) {
             try {
                 userResponse = userService.findBeanByUsername(payload.getKey());
-            } catch (NoSuchElementException e) {
+            } catch (Exception e) {
                 userResponse = null;
             }
         }

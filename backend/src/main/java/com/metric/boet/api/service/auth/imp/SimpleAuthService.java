@@ -1,6 +1,7 @@
 package com.metric.boet.api.service.auth.imp;
 
 import com.metric.boet.api.authorization.BasicUsers;
+import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payloads.request.auth.LoginRequestAbstract;
 import com.metric.boet.api.payloads.request.user.UserRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
@@ -42,6 +43,7 @@ public class SimpleAuthService implements IAuthService {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
             String jwt = jwtUtils.generateJwtToken(userDetails.getUsername());
+            User user = userService.findBeanByUsername(userDetails.getUsername());
 
             List<String> roles = userDetails.getAuthorities().stream()
                     .map(item -> item.getAuthority())
@@ -49,6 +51,7 @@ public class SimpleAuthService implements IAuthService {
 
             JwtResponse jwtResponse = new JwtResponse(jwt,
                     "Generated Token",
+                    user.mapToDTO(),
                     true,
                     userDetails.getId(),
                     userDetails.getUsername(),

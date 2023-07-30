@@ -19,7 +19,7 @@
   
 <script>
 import { ref, onMounted, computed, getCurrentInstance } from 'vue'
-import htmlPagesService from "@/services/html-pages-service";
+import htmlPagesService from "@/services/html-pages.service";
 import PageForm from "@/components/html/pages/PageForm.vue";
 import { useAsyncWrapper } from "@/composables/util/async/useAsyncWrapper";
 import { HtmlPage } from '@/types/pages/html-pages';

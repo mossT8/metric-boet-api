@@ -36,3 +36,12 @@ export const userSchema = yup.object().shape({
 export interface User extends yup.InferType<typeof userSchema> {
  
 }
+
+export interface UserMapped {
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
+  createdAt: string,
+  updatedAt: string,
+}

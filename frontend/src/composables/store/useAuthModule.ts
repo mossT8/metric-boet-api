@@ -19,8 +19,10 @@ export function useAuthModuleFeatures(): AuthModule {
   const loggedIn = computed<boolean>(() => store.state.auth.status.loggedIn);
 
   async function login(user: User): Promise<LoginResponse> {
+    console.log(user);
+    
     return AuthService.login(user)
-      .then((response) => {
+      .then((response) => {        
         store.commit('auth/loginSuccess', response);
         return response;
       })
@@ -37,7 +39,7 @@ export function useAuthModuleFeatures(): AuthModule {
 
   function register(user: User): Promise<any> {
     return AuthService.register(user)
-      .then((response) => {
+      .then((response) => {        
         store.commit('auth/registerSuccess');
         return response.data;
       })

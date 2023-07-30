@@ -15,9 +15,9 @@ export const auth = {
   actions: {
     async login({ commit }: AuthActionContext, user: User): Promise<User> {
     await AuthService.login(user).then(
-        response  => {
-          commit('loginSuccess', response);
-          return Promise.resolve(user);
+        response  => {          
+          commit('loginSuccess', {user: response.user});
+          return Promise.resolve(response);
         },
         error => {
           commit('loginFailure');
@@ -35,6 +35,7 @@ export const auth = {
       return AuthService.register(user).then(
         response => {
           commit('registerSuccess');
+          
           return Promise.resolve(response.data);
         },
         error => {
