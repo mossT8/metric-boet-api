@@ -170,7 +170,7 @@ const Sidebar = defineComponent({
   },
   setup() {
     return {
-      ...useAuthModuleFeatures(),
+      ...useAuthModuleFeatures()
     }
   },
   munted() {

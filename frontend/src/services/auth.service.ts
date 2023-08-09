@@ -5,8 +5,9 @@ import {
 } from "@/types/auth/auth";
 import { User } from "@/types/user/user";
 import { ApiGatewayService, HTTP_PROTOCOLS } from "./api-gateway-service";
-import store from "@/store";
-import { useAuthModuleFeatures } from "@/composables/store/useAuthModule";
+
+export const LOCAL_STOAGE_USER_KEY = "user";
+export const LOCAL_STOAGE_USERNAME_KEY = "username";
 
 const AUTH_API_PACKAGE_PREFIX = "com.metric.boet.api.endpoints.open";
 const AUTH_API_GROUP_KEY = "auth";
@@ -22,12 +23,11 @@ class AuthService {
   }
 
   username() {
-    if (localStorage.getItem("username")) {
-      return localStorage.getItem("username") || "";
+    if (localStorage.getItem(LOCAL_STOAGE_USERNAME_KEY)) {
+      return localStorage.getItem(LOCAL_STOAGE_USERNAME_KEY) || "";
     }
     return "";
   }
-
   login(userRequest: LoginRequest): Promise<LoginResponse> {
     const response = this.apiService
       .callApiRequest<LoginResponse>(
@@ -41,8 +41,8 @@ class AuthService {
       )
       .then((response) => {
         if (response.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response));
-          localStorage.setItem("username", userRequest.username);
+          localStorage.setItem(LOCAL_STOAGE_USER_KEY, JSON.stringify(response));
+          localStorage.setItem(LOCAL_STOAGE_USERNAME_KEY, userRequest.username);
         }
         return response;
       });
@@ -51,7 +51,8 @@ class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem("user");
+    localStorage.removeItem(LOCAL_STOAGE_USER_KEY);
+    localStorage.removeItem(LOCAL_STOAGE_USERNAME_KEY);
   }
 
   async register(user: User): Promise<RegisterResponse> {

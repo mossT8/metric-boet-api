@@ -19,22 +19,6 @@
 For instruction, please visit:
 > [Vue 3 Authentication & Authorization with JWT, Vuex and Vue Router](https://bezkoder.com/vue-3-authentication-jwt/)
 
-## Note:
-Open `src/services/auth-header.js` and modify `return` statement for appropriate back-end.
-
-```js
-export default function authHeader() {
-  let user = JSON.parse(localStorage.getItem('user'));
-
-  if (user && user.accessToken) {
-    return { Authorization: 'Bearer ' + user.accessToken }; // for Spring Boot back-end
-    // return { 'x-access-token': user.accessToken };       // for Node.js Express back-end
-  } else {
-    return {};
-  }
-}
-```
-
 Related Posts:
 > [Vue 2 JWT Authentication with Vuex and Vue Router](https://bezkoder.com/jwt-vue-vuex-authentication/)
 

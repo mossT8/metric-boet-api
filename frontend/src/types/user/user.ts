@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { Roles } from "../roles";
 
 export const userSchema = yup.object().shape({
   firstName: yup
@@ -37,6 +38,10 @@ export interface User extends yup.InferType<typeof userSchema> {
  
 }
 
+export interface MappedRole {
+  roleName: Roles;
+}
+
 export interface UserMapped {
   firstName: string,
   lastName: string,
@@ -44,4 +49,5 @@ export interface UserMapped {
   phone: string,
   createdAt: string,
   updatedAt: string,
+  roles: MappedRole[]
 }

@@ -3,29 +3,23 @@
     <header class="jumbotron">
       <h3>
         <font-awesome-icon icon="fa-solid fa-user" />
-        <strong>{{ currentUser.username }}</strong> Profile
+        <strong>{{ user.username }}</strong> Profile
       </h3>
       <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'">
         {{ message }}
       </div>
     </header>
     <p>
-      <strong>Token:</strong>
-      {{ currentUser.accessToken.substring(0, 20) }} ... {{ currentUser.accessToken.substr(currentUser.accessToken.length
-        -
-        20) }}
-    </p>
-    <p>
       <strong>Id:</strong>
-      {{ currentUser.id }}
+      {{ user.id }}
     </p>
     <p>
       <strong>Email:</strong>
-      {{ currentUser.email }}
+      {{ user.email }}
     </p>
     <strong>Authorities:</strong>
     <ul>
-      <li v-for="role in currentUser.roles" :key="role">{{ role }}</li>
+      <li v-for="role in user.roles" :key="role">{{ role }}</li>
     </ul>
     <div v-roles="['Admin', 'Moderator']" class="mb-2 d-flex justify-content-between">
       <strong>Devices ({{ totalDevices }}) </strong>
@@ -40,6 +34,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Button from "@/components/button/Button.vue"
 import DeviceList from "@/components/device/DeviceList.vue";
 import DeviceService from "@/services/device.service";
+import { useAuthModuleFeatures } from '@/composables/store/useAuthModule';
 
 
 export default {
@@ -67,10 +62,10 @@ export default {
     }
 
   },
+  setup() {
+    return { ...useAuthModuleFeatures() }
+  },
   computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
     totalDevices() {
       return this.devices.length || 0;
     },
@@ -84,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    if (!this.currentUser) {
+    if (!this.user) {
       this.$router.push('/login');
     }
   }

@@ -9,6 +9,12 @@ export interface NavItem {
 
 export const mainNavOptions: NavItem[] = [
   {
+    route: "/home",
+    icon: "fa-solid fa-home",
+    label: "Home",
+    roles: [Roles.ROLE_PUBLIC],
+  },
+  {
     route: "/user-board",
     icon: "fa-solid fa-blog",
     label: "User Board",
