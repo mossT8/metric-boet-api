@@ -5,9 +5,10 @@
 </template>
 
 <script>
+// vue
 import { defineComponent } from 'vue'
 
-export default defineComponent({
+const SwitchValueDisplay = defineComponent({
     props: {
         positiveColorValue: {
             type: String,
@@ -38,4 +39,5 @@ export default defineComponent({
     },
 });
 
+export default SwitchValueDisplay;
 </script>

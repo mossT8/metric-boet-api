@@ -16,7 +16,10 @@
 </template>
   
 <script>
-export default {
+// vue
+import { defineComponent } from 'vue'
+
+const ConfirmationModal = defineComponent({
     name: 'confirmation-modal',
     props: {
         title: {
@@ -24,7 +27,9 @@ export default {
             default: "Confirmation",
         },
     },
-};
+});
+
+export default ConfirmationModal;
 </script>
   
 <style scoped lang="scss">
@@ -38,7 +43,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     .modal {
         background-color: white;
         padding: 1rem;

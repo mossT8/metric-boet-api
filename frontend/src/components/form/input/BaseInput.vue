@@ -31,10 +31,12 @@
   </div>
 </template>
 <script>
+// vue
 import { defineComponent } from 'vue'
+// services
 import { ErrorMessage } from 'vee-validate'
 
-export default defineComponent({
+const BaseInput = defineComponent({
   inheritAttrs: false,
   name: "base-input",
   components: {
@@ -92,5 +94,6 @@ export default defineComponent({
     }
   }
 });
+
+export default BaseInput;
 </script>
-<style></style>

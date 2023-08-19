@@ -7,11 +7,15 @@
 </template>
 
 <script>
+// vue
+import { defineComponent } from 'vue'
+// services
 import UserService from "@/services/user.service";
+// components
 import Editor from "@/components/editor/Editor.vue";
 
-export default defineComponent({
-  name: "Admin",
+const AdminBoardPage = defineComponent({
+  name: "admin-board-page",
   components: {
     Editor
   },
@@ -36,4 +40,6 @@ export default defineComponent({
     );
   },
 });
+
+export default AdminBoardPage;
 </script>

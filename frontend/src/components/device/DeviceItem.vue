@@ -9,9 +9,12 @@
 </template>
   
 <script>
+// vue
+import { defineComponent } from 'vue'
+// components
 import Button from "@/components/button/Button.vue"
 
-export default {
+const DeviceItem = defineComponent({
     name: "DeviceItem",
     components: {
         Button,
@@ -36,6 +39,8 @@ export default {
 
         }
     },
-}
+});
+
+export default DeviceItem;
 </script>
   

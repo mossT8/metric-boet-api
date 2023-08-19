@@ -10,10 +10,12 @@
 </template>
   
 <script>
+// vue
 import { defineComponent } from 'vue'
+// services
 import { ErrorMessage } from 'vee-validate'
 
-export default defineComponent({
+const FormRadioButtonInput = defineComponent({
     name: 'form-radio-button-input',
     props: {
         name: {
@@ -46,6 +48,8 @@ export default defineComponent({
             this.$emit('update:selectedValue', newVal);
         }
     }
-})
+});
+
+export default FormRadioButtonInput;
 </script>
   

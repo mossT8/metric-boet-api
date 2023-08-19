@@ -16,11 +16,13 @@
 </template>
 
 <script>
+// vue
 import { defineComponent } from 'vue'
+// services
 import { ErrorMessage } from 'vee-validate'
-<style src="@vueform/toggle/themes/default.css"></style>
 
-export default defineComponent({
+const FormSwitchInput = defineComponent({    
+    name: "form-switch-input",
     components: {
         ErrorMessage,
     },
@@ -96,7 +98,6 @@ export default defineComponent({
         }
     },
     created() {
-        console.log(this.value);
         if (this.value) {
             this.innerValue = this.value;
         }
@@ -108,4 +109,5 @@ export default defineComponent({
     },
 });
 
+export default FormSwitchInput;
 </script>

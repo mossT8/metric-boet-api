@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="sidebar" :class="{ 'hide-sidebar': !sidebarOpen }">
-            <Sidebar :sidebarLinksTop="mainNavOptions" :sidebarLinksBottum="subNavOptions" @toggleSidebar="toggleSidebar"
+            <SideBar :sidebarLinksTop="mainNavOptions" :sidebarLinksBottum="subNavOptions" @toggleSidebar="toggleSidebar"
                 @hideSidebar="hideSidebar" />
         </div>
         <div class="main-screen-wrapper">
@@ -12,14 +12,15 @@
                 <Content :class="{ 'blur': sidebarOpen }" @click.stop="hideSidebar" />
             </main>
             <footer>
-                <CustomFooter :class="{ 'blur': sidebarOpen }"  />
+                <CustomFooter :class="{ 'blur': sidebarOpen }" />
             </footer>
         </div>
     </div>
 </template>
 <script>
+// vue
 
-import Sidebar from "@/components/layout/sidebar/Sidebar.vue";
+import SideBar from "@/components/layout/sidebar/SideBar.vue";
 import TopNavbar from "@/components/layout/TopNavbar.vue";
 import Content from "@/components/layout/Content.vue";
 import CustomFooter from "@/components/layout/Footer.vue";
@@ -29,7 +30,7 @@ export default {
         TopNavbar,
         CustomFooter,
         Content,
-        Sidebar
+        SideBar
     },
     data() {
         return {

@@ -7,8 +7,10 @@
 </template>
   
 <script>
+// vue
 import { defineComponent } from 'vue'
-import { Field, ErrorMessage } from 'vee-validate'
+// services
+import { ErrorMessage, Field } from 'vee-validate'
 
 const FormTextInput  =  defineComponent({
     name: 'form-text-imput',

@@ -3,11 +3,17 @@
 </template>
   
 <script>
+// vue
+import { defineComponent } from 'vue';
+
+// components
 import UpdatePage from "@/components/html/pages/UpdatePage.vue";
 
-export default {
-    name: "update-html-page",
+const HtmlUpdatePage = defineComponent({
+    name: "html-update-page",
     components: { UpdatePage }
-};
+});
+
+export default HtmlUpdatePage;
 </script>
   

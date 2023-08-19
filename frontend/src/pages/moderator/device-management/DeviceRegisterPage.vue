@@ -3,11 +3,18 @@
 </template>
   
 <script >
-import { deviceShema } from "@/types/device/device"
-import DeviceForm from "@/components/device/DeviceForm.vue";
+// vue
+import { defineComponent } from 'vue';
+
+// service
+import { deviceShema } from "@/types/device/device";
 import DeviceService from "@/services/device.service";
 
-export default {
+//component
+import DeviceForm from "@/components/device/DeviceForm.vue";
+
+
+const DeviceRegisterPage = defineComponent({
     name: "device-register-page",
     components: {
         DeviceForm
@@ -38,5 +45,7 @@ export default {
             DeviceService.addDevice(device)
         },
     },
-};
+});
+
+export default DeviceRegisterPage;
 </script>

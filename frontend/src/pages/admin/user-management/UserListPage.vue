@@ -11,12 +11,15 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-//services
+// services
 import userService from '@/services/user.service';
 import { useAuthModuleFeatures } from '@/composables/store/useAuthModule';
+
+// components
 import UserList from '@/components/user/UserList.vue';
 
-export default defineComponent({
+const UserListPage = defineComponent({
+    name: "user-list-page",
     components: {
         UserList
     },
@@ -49,5 +52,7 @@ export default defineComponent({
         };
     }
 });
+
+export default UserListPage;
 </script>
   

@@ -10,8 +10,7 @@
                     <form-radio-button-input name="status" label="Status" :options="statusOptions" />
                     <form-text-input name="token" label="Token" />
                     <button class="btn btn-primary float-right" :disabled="loading">
-                        <span v-show="loading" 
-                            class="spinner-border spinner-border-sm"></span>
+                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                         {{ btnTxt }}
                     </button>
                 </div>
@@ -25,14 +24,20 @@
 </template>
   
 <script>
+
+// vue
+import { defineComponent } from 'vue'
+
+// service
 import { Form } from "vee-validate";
+
+// components
 import { deviceShema } from "@/types/device/device"
 import FormTextInput from "@/components/form/input/FormTextInput.vue";
 import FormSelectListInput from "@/components/form/input/FormSelectListInput.vue";
 import FormRadioButtonInput from "@/components/form/input/FormRadioButtonInput.vue";
 
-
-export default {
+const DeviceForm = defineComponent({
     name: "device-form",
     components: {
         Form,
@@ -115,5 +120,7 @@ export default {
             this.$emit("onSubmit", device);
         },
     },
-};
+});
+
+export default DeviceForm;
 </script>

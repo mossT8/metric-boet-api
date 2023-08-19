@@ -3,10 +3,16 @@
 </template>
   
 <script >
-import DeviceForm from "@/components/device/DeviceForm.vue";
+// vue
+import { defineComponent } from 'vue';
+
+// service
 import DeviceService from "@/services/device.service";
 
-export default {
+// components
+import DeviceForm from "@/components/device/DeviceForm.vue";
+
+const DeviceUpdatePage = defineComponent({
     name: "device-update-page",
     components: {
         DeviceForm
@@ -61,5 +67,7 @@ export default {
             }
         },
     }
-};
+});
+
+export default DeviceUpdatePage;
 </script>

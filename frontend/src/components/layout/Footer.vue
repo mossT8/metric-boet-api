@@ -15,11 +15,16 @@
 </template>
 
 <script>
-export default {
+// vue
+import { defineComponent } from 'vue'
+
+const Footer = defineComponent({
   data() {
     return {
       year: new Date().getFullYear()
     }
   }
-};
+});
+
+export default Footer;
 </script>

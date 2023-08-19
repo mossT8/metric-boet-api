@@ -3,9 +3,14 @@
 </template>
 
 <script>
+
+// vue
+import { defineComponent } from 'vue'
+
+// components
 import UserForm from "@/components/user/UserForm.vue";
 
-export default {
+const UserRegsterPage = defineComponent({
   name: "user-register-page",
   components: {
     UserForm,
@@ -55,5 +60,7 @@ export default {
       );
     },
   },
-};
+});
+
+export default UserRegsterPage;
 </script>

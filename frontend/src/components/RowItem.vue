@@ -36,7 +36,10 @@
 </style>
     
 <script>
+// vue
 import { defineComponent } from 'vue';
+
+// components
 import Button from '@/components/button/Button.vue';
 import SwitchValueDisplay from '@/components/form/display/SwitchValueDisplay.vue';
 

@@ -30,14 +30,19 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Button from "@/components/button/Button.vue"
-import DeviceList from "@/components/device/DeviceList.vue";
+// vue
+import { defineComponent } from 'vue'
+
+// services
 import DeviceService from "@/services/device.service";
 import { useAuthModuleFeatures } from '@/composables/store/useAuthModule';
 
+//components
+import Button from "@/components/button/Button.vue"
+import DeviceList from "@/components/device/DeviceList.vue";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-export default {
+const UserProfilePage = defineComponent({
   name: 'user-profile-page',
   components: {
     Button,
@@ -83,5 +88,7 @@ export default {
       this.$router.push('/login');
     }
   }
-};
+});
+
+export default UserProfilePage;
 </script>

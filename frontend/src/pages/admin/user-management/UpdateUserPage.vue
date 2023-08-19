@@ -13,16 +13,17 @@
 <script>
 // Vue
 import { ref, onMounted, defineComponent, getCurrentInstance } from 'vue'
+
 // Service
 import userService from "@/services/user.service";
 import router from '@/router/router';
+
 // Component
 import UserForm from "@/components/user/UserForm.vue";
 import { useAsyncWrapper } from "@/composables/util/async/useAsyncWrapper";
 
-
 const UpdateUserPage = defineComponent({
-    name: "update-user",
+    name: "update-user-page",
     components: {
         UserForm,
     },

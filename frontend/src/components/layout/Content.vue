@@ -9,8 +9,13 @@
 </template>
 
 <script>
-export default {
+// vue
+import { defineComponent } from 'vue'
+
+const Content = defineComponent({
     components: {}
-};
+});
+
+export default Content;
 </script>
   

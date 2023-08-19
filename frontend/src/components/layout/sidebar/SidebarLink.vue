@@ -17,7 +17,10 @@ svg {
 </style>
 
 <script>
-export default {
+// vue
+import { defineComponent } from 'vue'
+
+const SidebarLink = defineComponent({
   name: "sidebar-link",
   inheritAttrs: false,
   inject: {
@@ -65,5 +68,7 @@ export default {
       this.removeLink(this);
     }
   }
-};
+});
+
+export default SidebarLink;
 </script>

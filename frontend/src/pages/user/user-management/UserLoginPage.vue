@@ -32,10 +32,14 @@
 </template>
 
 <script>
+
+// vue
+import { defineComponent } from 'vue'
+// services
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
-export default {
+const UserLoginPage = defineComponent({
   name: "user-login-page",
   components: {
     Form,
@@ -80,7 +84,9 @@ export default {
       );
     },
   },
-};
+});
+
+export default UserLoginPage;
 </script>
 
 <style scoped>

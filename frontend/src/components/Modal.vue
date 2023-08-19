@@ -1,5 +1,5 @@
 <template>
-   <transition name="slide-up">
+    <transition name="slide-up">
         <div class="modal fade" @click.self="closeModal"
             :class="[{ 'show d-block': show }, { 'd-none': !show }, { 'modal-mini': type === 'mini' }]" v-show="show"
             tabindex="-1" role="dialog" :aria-hidden="!show">
@@ -35,22 +35,25 @@
 <style lang="scss" scoped>
 .slide-up-enter-active,
 .slide-up-leave-active {
-  transition: transform 0.5s;
+    transition: transform 0.5s;
 }
 
 .slide-up-enter-from,
 .slide-up-leave-to {
-  transform: translateY(100%);
+    transform: translateY(100%);
 }
 
 .slide-up-enter-to,
 .slide-up-leave-from {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 </style>
 
 <script>
-export default {
+// vue
+import { defineComponent } from 'vue'
+
+const Modal = defineComponent({
     name: "modal",
     components: {
     },
@@ -119,7 +122,9 @@ export default {
             }
         }
     }
-};
+});
+
+export default Modal;
 </script>
 <style>
 .modal.show {

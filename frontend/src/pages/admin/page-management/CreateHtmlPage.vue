@@ -3,11 +3,16 @@
 </template>
   
 <script>
-import CreatePage from "@/components/html/pages/CreatePage.vue";
+// Vue
+import { defineComponent } from 'vue';
 
-export default {
+// components
+import CreatePage from "@/components/html/pages/CreatePage.vue";
+const CreateHtmlPage = defineComponent({
     name: "create-html-page",
     components: { CreatePage }
-};
+});
+
+export default CreateHtmlPage;
 </script>
   

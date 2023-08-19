@@ -5,7 +5,11 @@
 </template>
   
 <script>
-export default {
+// vue
+import { defineComponent } from 'vue'
+
+const Button = defineComponent({
+    name: "button",
     props: {
         type: String,
         disabled: Boolean,
@@ -15,6 +19,8 @@ export default {
             this.$emit('click', event);
         },
     },
-};
+});
+
+export default Button;
 </script>
   

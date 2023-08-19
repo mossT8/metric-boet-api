@@ -11,10 +11,12 @@
 </template>
   
 <script>
+// vue
 import { defineComponent } from 'vue'
-import { ErrorMessage , Field} from 'vee-validate'
+// services
+import { ErrorMessage, Field } from 'vee-validate'
 
-export default defineComponent({
+const FormSelectListInput = defineComponent({
     name: 'form-select-list-input',
     props: {
         name: {
@@ -47,6 +49,8 @@ export default defineComponent({
             this.$emit('update:selectedValue', newVal);
         }
     }
-})
+});
+
+export default FormSelectListInput;
 </script>
   

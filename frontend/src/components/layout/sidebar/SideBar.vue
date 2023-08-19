@@ -54,7 +54,7 @@ import SidebarLink from "@/components/layout/sidebar/SidebarLink.vue";
 import ConfirmationModal from "@/components/modals/ConfirmationModal.vue";
 
 
-const Sidebar = defineComponent({
+const SideBar = defineComponent({
   name: 'sidebar',
   props: {
     title: {
@@ -180,5 +180,5 @@ const Sidebar = defineComponent({
   }
 });
 
-export default Sidebar;
+export default SideBar;
 </script>

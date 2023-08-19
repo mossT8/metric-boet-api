@@ -11,12 +11,15 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-//services
+// services
 import htmlPagesService from '@/services/html-pages-service';
 import { useAuthModuleFeatures } from '@/composables/store/useAuthModule';
+
+// components
 import PageList from '@/components/html/pages/PageList.vue';
 
-export default defineComponent({
+const HtmlListPage = defineComponent({
+    name: "html-list-page",
     components: {
         PageList
     },
@@ -49,5 +52,7 @@ export default defineComponent({
         };
     }
 });
+
+export default HtmlListPage;
 </script>
   
