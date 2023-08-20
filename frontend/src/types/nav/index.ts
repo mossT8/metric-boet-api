@@ -39,9 +39,9 @@ export const mainNavOptions: NavItem[] = [
     roles: [Roles.ROLE_ADMIN],
   },
   {
-    route: "/home",
+    route: "/site-management",
     icon: "fa-solid fa-tachometer-alt",
-    label: "Site Dashboard",
+    label: "Site Management",
     roles: [Roles.ROLE_ADMIN],
   },
   {

@@ -17,6 +17,7 @@ import UpdateUserPage from "@/pages/admin/user-management/UpdateUserPage.vue";
 import ModeratorBoardPage from "@/pages/moderator/ModeratorBoardPage.vue";
 import DeviceRegisterPage from "@/pages/moderator/device-management/DeviceRegisterPage.vue";
 import DeviceUpdatePage from "@/pages/moderator/device-management/DeviceUpdatePage.vue";
+import SiteManagementPage from "@/pages/admin/site-management/SiteManagementPage.vue";
 
 // Define routes
 const publicRoutes: RouteRecordRaw[] = [
@@ -50,6 +51,11 @@ const adminRoutes: RouteRecordRaw[] = [
     path: "/user-management",
     name: "user-management",
     component: UserListPage,
+  },
+  {
+    path: "/site-management",
+    name: "site-management",
+    component: SiteManagementPage,
   },
   {
     path: "/user-edit/:username",
