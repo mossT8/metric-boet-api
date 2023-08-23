@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Frontend Dashboard</h3>
+        <h3>Database Dashboard</h3>
         <div class="metrics">
             <div class="metric">
                 <TimeSeriesChart title="CPU Usage (%)" titleSpot="center" :data="data" />
@@ -27,8 +27,8 @@ import BarGraph from '@/components/graph/BarGraph.vue';
 import GroupedBarGraph from '@/components/graph/GroupedBarGraph.vue';
 import ServerLogs from '@/components/logs/ServerLogs.vue';
 
-const FrontendDashboard = defineComponent({
-    name: 'frontend-dashboard',
+const DatabaseDashboard = defineComponent({
+    name: 'database-dashboard',
     components: {
         TimeSeriesChart,
         GaugeChart,
@@ -39,6 +39,7 @@ const FrontendDashboard = defineComponent({
         RadarGraph
     },
     setup() {
+        let lastDate = 0;
         const data = ref([]);
 
         const logEntries = [
@@ -58,8 +59,7 @@ const FrontendDashboard = defineComponent({
         ];
 
         const TICKINTERVAL = 86400000;
-        let lastDate = 0;
-        
+
         function getDayWiseTimeSeries(baseval, count, yrange) {
             let i = 0;
             while (i < count) {
@@ -75,7 +75,7 @@ const FrontendDashboard = defineComponent({
             }
         }
 
-        getDayWiseTimeSeries(new Date().getTime(), 10, {
+        getDayWiseTimeSeries(new Date('11 Feb 2017 GMT').getTime(), 10, {
             min: 10,
             max: 90,
         });
@@ -87,7 +87,8 @@ const FrontendDashboard = defineComponent({
     },
 });
 
-export default FrontendDashboard;
+export default DatabaseDashboard;
 </script>
   
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

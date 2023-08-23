@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Server Metrics</h3>
+        <h3>Baackend Dashboard</h3>
         <div class="metrics">
             <div class="metric">
                 <TimeSeriesChart title="CPU Usage (%)" titleSpot="center" :data="data" />
@@ -58,15 +58,6 @@ const BackendDashboard = defineComponent({
             "2023-08-23 15:07:54.418 ERROR 6088 --- [nio-8080-exec-3] c.m.b.a.security.jwt.AuthEntryPointJwt   : Unauthorized error: Full authentication is required to access this resource"
         ];
 
-
-        let seconds = 1;
-        let minutes = 1;
-        let hours = 1;
-        let days = 1;
-        let milliseconds = 1;
-
-        let XAXISRANGE = 60 * seconds * 60 * minutes * 24 * hours * 7 * days * 1000 * milliseconds;
-
         const TICKINTERVAL = 86400000;
 
         function getDayWiseTimeSeries(baseval, count, yrange) {
@@ -88,44 +79,6 @@ const BackendDashboard = defineComponent({
             min: 10,
             max: 90,
         });
-
-        function getNewSeries(baseval, yrange) {
-            let newDate = baseval + TICKINTERVAL;
-            lastDate = newDate;
-
-            for (let i = 0; i < data.value.length - 10; i++) {
-                // IMPORTANT
-                // we reset the x and y of the data which is out of drawing area
-                // to prevent memory leaks
-                data.value[i].x = newDate - XAXISRANGE - TICKINTERVAL;
-                data.value[i].y = 0;
-            }
-
-            const newPoint = {
-                x: newDate,
-                y: Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min,
-            }
-
-            data.value.push(newPoint);
-        }
-
-        function resetData() {
-            // Alternatively, you can also reset the data at certain intervals to prevent creating a huge series
-            data.value = data.value.slice(data.length - 10, data.length);
-        }
-
-
-        window.setInterval(function () {
-            getNewSeries(lastDate, {
-                min: 10,
-                max: 90,
-            });
-        }, 1000);
-
-        // every 60 seconds, we reset the data to prevent memory leaks
-        window.setInterval(function () {
-            resetData();
-        }, 60000);
 
         return {
             data,
