@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 
 // Import components
-import HomePage from "@/pages/public/HomePage.vue";
+import GenericPage from "@/pages/public/GenericPage.vue";
 import AboutPage from "@/pages/public/AboutPage.vue";
 import UserSettingsPage from "@/pages/user/user-management/UserSettingsPage.vue";
 import UserLoginPage from "@/pages/user/user-management/UserLoginPage.vue";
@@ -21,7 +21,7 @@ import SiteManagementPage from "@/pages/admin/site-management/SiteManagementPage
 
 // Define routes
 const publicRoutes: RouteRecordRaw[] = [
-  { path: "/home", name: "home", component: HomePage },
+  { path: "/:pageName", name: "home", component: GenericPage },
   { path: "/", redirect: { name: "home" } },
   { path: "/about", name: "about", component: AboutPage },
 ];

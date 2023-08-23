@@ -1,5 +1,10 @@
 import { HtmlPage, HtmlPageMapped } from "@/types/pages/html-pages";
-import { ApiGatewayService, EmptyReuqest, HTTP_PROTOCOLS, KeyRequest } from "./api-gateway-service";
+import {
+  ApiGatewayService,
+  EmptyReuqest,
+  HTTP_PROTOCOLS,
+  KeyRequest,
+} from "./api-gateway-service";
 import authHeader from "@/services/auth-header";
 import { formatDate } from "@/types/dates/date-util";
 
@@ -21,7 +26,7 @@ class HtmlPageServices {
       "CreateHtmlPage",
       payload,
       HTTP_PROTOCOLS.POST,
-      { headers: {Authorization: authHeader()} }, 
+      { headers: { Authorization: authHeader() } }
     );
   }
 
@@ -33,19 +38,32 @@ class HtmlPageServices {
       "UpdateHtmlPage",
       payload,
       HTTP_PROTOCOLS.POST,
-      { headers: {Authorization: authHeader()} }, 
+      { headers: { Authorization: authHeader() } }
+    );
+  }
+
+  viewPageByUrl(url: string): Promise<HtmlPageMapped> {
+    const payload: KeyRequest = { key: url };
+    return this.apiService.callApiRequest<HtmlPageMapped>(
+      "com.metric.boet.api.endpoints.open",
+      API_GROUP_KEY,
+      "ViewHtmlPage",
+      payload,
+      HTTP_PROTOCOLS.GET,
+      { headers: { Authorization: authHeader() } },
+      true
     );
   }
 
   getPageByUrl(url: string): Promise<HtmlPageMapped> {
-    const payload: KeyRequest = { key: url};
+    const payload: KeyRequest = { key: url };
     return this.apiService.callApiRequest<HtmlPageMapped>(
       API_PACKAGE_PREFIX,
       API_GROUP_KEY,
       "GetHtmlPage",
       payload,
       HTTP_PROTOCOLS.GET,
-      { headers: {Authorization: authHeader()} }, 
+      { headers: { Authorization: authHeader() } }
     );
   }
 
@@ -58,8 +76,8 @@ class HtmlPageServices {
         "ListAllHtmlPages",
         payload,
         HTTP_PROTOCOLS.GET,
-        { headers: {Authorization: authHeader()} }, 
-        )
+        { headers: { Authorization: authHeader() } }
+      )
       .then((data) => {
         for (const record of data) {
           if (record.createdAt) {
