@@ -70,7 +70,7 @@ const UserLoginPage = defineComponent({
       this.$store.dispatch("auth/login", user).then(
         (response) => {
           console.log(response);
-          this.$router.push("/user-profile");
+          this.$router.push("/user/profile");
         },
         (error) => {
           this.loading = false;

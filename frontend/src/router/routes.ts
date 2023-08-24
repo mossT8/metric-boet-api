@@ -23,42 +23,45 @@ import SiteManagementPage from "@/pages/admin/site-management/SiteManagementPage
 const publicRoutes: RouteRecordRaw[] = [
   { path: "/:pageName", name: "home", component: GenericPage },
   { path: "/", redirect: { name: "home" } },
-  { path: "/about", name: "about", component: AboutPage },
+  { path: "/static/about", name: "about", component: AboutPage },
 ];
 
 const userRoutes: RouteRecordRaw[] = [
-  { path: "/settings", name: "settings", component: UserSettingsPage },
-  { path: "/user-login", name: "user-login", component: UserLoginPage },
-  { path: "/user-logout", name: "user-logout", component: UserLogoutPage },
-  { path: "/user-board", name: "user-board", component: UserBoardPage },
   {
-    path: "/user-register",
+    path: "/user/settings",
+    name: "user-settings",
+    component: UserSettingsPage,
+  },
+  { path: "/user/login", name: "user-login", component: UserLoginPage },
+  { path: "/user/logout", name: "user-logout", component: UserLogoutPage },
+  { path: "/user/board", name: "user-board", component: UserBoardPage },
+  {
+    path: "/user/register",
     name: "user-register",
     component: UserRegisterPage,
   },
-  { path: "/user-profile", name: "user-profile", component: UserProfilePage },
+  { path: "/user/profile", name: "user-profile", component: UserProfilePage },
 ];
 
 const adminRoutes: RouteRecordRaw[] = [
-  { path: "/admin-board", name: "admin-board", component: AdminBoardPage },
   {
-    path: "/page-management",
+    path: "/page/management",
     name: "page-management",
     component: HtmlListPage,
   },
   { path: "/html-edit/:url", name: "html-edit", component: HtmlUpdatePage },
   {
-    path: "/user-management",
+    path: "/user/management",
     name: "user-management",
     component: UserListPage,
   },
   {
-    path: "/site-management",
+    path: "/site/management",
     name: "site-management",
     component: SiteManagementPage,
   },
   {
-    path: "/user-edit/:username",
+    path: "/user/edit/:username",
     name: "user-edit",
     component: UpdateUserPage,
   },
@@ -66,17 +69,17 @@ const adminRoutes: RouteRecordRaw[] = [
 
 const moderatorRoutes: RouteRecordRaw[] = [
   {
-    path: "/moderator-board",
+    path: "/moderator",
     name: "moderator",
     component: ModeratorBoardPage,
   },
   {
-    path: "/device-register",
+    path: "/device/register",
     name: "device-register",
     component: DeviceRegisterPage,
   },
   {
-    path: "/device-update/:uid",
+    path: "/device/update/:uid",
     name: "device-update",
     component: DeviceUpdatePage,
   },

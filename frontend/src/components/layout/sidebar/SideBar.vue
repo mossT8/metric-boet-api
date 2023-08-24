@@ -20,19 +20,19 @@
 
               <div class="sidebar-links-bottum">
                 <!-- Profile -->
-                <sidebar-link v-if="loggedIn" @hideSideBar="hideSidebar" key="user-profile" to="/user-profile"
+                <sidebar-link v-if="loggedIn" @hideSideBar="hideSidebar" key="user-profile" to="/user/profile"
                   name="Profile" icon="fa-solid fa-user-circle" />
 
                 <!-- Settings -->
-                <sidebar-link v-if="loggedIn" @hideSideBar="hideSidebar" key="settings" to="/settings" name="Settings"
-                  icon="fa-solid fa-cog" />
+                <sidebar-link v-if="loggedIn" @hideSideBar="hideSidebar" key="settings" to="/user/settings"
+                  name="Settings" icon="fa-solid fa-cog" />
 
                 <!-- Logout -->
-                <sidebar-link v-if="loggedIn" @hideSideBar="hideSidebar" key="user-logout" to="/user-logout"
-                  name="Logout" icon="fa-solid fa-sign-out-alt" />
+                <sidebar-link v-if="loggedIn" @hideSideBar="hideSidebar" key="user-logout" to="/user/logout" name="Logout"
+                  icon="fa-solid fa-sign-out-alt" />
 
                 <!-- Login -->
-                <sidebar-link v-else @hideSideBar="hideSidebar" key="user-login" to="/user-login" name="Login"
+                <sidebar-link v-else @hideSideBar="hideSidebar" key="user-login" to="/user/login" name="Login"
                   icon="fa-solid fa-sign-in-alt" />
               </div>
             </div>
