@@ -19,9 +19,9 @@ bash
 ````
 ### Subfolder Details
 
-* **backend/** Contains the backend logic and functionality. Refer to the backend/README.md for specific details.
+* **backend/:** Contains the backend logic and functionality. Refer to the backend/README.md for specific details.
 
-* **database/** Hosts information related to the database. Explore the database/README.md for configuration and usage instructions.
+* **database/:** Hosts information related to the database. Explore the database/README.md for configuration and usage instructions.
 
 * **frontend/:** Encompasses the frontend codebase. Check the frontend/README.md for guidance on setup and usage.
 
