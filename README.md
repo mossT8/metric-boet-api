@@ -1,69 +1,42 @@
-<h1 align="center">
-  <img src="img/logo.png" alt="Metric Boet Logo" width="100">
-  <br>
-  Metric Boet API
-</h1>
+# Metric Boet API
 
-<h2 align="center">
-  <img src="img/vue-logo.png" alt="Vue Logo" width="100">
-  <br>
-  Vue 3 Frontend Application
-</h2>
+Metric Boet API is a comprehensive full-stack application designed to empower farmers in effectively managing users, basic static web pages, and field devices within their agricultural operations. Field devices serve the crucial function of monitoring specific areas of the farm, enabling farmers to stay informed and take timely actions as needed. Leveraging AWS as its cloud provider, the application utilizes an Application Load Balancer (ALB) with GoLang Lambda serving as the backend, while the frontend is developed using the Amplify Vue application. Additionally, the database is hosted on AWS.
 
-<h3 align="center">Description</h3>
+## Structure
 
-<p align="center">
-  Add a brief description of your Vue 3 frontend application here.
-</p>
+Metric Boet API is organized with a simple and intuitive file structure. For more in-depth information about each subfolder, please refer to the respective README.md files. This approach is designed to provide developers with a clear understanding of the project without overwhelming them. It is highly recommended to read all README.md files before running the application locally.
 
-<h3 align="center">Technologies</h3>
+bash
+````
+|+- Metric Boet API Application ROOT
+|--- .env
+|--- .gitignore
+|--- backend/
+|--- database/
+|--- frontend/
+|--- tester/
+|--- README.md
+````
+### Subfolder Details
+#### - backend/ 
+Contains the backend logic and functionality. Refer to the backend/README.md for specific details.
 
-<p align="center">
-  Mention the key technologies and frameworks used in your Vue 3 frontend application.
-</p>
+#### - database/
+Hosts information related to the database. Explore the database/README.md for configuration and usage instructions.
 
-<h3 align="center">
-  <img src="img/java-logo.png" alt="Java Logo" width="100">
-  <br>
-  Java 11 Backend Application
-</h3>
+#### - frontend/
+Encompasses the frontend codebase. Check the frontend/README.md for guidance on setup and usage.
 
-<h3 align="center">Description</h3>
+#### - tester/
+Involves testing-related application. Find more information in the tester/README.md for testing instructions.
 
-<p align="center">
-  Add a brief description of your Java 11 backend application here.
-</p>
+## Contributing
 
-<h3 align="center">Technologies</h3>
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
 
-<p align="center">
-  Mention the key technologies and frameworks used in your Java 11 backend application.
-</p>
+Please make sure to update tests as appropriate.
 
-<h3 align="center">
-  <img src="img/postgres-logo.png" alt="Java Logo" width="100">
-  <br>
-  Database
-</h3>
+## License
 
-<p align="center">
-  Mention the database system you are using (e.g., PostgreSQL) and its version.
-</p>
-
-<h3 align="center">Getting Started</h3>
-
-<p align="center">
-  Add instructions on how to get the project up and running locally.
-</p>
-
-<h3 align="center">Contributing</h3>
-
-<p align="center">
-  Explain how others can contribute to your project, such as guidelines for pull requests and code reviews.
-</p>
-
-<h3 align="center">License</h3>
-
-<p align="center">
-  Mention the license under which your project is released (e.g., MIT License).
-</p>
+[MIT](https://choosealicense.com/licenses/mit/)
