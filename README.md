@@ -18,17 +18,14 @@ bash
 |--- README.md
 ````
 ### Subfolder Details
-#### - backend/ 
-Contains the backend logic and functionality. Refer to the backend/README.md for specific details.
 
-#### - database/
-Hosts information related to the database. Explore the database/README.md for configuration and usage instructions.
+- **backend/** Contains the backend logic and functionality. Refer to the backend/README.md for specific details.
 
-#### - frontend/
-Encompasses the frontend codebase. Check the frontend/README.md for guidance on setup and usage.
+- **database/** Hosts information related to the database. Explore the database/README.md for configuration and usage instructions.
 
-#### - tester/
-Involves testing-related application. Find more information in the tester/README.md for testing instructions.
+- **frontend/:** Encompasses the frontend codebase. Check the frontend/README.md for guidance on setup and usage.
+
+- **tester/:** Involves testing-related components. Find more information in the tester/README.md for testing instructions.
 
 ## Contributing
 
