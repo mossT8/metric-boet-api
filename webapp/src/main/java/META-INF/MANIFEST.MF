@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Main-Class: com.javatpoint.MetricBoetApiApplication
+Class-Path: spring-expression-6.0.4.jar spring-boot-starter-actuator-3.0
+ .2.jar spring-boot-actuator-autoconfigure-3.0.2.jar slf4j-api-2.0.6.jar
+  spring-boot-starter-web-3.0.2.jar jul-to-slf4j-2.0.6.jar spring-aop-6.
+ 0.4.jar tomcat-embed-websocket-10.1.5.jar jakarta.annotation-api-2.1.1.
+ jar jackson-module-parameter-names-2.14.1.jar micrometer-core-1.10.3.ja
+ r spring-boot-starter-tomcat-3.0.2.jar spring-beans-6.0.4.jar jackson-d
+ atatype-jdk8-2.14.1.jar logback-classic-1.4.5.jar tomcat-embed-core-10.
+ 1.5.jar snakeyaml-1.33.jar spring-boot-3.0.2.jar spring-webmvc-6.0.4.ja
+ r log4j-core-2.13.1.jar micrometer-commons-1.10.3.jar jackson-databind-
+ 2.14.1.jar jackson-core-2.14.1.jar spring-jcl-6.0.4.jar tomcat-embed-el
+ -10.1.5.jar jackson-datatype-jsr310-2.14.1.jar spring-web-6.0.4.jar spr
+ ing-boot-actuator-3.0.2.jar micrometer-observation-1.10.3.jar spring-bo
+ ot-starter-logging-3.0.2.jar logback-core-1.4.5.jar spring-tx-6.0.4.jar
+  spring-core-6.0.4.jar jackson-annotations-2.14.1.jar LatencyUtils-2.0.
+ 3.jar spring-context-6.0.4.jar spring-boot-autoconfigure-3.0.2.jar log4
+ j-api-2.13.1.jar log4j-to-slf4j-2.19.0.jar spring-boot-starter-3.0.2.ja
+ r spring-boot-starter-json-3.0.2.jar spring-jdbc-6.0.4.jar javaee-web-a
+ pi-8.0.jar HdrHistogram-2.1.12.jar
+

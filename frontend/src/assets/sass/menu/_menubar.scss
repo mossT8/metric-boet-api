@@ -1,0 +1,60 @@
+// Size
+$menubar-button-width: 1.8rem;
+$menubar-button-height: 1.2rem;
+
+// Font
+$menubar-button-font-weight: bold;
+$font-size-small: 12px;
+
+// Padding
+$menubar-button-padding: 0.2rem 0.5rem;
+
+// Margin
+$menubar-margin-bottom: 1rem;
+$menubar-button-margin-right: 0.2rem;
+
+// Radius
+$menubar-button-border-radius: 3px;
+
+.menubar {
+  margin-bottom: $menubar-margin-bottom;
+  transition: visibility 0.2s 0.4s, opacity 0.2s 0.4s;
+
+  &.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.is-focused {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.2s, opacity 0.2s;
+  }
+
+  &__button {
+    vertical-align: middle;
+    width: $menubar-button-width;
+    height: $menubar-button-height;
+    font-weight: $menubar-button-font-weight;
+    display: inline-flex;
+    background: transparent;
+    border: 0;
+    color: $black-color;
+    padding: $menubar-button-padding;
+    margin-right: $menubar-button-margin-right;
+    border-radius: $menubar-button-border-radius;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($black-color, 0.05);
+    }
+
+    &.is-active {
+      background-color: rgba($black-color, 0.1);
+    }
+  }
+
+  span#{&}__button {
+    font-size: $font-size-small;
+  }
+}
