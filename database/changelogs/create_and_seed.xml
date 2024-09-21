@@ -1,0 +1,35 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="tannar.moss" id="create_tables">
+        <sqlFile dbms="mysql"
+            encoding="UTF-8"
+            path="v1.0.0_create_tables.sql"
+            relativeToChangelogFile="false"
+            stripComments="true" />
+    </changeSet>
+    <changeSet author="tannar.moss" id="seed_default_data">
+        <sqlFile dbms="mysql"
+            encoding="UTF-8"
+            path="v1.0.0_seed_tables.sql"
+            relativeToChangelogFile="false"
+            stripComments="true" />
+    </changeSet>
+    <changeSet author="tannar.moss" id="seed_local" context="beta">
+        <sqlFile dbms="mysql"
+            encoding="UTF-8"
+            path="beta/v1.0.0_seed_enviroment.sql"
+            relativeToChangelogFile="false"
+            stripComments="true" />
+    </changeSet>
+    <changeSet author="tannar.moss" id="seed_prod" context="prod">
+        <sqlFile dbms="mysql"
+            encoding="UTF-8"
+            path="prod/v1.0.0_seed_enviroment.sql"
+            relativeToChangelogFile="false"
+            stripComments="true" />
+    </changeSet>
+
+</databaseChangeLog>

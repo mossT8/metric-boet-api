@@ -12,8 +12,8 @@
     <artifactId>api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>metric-boet-backend</name>
-    <description>Spring Boot, Spring Security, PostgreSQL: JWT Authentication &amp; Authorization backend server for VUE
-        web app portal and metric API recording.
+    <description>
+        ToDo: add description
     </description>
 
     <properties>
