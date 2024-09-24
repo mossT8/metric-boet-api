@@ -1,8 +1,9 @@
 package com.metric.boet.api.util.api;
 
-import com.metric.boet.api.util.annotations.PrivateWebAppEndpoint;
 import com.metric.boet.api.util.api.request.AbstractWebAppEndpointPayload;
 import com.metric.boet.api.util.api.request.WebAppApiRequestHolderBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.http.ResponseEntity;
 
@@ -14,6 +15,7 @@ import java.util.Map;
 
 public abstract class AbstractWebAppService<ENDPOINT_TYPE extends Annotation, HANDLER_TYPE extends AbstractWebAppEndpointHandler<AbstractWebAppEndpointPayload>> {
     protected Map<String, HANDLER_TYPE> endpointHandlers;
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractWebAppService.class);
 
     public AbstractWebAppService(ListableBeanFactory beanFactory) {
         populateEndpoints(beanFactory);

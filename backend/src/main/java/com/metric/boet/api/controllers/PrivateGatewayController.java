@@ -1,7 +1,7 @@
 package com.metric.boet.api.controllers;
 
-import com.metric.boet.api.util.api.request.WebAppApiRequestHolderBean;
 import com.metric.boet.api.util.api.closed.PrivateApiGatewayService;
+import com.metric.boet.api.util.api.request.WebAppApiRequestHolderBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

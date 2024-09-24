@@ -4,7 +4,7 @@ import { User } from "@/types/user/user";
 import { LOCAL_STOAGE_USER_KEY } from "@/services/auth.service";
 
 const rolesDirective: Directive<HTMLButtonElement> = {
-  mounted(el, binding) {
+  mounted(el: { disabled: boolean; style: { display: string; }; }, binding: { modifiers: any; value: any; }) {
     const elementRoles = {
       ...binding.modifiers,
       ...getRoleFromValue(binding.value),

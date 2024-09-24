@@ -35,6 +35,7 @@ public class PublicApiGatewayService extends AbstractWebAppService<PublicWebAppE
                                 .status(HttpStatus.FORBIDDEN)
                                 .body("Please ensure you have necessary credentials to access this endpoint with given request.");
                 } catch (Exception e) {
+                    logger.error("cant perform request: ", e);
                     return ResponseEntity
                             .status(HttpStatus.INTERNAL_SERVER_ERROR)
                             .body(e.getMessage());

@@ -38,7 +38,7 @@ BEGIN
         'systen@test.com',
         'System',
         'Auto',
-        '$2a$10$wyRxHWfDWNB4mRT0Rb8czO7Oq4PCYaI3HLb8zGvppijzpS0oRXsiq',
+        '$2a$10$up93efLWCZXf6iBGq.7XeerwJp3HzzaQUMBIIKzZN.rUtOIVYerbi',
         '0605281163',
         'System Auto'
     )

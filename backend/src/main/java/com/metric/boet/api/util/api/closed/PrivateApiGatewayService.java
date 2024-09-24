@@ -23,12 +23,14 @@ public class PrivateApiGatewayService extends AbstractWebAppService<PrivateWebAp
 
     @Override
     public ResponseEntity<?> handleRequestProcess(HttpServletRequest request, WebAppApiRequestHolderBean payload) {
+
         for (AbstractPrivateWebAppEndpointHandler<AbstractWebAppEndpointPayload> privateWebAppEndpointHandler : endpointHandlers.values()) {
             if (privateWebAppEndpointHandler.getClass().getName().equals(payload.getFullyQualifiedClassName())) {
                 try {
                     AbstractWebAppEndpointPayload mappedPayload = privateWebAppEndpointHandler.getRequestFromString(toJsonObject(payload.getPayload().toString()));
                     return ResponseEntity.ok().body(privateWebAppEndpointHandler.processRequest(request, mappedPayload));
                 } catch (Exception e) {
+                    logger.error("cant perform request: ", e);
                     return ResponseEntity
                             .status(HttpStatus.INTERNAL_SERVER_ERROR)
                             .body("Error: Request details provided has caused an internal Server Error.");

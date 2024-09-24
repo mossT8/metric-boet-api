@@ -73,7 +73,6 @@ public class WebSecurityConfig {
         return source;
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
@@ -82,6 +81,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/v2/public/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v2/public/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/health").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

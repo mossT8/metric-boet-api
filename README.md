@@ -1,69 +1,65 @@
-<h1 align="center">
-  <img src="img/logo.png" alt="Metric Boet Logo" width="100">
-  <br>
-  Metric Boet API
-</h1>
 
-<h2 align="center">
-  <img src="img/vue-logo.png" alt="Vue Logo" width="100">
-  <br>
-  Vue 3 Frontend Application
-</h2>
+# Metric Boet API
 
-<h3 align="center">Description</h3>
+Project is a working progress. I like to play around with coding and development and wanted to showcase a full stack solution. So, I created simple java spring boot application which connects to a postrgessql database. I used a Vue frontend application to then interact with my backend end application. A more detailed version is to come I promise but for the time being can just Deploy solution locally and play around with frontend. Basic project directory is 
 
-<p align="center">
-  Add a brief description of your Vue 3 frontend application here.
-</p>
+```
+  |- backend 
+  |- database
+  |- frontend
+  .env
+  backend.dockerfile
+  database.dockerfile
+  frontend.dockerfile
+  docker-compose.yml
+  README.md
+```
+## Run Locally
 
-<h3 align="center">Technologies</h3>
+Clone this project to desired local directory
 
-<p align="center">
-  Mention the key technologies and frameworks used in your Vue 3 frontend application.
-</p>
+```bash
+  git clone https://github.com/mossT8/metric-boet-api.git
+```
 
-<h3 align="center">
-  <img src="img/java-logo.png" alt="Java Logo" width="100">
-  <br>
-  Java 11 Backend Application
-</h3>
+Go to the project directory
 
-<h3 align="center">Description</h3>
+```bash
+  cd metric-boet-api
+```
 
-<p align="center">
-  Add a brief description of your Java 11 backend application here.
-</p>
+Build Java Binaries
 
-<h3 align="center">Technologies</h3>
+```bash
+  cd backend
+  mvn package
+```
 
-<p align="center">
-  Mention the key technologies and frameworks used in your Java 11 backend application.
-</p>
+Start local enviroment with docker
 
-<h3 align="center">
-  <img src="img/postgres-logo.png" alt="Java Logo" width="100">
-  <br>
-  Database
-</h3>
+```bash
+  docker compose up --build
+```
 
-<p align="center">
-  Mention the database system you are using (e.g., PostgreSQL) and its version.
-</p>
 
-<h3 align="center">Getting Started</h3>
+## Tests Accounts
 
-<p align="center">
-  Add instructions on how to get the project up and running locally.
-</p>
+Once local enviroment is up you can go to 
+```url
+  http://localhost:8081/home
+```
+you can also select the login button from the side navigation or go to
 
-<h3 align="center">Contributing</h3>
+```url
+  http://localhost:8081/user/login
+```
 
-<p align="center">
-  Explain how others can contribute to your project, such as guidelines for pull requests and code reviews.
-</p>
+Here you can use one of the following:
 
-<h3 align="center">License</h3>
+| Username         | Password   |
+| ---------------- | ---------  |
+| System Auto      | password   |
+| Admin            | password   |
+| Moderator        | password   |
+| Blikkies         | password   |
 
-<p align="center">
-  Mention the license under which your project is released (e.g., MIT License).
-</p>

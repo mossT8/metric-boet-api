@@ -26,7 +26,7 @@
 <script setup>
 import Modal from '@/components/Modal.vue';
 import BaseDropdown from '@/components/BaseDropdown.vue';
-import { defineEmit, defineProps, ref } from 'vue';
+import { defineEmits, defineProps, ref } from 'vue';
 
 const props = defineProps({
     sidebarVisible: {
@@ -39,7 +39,7 @@ const props = defineProps({
 let searchModalVisible = ref(false);
 let searchQuery = ref('');
 
-const emit = defineEmit(['toggleSidebar', 'hideSidebar']);
+const emit = defineEmits(['toggleSidebar', 'hideSidebar']);
 
 const toggleSidebar = () => {
     emit('toggleSidebar');
