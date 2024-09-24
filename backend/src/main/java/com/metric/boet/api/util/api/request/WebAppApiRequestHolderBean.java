@@ -1,13 +1,19 @@
 package com.metric.boet.api.util.api.request;
 
+import javax.validation.constraints.NotBlank;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WebAppApiRequestHolderBean {
+    @NotBlank
     private String packagePrefix;
+    @NotBlank
     private String apiGroupKey;
+    @NotBlank
     private String endpointClassName;
+    @NotBlank
     private LinkedHashMap<String, Object> payload;
+
     private Map<String, Object> additionalProperties;
 
     public WebAppApiRequestHolderBean() {

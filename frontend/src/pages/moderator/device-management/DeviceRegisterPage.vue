@@ -8,7 +8,7 @@ import { defineComponent } from 'vue';
 
 // service
 import { deviceShema } from "@/types/device/device";
-import DeviceService from "@/services/device.service";
+import DeviceService from "@/services/device-service";
 
 //component
 import DeviceForm from "@/components/device/DeviceForm.vue";

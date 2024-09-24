@@ -4,17 +4,19 @@ import com.metric.boet.api.authorization.BasicUsers;
 import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.dto.HtmlPageDto;
 import com.metric.boet.api.service.mapper.visitors.HtmlPageDtoMapperVisitor;
-import com.metric.boet.api.util.repo.bean.AbstractDataBean;
+import com.metric.boet.api.util.repo.bean.AbstractTrackedDataBean;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "html_pages",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "url")
         })
-public class HtmlPage extends AbstractDataBean<HtmlPageDto> {
+public class HtmlPage extends AbstractTrackedDataBean<HtmlPageDto> {
     @Column(nullable = false)
     private String url;
 

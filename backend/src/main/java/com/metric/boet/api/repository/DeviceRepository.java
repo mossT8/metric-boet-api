@@ -1,14 +1,14 @@
 package com.metric.boet.api.repository;
 
-import java.util.Optional;
-
 import com.metric.boet.api.entity.Device;
-import com.metric.boet.api.util.repo.IAbstractDataBeanRepository;
+import com.metric.boet.api.util.repo.IAbstractTrackedDataBeanRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface DeviceRepository extends IAbstractDataBeanRepository<Device> {
+public interface DeviceRepository extends IAbstractTrackedDataBeanRepository<Device> {
     Optional<Device> findByUuid(String uid);
 
     Boolean existsByToken(String token);

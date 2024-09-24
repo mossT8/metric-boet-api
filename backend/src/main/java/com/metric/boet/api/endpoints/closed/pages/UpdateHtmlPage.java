@@ -3,7 +3,7 @@ package com.metric.boet.api.endpoints.closed.pages;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payloads.request.HtmlPageApiRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
-import com.metric.boet.api.service.beans.HtmlPageService;
+import com.metric.boet.api.service.beans.HtmlPageServiceTracked;
 import com.metric.boet.api.util.annotations.PrivateWebAppEndpoint;
 import com.metric.boet.api.util.api.closed.AbstractPrivateWebAppEndpointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @PrivateWebAppEndpoint
 public class UpdateHtmlPage extends AbstractPrivateWebAppEndpointHandler<HtmlPageApiRequestAbstract> {
     @Autowired
-    HtmlPageService htmlPageService;
+    HtmlPageServiceTracked htmlPageService;
 
     @Override
     protected boolean isRequestForUser(HttpServletRequest httpServletRequest, HtmlPageApiRequestAbstract payload, User user) throws Exception {

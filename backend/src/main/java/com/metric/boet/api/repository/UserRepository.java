@@ -4,11 +4,11 @@ import java.util.*;
 import java.util.Optional;
 
 import com.metric.boet.api.entity.User;
-import com.metric.boet.api.util.repo.IAbstractDataBeanRepository;
+import com.metric.boet.api.util.repo.IAbstractTrackedDataBeanRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends IAbstractDataBeanRepository<User> {
+public interface UserRepository extends IAbstractTrackedDataBeanRepository<User> {
 
     List<User> findAllByOrderByAccountCodeDesc();
 

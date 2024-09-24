@@ -1,59 +1,44 @@
-version: "3"
-
 services:
-  influxdb:
-    container_name: influxdb
-    image: influxdb:2.1.1
-    volumes:
-      - influxdb-storage:/var/lib/influxdb2:rw
-    env_file:
-      - .env
-    entrypoint: [ "./entrypoint.sh" ]
-    restart: on-failure:10
-    ports:
-      - ${DOCKER_INFLUXDB_INIT_PORT}:8086
-
-  telegraf:
-    container_name: telegraf
-    image: telegraf:1.19
-    volumes:
-      - ${TELEGRAF_CFG_PATH}:/etc/telegraf/telegraf.conf:rw
-    env_file:
-      - .env
-    depends_on:
-      - influxdb
-
-  grafana:
-    container_name: grafana
-    image: grafana/grafana-oss:8.4.3
-    volumes:
-      - grafana-storage:/var/lib/grafana:rw
-    depends_on:
-      - influxdb
-    ports:
-      - ${GRAFANA_PORT}:3000
-
-  postgress-db:
-    container_name: postgress-db
-    image: postgres
-    restart: always
+  database:
+    image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: metricboetdb
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
     ports:
-      - "5432:5432"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+    networks:
+      - internal
 
-  dbadmin:
-    image: adminer
-    restart: always
-    ports:
-      - 8083:8083
+  liquibase:
+    build:
+      dockerfile: database.dockerfile
+    environment:
+      - INSTALL_POSTGRES=true
+    tty: true
+    stdin_open: true
+    networks:
+      - internal
     depends_on:
-      - postgress-db
+      database:
+        condition: service_healthy
 
-volumes:
-  grafana-storage:
-  influxdb-storage:
+  backend:
+    build:
+      dockerfile: backend.dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - internal
+    depends_on:
+      database:
+        condition: service_healthy
+
+networks:
+  internal:
+    name: internal

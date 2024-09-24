@@ -7,7 +7,7 @@
 import { defineComponent } from 'vue';
 
 // service
-import DeviceService from "@/services/device.service";
+import DeviceService from "@/services/device-service";
 
 // components
 import DeviceForm from "@/components/device/DeviceForm.vue";

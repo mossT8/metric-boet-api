@@ -13,7 +13,7 @@
 import { defineComponent, ref } from 'vue';
 // service
 import { useAsyncWrapper } from "@/composables/util/async/useAsyncWrapper";
-import htmlPagesService from '@/services/html-pages.service';
+import htmlPagesService from '@/services/html-pages-service';
 import NotFoundPage from '@/pages/NotFoundPage.vue';
 
 

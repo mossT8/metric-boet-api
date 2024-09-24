@@ -3,7 +3,7 @@ package com.metric.boet.api.endpoints.closed.users;
 import com.metric.boet.api.entity.User;
 import com.metric.boet.api.payloads.request.basic.KeyApiRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
-import com.metric.boet.api.service.beans.UserService;
+import com.metric.boet.api.service.beans.UserServiceTracked;
 import com.metric.boet.api.util.annotations.PrivateWebAppEndpoint;
 import com.metric.boet.api.util.api.closed.AbstractPrivateWebAppEndpointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import static com.metric.boet.api.util.api.ApiUtil.DoesUserBeanBelongToUser;
 public class GetUser extends AbstractPrivateWebAppEndpointHandler<KeyApiRequestAbstract> {
 
     @Autowired
-    UserService userService;
+    UserServiceTracked userService;
 
     @Override
     protected boolean isRequestForUser(HttpServletRequest httpServletRequest, KeyApiRequestAbstract payload, User user) throws Exception {

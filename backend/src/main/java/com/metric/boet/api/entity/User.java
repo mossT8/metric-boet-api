@@ -5,15 +5,14 @@ import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.authorization.enums.ERole;
 import com.metric.boet.api.dto.UserDto;
 import com.metric.boet.api.service.mapper.visitors.UserDtoMapperVisitor;
-import com.metric.boet.api.util.repo.bean.AbstractDataBean;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.metric.boet.api.util.repo.bean.AbstractTrackedDataBean;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -23,7 +22,7 @@ import javax.validation.constraints.Size;
                 @UniqueConstraint(columnNames = "email"),
                 @UniqueConstraint(columnNames = "accountCode"),
         })
-public class User extends AbstractDataBean<UserDto> implements IUserAudit {
+public class User extends AbstractTrackedDataBean<UserDto> implements IUserAudit {
     @NotBlank
     @Size(max = 50)
     private String accountCode;

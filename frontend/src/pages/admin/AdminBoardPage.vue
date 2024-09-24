@@ -10,7 +10,7 @@
 // vue
 import { defineComponent } from 'vue'
 // services
-import UserService from "@/services/user.service";
+import UserService from "@/services/user-service";
 // components
 import Editor from "@/components/editor/Editor.vue";
 

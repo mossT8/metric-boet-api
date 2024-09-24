@@ -9,7 +9,7 @@ import com.metric.boet.api.payloads.response.auth.JwtResponse;
 import com.metric.boet.api.security.jwt.JwtUtils;
 import com.metric.boet.api.security.services.UserDetailsImpl;
 import com.metric.boet.api.service.auth.IAuthService;
-import com.metric.boet.api.service.beans.UserService;
+import com.metric.boet.api.service.beans.UserServiceTracked;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,7 +31,7 @@ public class SimpleAuthService implements IAuthService {
     JwtUtils jwtUtils;
 
     @Autowired
-    UserService userService;
+    UserServiceTracked userService;
 
     @Override
     public BasicAPIResponse authenticateUser(LoginRequestAbstract loginRequest) {

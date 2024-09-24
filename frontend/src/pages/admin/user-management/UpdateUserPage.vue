@@ -15,7 +15,7 @@
 import { ref, onMounted, defineComponent, getCurrentInstance } from 'vue'
 
 // Service
-import userService from "@/services/user.service";
+import userService from "@/services/user-service";
 import router from '@/router/router';
 
 // Component

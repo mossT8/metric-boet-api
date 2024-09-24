@@ -34,7 +34,7 @@
 import { defineComponent } from 'vue'
 
 // services
-import DeviceService from "@/services/device.service";
+import DeviceService from "@/services/device-service";
 import { useAuthModuleFeatures } from '@/composables/store/useAuthModule';
 
 //components

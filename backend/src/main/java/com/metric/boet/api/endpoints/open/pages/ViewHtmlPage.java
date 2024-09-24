@@ -3,7 +3,7 @@ package com.metric.boet.api.endpoints.open.pages;
 import com.metric.boet.api.entity.HtmlPage;
 import com.metric.boet.api.payloads.request.basic.KeyApiRequestAbstract;
 import com.metric.boet.api.payloads.response.BasicAPIResponse;
-import com.metric.boet.api.service.beans.HtmlPageService;
+import com.metric.boet.api.service.beans.HtmlPageServiceTracked;
 import com.metric.boet.api.util.annotations.PublicWebAppEndpoint;
 import com.metric.boet.api.util.api.open.AbstractPublicWebAppEndpointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 public class ViewHtmlPage extends AbstractPublicWebAppEndpointHandler<KeyApiRequestAbstract> {
 
     @Autowired
-    HtmlPageService htmlPageService;
+    HtmlPageServiceTracked htmlPageServiceTracked;
 
     @Override
     public boolean authoriseRequest(HttpServletRequest httpServletRequest, KeyApiRequestAbstract payload) throws Exception {
-        BasicAPIResponse htmlPageResponse = htmlPageService.findByUrl(payload.getKey());
+        BasicAPIResponse htmlPageResponse = htmlPageServiceTracked.findByUrl(payload.getKey());
 
         if (htmlPageResponse.getSuccessful()) {
             HtmlPage htmlPage = (HtmlPage) htmlPageResponse.getData();
@@ -38,7 +38,7 @@ public class ViewHtmlPage extends AbstractPublicWebAppEndpointHandler<KeyApiRequ
 
     @Override
     public ResponseEntity<BasicAPIResponse> processRequest(HttpServletRequest httpServletRequest, KeyApiRequestAbstract payload) throws Exception {
-        return ResponseEntity.ok().body(htmlPageService.findDtoByUrl(payload.getKey()));
+        return ResponseEntity.ok().body(htmlPageServiceTracked.findDtoByUrl(payload.getKey()));
     }
 }
 

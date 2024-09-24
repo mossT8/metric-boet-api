@@ -37,7 +37,7 @@ public class PublicApiGatewayService extends AbstractWebAppService<PublicWebAppE
                 } catch (Exception e) {
                     return ResponseEntity
                             .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .body("Error: Request details provided has caused an internal Server Error.");
+                            .body(e.getMessage());
                 }
             }
         }

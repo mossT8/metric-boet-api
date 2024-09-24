@@ -2,12 +2,11 @@ package com.metric.boet.api.util.repo.bean;
 
 import com.metric.boet.api.authorization.IUserAudit;
 import com.metric.boet.api.dto.BasicObjectDto;
-import com.metric.boet.api.entity.User;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractDataBean<DTO extends BasicObjectDto> {
@@ -15,36 +14,13 @@ public abstract class AbstractDataBean<DTO extends BasicObjectDto> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected long id;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    protected Date createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    protected Date updatedAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_created_id", nullable = false)
-    private User userCreated;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_updated_id", nullable = false)
-    private User lastUpdatedUser;
-
     public abstract DTO mapToDTO();
 
     protected AbstractDataBean() {
-        Date createDate = new Date();
-        this.createdAt = new Date(createDate.getTime());
-        this.updatedAt = new Date(createDate.getTime());
     }
 
     public AbstractDataBean(IUserAudit userAudit) {
         this();
-        this.lastUpdatedUser = userAudit.getUser();
-        this.userCreated = userAudit.getUser();
     }
 
     public long getId() {
@@ -53,38 +29,6 @@ public abstract class AbstractDataBean<DTO extends BasicObjectDto> {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public User getUserCreated() {
-        return userCreated;
-    }
-
-    public void setUserCreated(User userCreated) {
-        this.userCreated = userCreated;
-    }
-
-    public User getLastUpdatedUser() {
-        return lastUpdatedUser;
-    }
-
-    public void setLastUpdatedUser(User lastUpdatedUser) {
-        this.lastUpdatedUser = lastUpdatedUser;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     @Override

@@ -12,7 +12,7 @@ import { defineComponent, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 // services
-import userService from '@/services/user.service';
+import userService from '@/services/user-service';
 import { useAuthModuleFeatures } from '@/composables/store/useAuthModule';
 
 // components

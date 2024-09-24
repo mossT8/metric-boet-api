@@ -1,5 +1,7 @@
 package com.metric.boet.api.controllers;
 
+import com.metric.boet.api.endpoints.open.pages.ViewHtmlPage;
+import com.metric.boet.api.payloads.request.basic.KeyApiRequestAbstract;
 import com.metric.boet.api.util.api.open.PublicApiGatewayService;
 import com.metric.boet.api.util.api.request.WebAppApiRequestHolderBean;
 
@@ -16,6 +18,14 @@ public class PublicGatewayController {
 
     @Autowired
     PublicApiGatewayService publicApiGatewayService;
+
+    @Autowired
+    ViewHtmlPage viewHtmlPage;
+
+    @GetMapping("/view")
+    public ResponseEntity<?> handleHelloRequestPost(HttpServletRequest httpServletRequest, @RequestBody KeyApiRequestAbstract apiPayload) throws Exception {
+        return viewHtmlPage.processRequest(httpServletRequest, apiPayload);
+    }
 
     @PostMapping("/")
     public ResponseEntity<?> handleRequestPost(HttpServletRequest httpServletRequest, @RequestBody WebAppApiRequestHolderBean apiPayload) throws Exception {
